@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="io.requestly.rqinterceptor">
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.CREATE_DOCUMENT" />
+            <data android:mimeType="*/*" />
+        </intent>
+    </queries>
+
+    <uses-permission
+        android:name="android.permission.WAKE_LOCK"
+        android:maxSdkVersion="25" />
+
+    <application>
+        <activity
+            android:name="io.requestly.rqinterceptor.internal.ui.MainActivity"
+            android:label="@string/rq_interceptor_name"
+            android:launchMode="singleTask"
+            android:taskAffinity="io.requestly.rq_interceptor.task"
+            android:theme="@style/RqInterceptor.Theme" />
+
+        <activity
+            android:name="io.requestly.rqinterceptor.internal.ui.transaction.TransactionActivity"
+            android:parentActivityName="io.requestly.rqinterceptor.internal.ui.MainActivity"
+            android:theme="@style/RqInterceptor.Theme" />
+
+        <service
+            android:name="io.requestly.rqinterceptor.internal.support.ClearDatabaseService"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <service
+            android:name="io.requestly.rqinterceptor.internal.support.RQConnectionService"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <receiver
+            android:name="io.requestly.rqinterceptor.internal.support.ClearDatabaseJobIntentServiceReceiver"
+            android:exported="false" />
+
+        <receiver
+            android:name="io.requestly.rqinterceptor.internal.support.RQConnectionIntentServiceReceiver"
+            android:exported="false" />
+
+        <receiver
+            android:name="io.requestly.rqinterceptor.internal.support.CopyIntentServiceReceiver"
+            android:exported="false" />
+
+        <provider
+            android:name="io.requestly.rqinterceptor.internal.support.RQFileProvider"
+            android:authorities="${applicationId}.io.requestly.rqinterceptor.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/rq_interceptor_provider_paths" />
+        </provider>
+    </application>
+</manifest>

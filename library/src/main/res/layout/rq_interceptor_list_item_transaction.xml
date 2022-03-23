@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:background="?android:attr/selectableItemBackground"
+    android:padding="@dimen/rq_interceptor_base_grid">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <TextView
+        android:id="@+id/code"
+        android:layout_width="@dimen/rq_interceptor_item_size"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingEnd="@dimen/rq_interceptor_doub_grid"
+        android:textAppearance="@style/RqInterceptorTextAppearance.ListItem"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="200"
+        tools:ignore="RtlSymmetry" />
+
+    <TextView
+        android:id="@+id/path"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="4"
+        android:textAppearance="@style/RqInterceptorTextAppearance.ListItem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/code"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="GET /path/to/some/resource?goes=here" />
+
+    <TextView
+        android:id="@+id/host"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/rq_interceptor_half_grid"
+        android:ellipsize="end"
+        android:maxLines="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ssl"
+        app:layout_constraintTop_toBottomOf="@+id/path"
+        app:layout_goneMarginStart="0dp"
+        app:layout_goneMarginTop="@dimen/rq_interceptor_doub_grid"
+        tools:text="example.com" />
+
+    <ImageView
+        android:id="@+id/ssl"
+        android:layout_width="@dimen/rq_interceptor_doub_grid"
+        android:layout_height="@dimen/rq_interceptor_doub_grid"
+        android:contentDescription="@string/rq_interceptor_ssl"
+        app:layout_constraintStart_toStartOf="@+id/path"
+        app:layout_constraintTop_toTopOf="@+id/host"
+        app:layout_constraintBottom_toBottomOf="@id/host"
+        tools:src="@drawable/rq_interceptor_ic_https" />
+
+    <TextView
+        android:id="@+id/timeStart"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/duration"
+        app:layout_constraintStart_toStartOf="@+id/path"
+        app:layout_constraintTop_toBottomOf="@+id/host"
+        tools:text="18:29:07 PM" />
+
+    <TextView
+        android:id="@+id/duration"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        app:layout_constraintEnd_toStartOf="@+id/size"
+        app:layout_constraintStart_toEndOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/timeStart"
+        tools:text="8023 ms" />
+
+    <TextView
+        android:id="@+id/size"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/duration"
+        app:layout_constraintTop_toTopOf="@+id/duration"
+        tools:text="16.45 KB" />
+</androidx.constraintlayout.widget.ConstraintLayout>
