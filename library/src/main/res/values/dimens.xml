@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="rq_interceptor_half_grid">4dp</dimen>
+    <dimen name="rq_interceptor_base_grid">8dp</dimen>
+    <dimen name="rq_interceptor_doub_grid">16dp</dimen>
+    <dimen name="rq_interceptor_quad_grid">32dp</dimen>
+    <dimen name="rq_interceptor_octa_grid">64dp</dimen>
+
+    <dimen name="rq_interceptor_item_size">56dp</dimen>
+</resources>

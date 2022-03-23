@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="RqInterceptor.BaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+      <item name="colorPrimary">@color/rq_interceptor_color_primary</item>
+      <item name="colorPrimaryDark">@color/rq_interceptor_color_primary_variant</item>
+      <item name="colorSecondary">@color/rq_interceptor_color_secondary</item>
+      <item name="android:colorBackground">@color/rq_interceptor_color_background</item>
+      <item name="colorSurface">@color/rq_interceptor_color_surface</item>
+      <item name="colorError">@color/rq_interceptor_status_error</item>
+      <item name="colorOnPrimary">@color/rq_interceptor_color_on_primary</item>
+      <item name="colorOnSecondary">@color/rq_interceptor_color_on_secondary</item>
+      <item name="colorOnBackground">@color/rq_interceptor_color_on_background</item>
+      <item name="colorOnSurface">@color/rq_interceptor_color_on_surface</item>
+      <item name="colorOnError">@color/rq_interceptor_color_on_error</item>
+      <item name="android:textDirection">locale</item>
+      <item name="android:textAlignment">viewStart</item>
+    </style>
+
+    <style name="RqInterceptor.Theme" parent="RqInterceptor.BaseTheme"/>
+
+    <style name="RqInterceptorTextAppearance.ListItem" parent="android:TextAppearance">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="RqInterceptor.TextAppearance.Label" parent="android:TextAppearance.Small">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="RqInterceptor.TextAppearance.Value" parent="android:TextAppearance.Small">
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:textIsSelectable">true</item>
+    </style>
+
+    <style name="RqInterceptor.TextAppearance.Title" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textSize">16sp</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+</resources>

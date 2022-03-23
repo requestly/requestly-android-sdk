@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package io.requestly.rqinterceptor.sample;
+
+option java_package = "io.requestly.rqinterceptor.sample";
+
+message Pokemon {
+  string name = 1;
+  int32 level = 2;
+}
