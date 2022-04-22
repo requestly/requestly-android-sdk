@@ -9,8 +9,8 @@ RQInterceptor is distributed through Maven Central. To use it you need to add th
 
 ```
 dependencies {
-    debugImplementation "io.requestly.rqinterceptor:library:1.0.0"
-    releaseImplementation "io.requestly.rqinterceptor:library-no-op:1.0.0"
+    debugImplementation "io.requestly.rqinterceptor:library:1.1.5"
+    releaseImplementation "io.requestly.rqinterceptor:library-no-op:1.1.5"
 }
 ```
 
