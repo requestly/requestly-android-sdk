@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="rq_interceptor_name">RQ-Interceptor</string>
+    <string name="rq_interceptor_http_notification_title">Recording HTTP activity</string>
+    <string name="rq_interceptor_metadata_notification_title">RQ Interceptor Details</string>
+    <string name="rq_interceptor_clear">Clear</string>
+    <string name="rq_interceptor_connect">Connect</string>
+    <string name="rq_interceptor_disconnect">Disconnect</string>
+    <string name="rq_interceptor_encode_url">Encode URL</string>
+    <string name="rq_interceptor_cancel">Cancel</string>
+    <string name="rq_interceptor_overview">Overview</string>
+    <string name="rq_interceptor_request">Request</string>
+    <string name="rq_interceptor_response">Response</string>
+    <string name="rq_interceptor_url">URL</string>
+    <string name="rq_interceptor_method">Method</string>
+    <string name="rq_interceptor_protocol">Protocol</string>
+    <string name="rq_interceptor_status">Status</string>
+    <string name="rq_interceptor_ssl">SSL</string>
+    <string name="rq_interceptor_tls_version">TLS version</string>
+    <string name="rq_interceptor_tls_cipher_suite">Cipher Suite</string>
+    <string name="rq_interceptor_request_time">Request time</string>
+    <string name="rq_interceptor_response_time">Response time</string>
+    <string name="rq_interceptor_duration">Duration</string>
+    <string name="rq_interceptor_request_size">Request size</string>
+    <string name="rq_interceptor_response_size">Response size</string>
+    <string name="rq_interceptor_total_size">Total size</string>
+    <string name="rq_interceptor_yes">Yes</string>
+    <string name="rq_interceptor_no">No</string>
+    <string name="rq_interceptor_share">Share</string>
+    <string name="rq_interceptor_export">Export</string>
+    <string name="rq_interceptor_export_empty_text">Nothing to export</string>
+    <string name="rq_interceptor_export_no_file">Failed to create file for export</string>
+    <string name="rq_interceptor_share_as_text">Share as text</string>
+    <string name="rq_interceptor_share_as_curl">Share as curl command</string>
+    <string name="rq_interceptor_share_as_file">Share as file</string>
+    <string name="rq_interceptor_share_as_har">Share as .har file</string>
+    <string name="rq_interceptor_save">Save body to file</string>
+    <string name="rq_interceptor_save_failed_to_open_document">Failed to open file chooser</string>
+    <string name="rq_interceptor_file_saved">File saved successfully!</string>
+    <string name="rq_interceptor_file_not_saved">Failed to save file</string>
+    <string name="rq_interceptor_body_empty">(body is empty)</string>
+    <string name="rq_interceptor_body_omitted">(encoded or binary body omitted)</string>
+    <string name="rq_interceptor_search">Search</string>
+    <string name="rq_interceptor_body_content_truncated">\n\n--- Content truncated ---</string>
+    <string name="rq_interceptor_network_tutorial">This tab displays network requests recorded with the RQ-Interceptor. Add the interceptor to your OkHttp client to reap the benefits.</string>
+    <string name="rq_interceptor_network_notification_category">RQ-Interceptor network requests</string>
+    <string name="rq_interceptor_metadata_notification_category">RQ-Interceptor Metadata</string>
+    <string name="rq_interceptor_share_transaction_title">Share transaction details</string>
+    <string name="rq_interceptor_share_all_transactions_title">Share transactions</string>
+    <string name="rq_interceptor_share_transaction_subject">Transaction details</string>
+    <string name="rq_interceptor_share_all_transactions_subject">All transactions</string>
+    <string name="rq_interceptor_clear_http_confirmation">Do you want to clear complete network calls history?</string>
+    <string name="rq_interceptor_export_text_http_confirmation">Do you want to export all network transactions as a text file?</string>
+    <string name="rq_interceptor_export_har_http_confirmation">Do you want to export all network transactions as a .har file?</string>
+    <string name="rq_interceptor_export_separator">==================</string>
+    <string name="rq_interceptor_export_prefix">/* Export Start */</string>
+    <string name="rq_interceptor_export_postfix">/*  Export End  */</string>
+    <string name="rq_interceptor_check_readme"><a href="https://github.com/ChuckerTeam/chucker/blob/develop/README.md#configure-">Check the setup instructions on GitHub</a></string>
+    <string name="rq_interceptor_setup">Setup</string>
+    <string name="rq_interceptor_binary_data">binary data</string>
+    <string name="rq_interceptor_request_not_ready">The request isn\'t ready for sharing or saving</string>
+    <string name="rq_interceptor_request_is_empty">This request is empty</string>
+    <string name="rq_interceptor_response_is_empty">This response is empty</string>
+    <string name="rq_interceptor_shortcut_label">Open RQ-Interceptor</string>
+
+    <string name="rq_interceptor_shared_pref_base_key">RQ_SHARED_PREF_KEY</string>
+    <string name="rq_interceptor_unique_device_id_key">UNIQUE_DEVICE_ID</string>
+    <string name="rq_interceptor_capture_enabled">CAPTURE_ENABLED</string>
+    <string name="rq_interceptor_settings">Setting</string>
+</resources>

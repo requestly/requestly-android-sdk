@@ -65,8 +65,8 @@ apply plugin: 'io.codearte.nexus-staging'
 apiValidation {
     ignoredProjects += ["sample"]
     ignoredPackages += [
-            "io.requestly.rqinterceptor.internal",
-            "io.requestly.rqinterceptor.databinding"
+            "io.requestly.android.okhttp.internal",
+            "io.requestly.android.databinding"
     ]
 }
 
@@ -105,8 +105,8 @@ task clean(type: Delete) {
 
 ext {
     minSdkVersion = 21
-    targetSdkVersion = 30
-    compileSdkVersion = 30
+    targetSdkVersion = 31
+    compileSdkVersion = 31
 }
 
 nexusStaging {

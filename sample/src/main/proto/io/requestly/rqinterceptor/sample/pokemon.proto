@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package io.requestly.rqinterceptor.sample;
+package io.requestly.android.sample;
 
-option java_package = "io.requestly.rqinterceptor.sample";
+option java_package = "io.requestly.android.sample";
 
 message Pokemon {
   string name = 1;

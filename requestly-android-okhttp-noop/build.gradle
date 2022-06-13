@@ -1,0 +1,38 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+
+    compileOptions {
+        kotlinOptions.freeCompilerArgs += [
+            '-module-name', "io.requestly.android.okhttp",
+            "-Xexplicit-api=strict"
+        ]
+    }
+
+    buildFeatures {
+        buildConfig = false
+    }
+
+    defaultConfig {
+        minSdkVersion rootProject.minSdkVersion
+    }
+
+    lintOptions {
+        warningsAsErrors true
+        abortOnError true
+        // We don't want to impose RTL on consuming applications.
+        disable 'RtlEnabled'
+        // Don't fail build if some dependencies outdated
+        disable 'GradleDependency'
+    }
+}
+
+dependencies {
+    api "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+}
+
+apply from: rootProject.file('gradle/gradle-mvn-push.gradle')
+apply from: rootProject.file('gradle/kotlin-static-analysis.gradle')
