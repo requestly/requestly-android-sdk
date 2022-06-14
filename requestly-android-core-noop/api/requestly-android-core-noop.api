@@ -1,0 +1,11 @@
+public final class io/requestly/android/core/Requestly {
+	public fun <init> ()V
+}
+
+public final class io/requestly/android/core/Requestly$Builder {
+	public fun <init> (Landroid/app/Application;Ljava/lang/String;)V
+	public final fun build ()V
+	public final fun setNetworkLoggerUIState (Z)Lio/requestly/android/core/Requestly$Builder;
+	public static synthetic fun setNetworkLoggerUIState$default (Lio/requestly/android/core/Requestly$Builder;ZILjava/lang/Object;)Lio/requestly/android/core/Requestly$Builder;
+}
+

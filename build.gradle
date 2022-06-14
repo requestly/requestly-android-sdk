@@ -66,7 +66,7 @@ apiValidation {
     ignoredProjects += ["sample"]
     ignoredPackages += [
             "io.requestly.android.okhttp.internal",
-            "io.requestly.android.databinding"
+            "io.requestly.android.okhttp.databinding"
     ]
 }
 

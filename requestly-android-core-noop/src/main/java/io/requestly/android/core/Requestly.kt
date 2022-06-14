@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 
 
+@Suppress("UnusedPrivateMember")
 public class Requestly {
     public class Builder(
         private val application: Application,
