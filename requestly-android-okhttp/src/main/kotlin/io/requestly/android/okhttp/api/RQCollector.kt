@@ -28,11 +28,11 @@ import kotlinx.coroutines.withContext
  */
 public class RQCollector @JvmOverloads constructor(
     context: Context,
-    public val sdkKey: String,
     public var uniqueDeviceId: String? = null,
     public var showNotification: Boolean = true,
     retentionPeriod: RetentionManager.Period = RetentionManager.Period.ONE_WEEK
 ) {
+    public var sdkKey: String
     private val retentionManager: RetentionManager = RetentionManager(context, retentionPeriod)
     private val notificationHelper: NotificationHelper = NotificationHelper(context)
     private val metadataNotificationHelper: MetadataNotificationHelper = MetadataNotificationHelper(context)
@@ -45,6 +45,8 @@ public class RQCollector @JvmOverloads constructor(
         var captureEnabled = getCaptureEnabled(context)
         Log.d(RQConstants.LOG_TAG, "CaptureEnabled Before init: $captureEnabled")
         Log.d(RQConstants.LOG_TAG, "applicationToken from core ${SettingsManager.getInstance().getAppToken()}")
+        sdkKey = SettingsManager.getInstance().getAppToken()
+
         RQClientProvider.initialize(uniqueDeviceId, sdkKey, captureEnabled)
         scope.launch {
             var deviceId = RQClientProvider.client().initDevice()

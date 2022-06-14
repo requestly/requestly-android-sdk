@@ -8,7 +8,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        Requestly.Builder(this, "test-token")
+        Requestly.Builder(this, "bk9fvxFXM5HNwaMc6gkZ")
             .setNetworkLoggerUIState(true)
             .build()
 

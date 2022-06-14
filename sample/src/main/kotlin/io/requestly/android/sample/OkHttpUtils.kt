@@ -19,8 +19,6 @@ fun createOkHttpClient(
 ): OkHttpClient {
     val collector = RQCollector(
         context = context,
-        sdkKey = "bk9fvxFXM5HNwaMc6gkZ",
-//        sdkKey = "bJAECi7sbHArc7Ngozpz",
         showNotification = true,
         retentionPeriod = RetentionManager.Period.ONE_HOUR
     )
