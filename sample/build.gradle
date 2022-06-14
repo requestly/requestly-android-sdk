@@ -65,8 +65,8 @@ android {
 dependencies {
     debugImplementation project(':requestly-android-okhttp')
     releaseImplementation project(':requestly-android-okhttp-noop')
-    debugImplementation project(':requestly-android-core')
-    releaseImplementation project(':requestly-android-core-noop')
+    debugImplementation project(':requestly-android')
+    releaseImplementation project(':requestly-android-noop')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 
