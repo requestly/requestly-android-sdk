@@ -12,7 +12,7 @@ android {
     defaultConfig {
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
-        applicationId "io.requestly.rqinterceptor.sample"
+        applicationId "io.requestly.android.sample"
         versionName VERSION_NAME
         versionCode VERSION_CODE.toInteger()
     }
@@ -63,8 +63,10 @@ android {
 }
 
 dependencies {
-    debugImplementation project(':library')
-    releaseImplementation project(':library-no-op')
+    debugImplementation project(':requestly-android-okhttp')
+    releaseImplementation project(':requestly-android-okhttp-noop')
+    debugImplementation project(':requestly-android')
+    releaseImplementation project(':requestly-android-noop')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 

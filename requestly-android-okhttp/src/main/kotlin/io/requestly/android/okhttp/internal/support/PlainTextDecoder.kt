@@ -1,0 +1,29 @@
+package io.requestly.android.okhttp.internal.support
+
+import okhttp3.Headers
+import okhttp3.MediaType
+import okhttp3.Request
+import okhttp3.Response
+import okio.ByteString
+import kotlin.text.Charsets.UTF_8
+
+internal object PlainTextDecoder : io.requestly.android.okhttp.api.BodyDecoder {
+    override fun decodeRequest(
+        request: Request,
+        body: ByteString,
+    ) = body.tryDecodeAsPlainText(request.headers, request.body?.contentType())
+
+    override fun decodeResponse(
+        response: Response,
+        body: ByteString,
+    ) = body.tryDecodeAsPlainText(response.headers, response.body?.contentType())
+
+    private fun ByteString.tryDecodeAsPlainText(
+        headers: Headers,
+        contentType: MediaType?,
+    ) = if (headers.hasSupportedContentEncoding && isProbablyPlainText) {
+        string(contentType?.charset() ?: UTF_8)
+    } else {
+        null
+    }
+}

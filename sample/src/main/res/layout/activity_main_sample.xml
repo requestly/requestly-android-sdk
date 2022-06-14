@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/doub_grid_size"
-    tools:context="io.requestly.rqinterceptor.sample.MainActivity">
+    tools:context="io.requestly.android.sample.MainActivity">
 
     <TextView
         android:id="@+id/title"

@@ -1,0 +1,43 @@
+public final class io/requestly/android/core/BuildConfig {
+	public static final field BUILD_TYPE Ljava/lang/String;
+	public static final field DEBUG Z
+	public static final field LIBRARY_PACKAGE_NAME Ljava/lang/String;
+	public fun <init> ()V
+}
+
+public final class io/requestly/android/core/Feature : java/lang/Enum {
+	public static final field NETWORK_LOGGER_UI Lio/requestly/android/core/Feature;
+	public static fun valueOf (Ljava/lang/String;)Lio/requestly/android/core/Feature;
+	public static fun values ()[Lio/requestly/android/core/Feature;
+}
+
+public final class io/requestly/android/core/Requestly {
+	public static final field Companion Lio/requestly/android/core/Requestly$Companion;
+	public fun <init> ()V
+}
+
+public final class io/requestly/android/core/Requestly$Builder {
+	public fun <init> (Landroid/app/Application;Ljava/lang/String;)V
+	public final fun build ()V
+	public final fun setNetworkLoggerUIState (Z)Lio/requestly/android/core/Requestly$Builder;
+	public static synthetic fun setNetworkLoggerUIState$default (Lio/requestly/android/core/Requestly$Builder;ZILjava/lang/Object;)Lio/requestly/android/core/Requestly$Builder;
+}
+
+public final class io/requestly/android/core/Requestly$Companion {
+	public final fun getInstance ()Lio/requestly/android/core/Requestly;
+}
+
+public final class io/requestly/android/core/SettingsManager {
+	public static final field Companion Lio/requestly/android/core/SettingsManager$Companion;
+	public fun <init> ()V
+	public final fun getAppToken ()Ljava/lang/String;
+	public final fun getUniqueDeviceId ()Ljava/lang/String;
+	public final fun setAppToken (Ljava/lang/String;)V
+	public final fun setFeatureState (Lio/requestly/android/core/Feature;Z)V
+	public final fun setUniqueDeviceId (Ljava/lang/String;)V
+}
+
+public final class io/requestly/android/core/SettingsManager$Companion {
+	public final fun getInstance ()Lio/requestly/android/core/SettingsManager;
+}
+

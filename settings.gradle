@@ -1,1 +1,7 @@
-include ':sample', ':library', ':library-no-op'
+include ':sample'
+include ':requestly-android-okhttp'
+include ':requestly-android-okhttp-noop'
+include ':requestly-android-core'
+include ':requestly-android-core-noop'
+include ':requestly-android'
+include ':requestly-android-noop'
