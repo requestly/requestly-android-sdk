@@ -1,0 +1,35 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+
+    compileOptions {
+        kotlinOptions.freeCompilerArgs += [
+            '-module-name', "io.requestly.android.core",
+            "-Xexplicit-api=strict"
+        ]
+    }
+
+    buildFeatures {
+        buildConfig = false
+    }
+
+    defaultConfig {
+        minSdkVersion rootProject.minSdkVersion
+    }
+
+    lintOptions {
+        warningsAsErrors true
+        abortOnError true
+        // We don't want to impose RTL on consuming applications.
+        disable 'RtlEnabled'
+        // Don't fail build if some dependencies outdated
+        disable 'GradleDependency'
+    }
+}
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+}
