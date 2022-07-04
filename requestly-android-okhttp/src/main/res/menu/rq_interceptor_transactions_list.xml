@@ -8,6 +8,13 @@
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="collapseActionView|ifRoom" />
     <item
+        android:title="@string/rq_interceptor_more_details"
+        android:id="@+id/more_Details"
+        android:icon="@drawable/rq_interceptor_ic_more_info"
+        android:visible="true"
+        app:showAsAction="ifRoom"
+        />
+    <item
         android:id="@+id/settings"
         android:icon="@drawable/rq_interceptor_settings"
         android:title="@string/rq_interceptor_settings"

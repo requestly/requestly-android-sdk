@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:paddingVertical="20dp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/rq_interceptor_textview"
+        style="@style/RqInterceptor.TextAppearance.Title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/rq_interceptor_device_id"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/rq_interceptor_textview3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.3" />
+
+    <TextView
+        android:id="@+id/rq_interceptor_DeviceId_TextView"
+        style="@style/RqInterceptor.TextAppearance.Title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/rq_interceptor_excess_lime"
+        app:layout_constraintBottom_toTopOf="@+id/rq_interceptor_AppId_TextView"
+        app:layout_constraintEnd_toStartOf="@+id/rq_interceptor_DeviceID_Copy_ImageButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/rq_interceptor_textview"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <ImageButton
+        android:id="@+id/rq_interceptor_DeviceID_Copy_ImageButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/rq_interceptor_copy_deviceid"
+        android:padding="2dp"
+        android:background="?actionBarItemBackground"
+        android:src="@drawable/rq_interceptor_ic_baseline_copy"
+        app:layout_constraintBottom_toTopOf="@+id/rq_interceptor_AppID_Copy_ImageButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.08" />
+
+    <TextView
+        android:layout_marginTop="15dp"
+        android:id="@+id/rq_interceptor_textview3"
+        style="@style/RqInterceptor.TextAppearance.Title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/rq_interceptor_sdk_id"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rq_interceptor_textview"
+        app:layout_constraintVertical_bias="0.77"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.3" />
+
+    <TextView
+        android:layout_marginTop="15dp"
+        android:id="@+id/rq_interceptor_AppId_TextView"
+        style="@style/RqInterceptor.TextAppearance.Title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/rq_interceptor_excess_lime"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/rq_interceptor_AppID_Copy_ImageButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/rq_interceptor_textview3"
+        app:layout_constraintTop_toBottomOf="@+id/rq_interceptor_DeviceId_TextView"
+        app:layout_constraintVertical_bias="0.7"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <ImageButton
+        android:layout_marginTop="15dp"
+        android:id="@+id/rq_interceptor_AppID_Copy_ImageButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/rq_interceptor_copy_deviceid"
+        android:padding="2dp"
+        android:background="?actionBarItemBackground"
+        android:src="@drawable/rq_interceptor_ic_baseline_copy"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rq_interceptor_DeviceID_Copy_ImageButton"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.08" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
