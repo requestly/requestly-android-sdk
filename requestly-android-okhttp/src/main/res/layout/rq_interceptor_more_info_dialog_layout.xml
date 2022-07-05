@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:paddingVertical="20dp"
     android:layout_height="wrap_content">
@@ -38,11 +37,12 @@
 
     <ImageButton
         android:id="@+id/rq_interceptor_DeviceID_Copy_ImageButton"
+        style="@android:style/Widget.Holo.Light.ImageButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/rq_interceptor_copy_deviceid"
-        android:padding="2dp"
         android:background="?actionBarItemBackground"
+        android:contentDescription="@string/rq_interceptor_copy_deviceId"
+        android:padding="2dp"
         android:src="@drawable/rq_interceptor_ic_baseline_copy"
         app:layout_constraintBottom_toTopOf="@+id/rq_interceptor_AppID_Copy_ImageButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -89,8 +89,9 @@
         android:layout_marginTop="15dp"
         android:id="@+id/rq_interceptor_AppID_Copy_ImageButton"
         android:layout_width="0dp"
+        style="@android:style/Widget.Holo.Light.ImageButton"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/rq_interceptor_copy_deviceid"
+        android:contentDescription="@string/rq_interceptor_copy_deviceId"
         android:padding="2dp"
         android:background="?actionBarItemBackground"
         android:src="@drawable/rq_interceptor_ic_baseline_copy"

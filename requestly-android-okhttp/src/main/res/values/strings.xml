@@ -68,8 +68,8 @@
     <string name="rq_interceptor_capture_enabled">CAPTURE_ENABLED</string>
     <string name="rq_interceptor_settings">Setting</string>
     <string name="rq_interceptor_more_details">More Details</string>
-    <string name="rq_interceptor_device_id">Device Id-</string>
-    <string name="rq_interceptor_copy_deviceid">copy_deviceId</string>
+    <string name="rq_interceptor_device_id">Device Id</string>
+    <string name="rq_interceptor_copy_deviceId">copy_deviceId</string>
     <string name="rq_interceptor_excess_lime">excess-lime</string>
-    <string name="rq_interceptor_sdk_id">App Id-</string>
+    <string name="rq_interceptor_sdk_id">App Id</string>
 </resources>
