@@ -1,6 +1,5 @@
 package io.requestly.android.okhttp.internal.ui
 
-import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -9,9 +8,7 @@ import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.ImageButton
-import android.widget.TextView
+
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
@@ -23,6 +20,7 @@ import io.requestly.android.core.SettingsManager
 import io.requestly.android.okhttp.R
 import io.requestly.android.okhttp.api.RQClientProvider
 import io.requestly.android.okhttp.databinding.RqInterceptorActivityMainBinding
+import io.requestly.android.okhttp.databinding.RqInterceptorMoreDetailDialogLayoutBinding
 import io.requestly.android.okhttp.internal.data.entity.HttpTransaction
 import io.requestly.android.okhttp.internal.data.model.DialogData
 import io.requestly.android.okhttp.internal.support.HarUtils
@@ -43,13 +41,14 @@ internal class MainActivity :
 
     private lateinit var mainBinding: RqInterceptorActivityMainBinding
     private lateinit var transactionsAdapter: TransactionAdapter
+    private lateinit var dialogBinding: RqInterceptorMoreDetailDialogLayoutBinding
 
     private val applicationName: CharSequence
         get() = applicationInfo.loadLabel(packageManager)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        dialogBinding= RqInterceptorMoreDetailDialogLayoutBinding.inflate(layoutInflater)
         mainBinding = RqInterceptorActivityMainBinding.inflate(layoutInflater)
         transactionsAdapter = TransactionAdapter(this) { transactionId ->
             TransactionActivity.start(this, transactionId)
@@ -67,6 +66,7 @@ internal class MainActivity :
                 adapter = transactionsAdapter
             }
         }
+
 
         viewModel.transactions.observe(
             this
@@ -89,10 +89,9 @@ internal class MainActivity :
         searchView.setIconifiedByDefault(true)
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.more_Details->{
+            R.id.more_details->{
                getInfoDialog()
                 true
             }
@@ -187,38 +186,45 @@ internal class MainActivity :
         negativeButtonText = getString(R.string.rq_interceptor_cancel)
     )
     private fun getInfoDialog(){
-        val view= View.inflate(this@MainActivity,    R.layout.rq_interceptor_more_info_dialog_layout,null)
+           createInfoDialog()
+        dialogBinding.rqInterceptorDeviceId.text=RQClientProvider.client().deviceId
+        dialogBinding.rqInterceptorAppId.text=SettingsManager.getInstance().getAppToken()
+           addInfoDialogListeners()
+
+            }
+    private fun createInfoDialog(){
         val builder= AlertDialog.Builder(this@MainActivity)
-        builder.setView(view)
+        builder.setView(dialogBinding.root)
         val dialog=builder.create()
         dialog.show()
         dialog.setCancelable(true)
-        val deviceIdCopyIB=dialog.findViewById<ImageButton>(R.id.rq_interceptor_DeviceID_Copy_ImageButton)
-        val appIdCopyIB=dialog.findViewById<ImageButton>(R.id.rq_interceptor_AppID_Copy_ImageButton)
-        val deviceIdTV=dialog.findViewById<TextView>(R.id.rq_interceptor_DeviceId_TextView)
-        val appIdTV=dialog.findViewById<TextView>(R.id.rq_interceptor_AppId_TextView)
-        // val col=RQCollector(this@MainActivity).uniqueDeviceId
 
-        deviceIdTV.text=RQClientProvider.client().deviceId
-        appIdTV.text=SettingsManager.getInstance().getAppToken()
+    }
+    private fun addInfoDialogListeners(){
 
-//                appIdTV.setText(rqClientPro.sdkId.toString())
-        deviceIdCopyIB.setOnClickListener {
+        val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        dialogBinding.rqInterceptorDeviceIdCopyButton.setOnClickListener {
             Toast.makeText(this@MainActivity,"Device Id Copied!",Toast.LENGTH_SHORT).show()
-            val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val clipData = ClipData.newPlainText("Device Id", android.os.Build.DEVICE)
+            val clipData = ClipData.newPlainText("Device Id", RQClientProvider.client().deviceId)
             clipboardManager.setPrimaryClip(clipData)
+
         }
-        appIdCopyIB.setOnClickListener {
+        dialogBinding.rqInterceptorAppIdCopyButton.setOnClickListener {
             Toast.makeText(this@MainActivity,"App Id is copied!",Toast.LENGTH_SHORT).show()
-            val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val clipData = ClipData.newPlainText("Device Id", android.os.Build.MANUFACTURER)
+            val clipData = ClipData.newPlainText("App Id",SettingsManager.getInstance().getAppToken())
             clipboardManager.setPrimaryClip(clipData)
+
         }
+
+
+
+
     }
 
     companion object {
         private const val EXPORT_TXT_FILE_NAME = "transactions.txt"
         private const val EXPORT_HAR_FILE_NAME = "transactions.har"
     }
+
+
 }

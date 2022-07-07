@@ -85,15 +85,7 @@ public class RQCollector @JvmOverloads constructor(
         Log.d(RQConstants.LOG_TAG, "deviceId get from cache: $deviceId")
         return deviceId
     }
-    private fun getSDKId(context: Context): String? {
-        val pref: SharedPreferences = context.getSharedPreferences(
-            context.getString(R.string.rq_interceptor_shared_pref_base_key),
-            0
-        )
-        var deviceId =  pref.getString(context.getString(R.string.rq_interceptor_unique_device_id_key), null)
-        Log.d(RQConstants.LOG_TAG, "deviceId get from cache: $deviceId")
-        return deviceId
-    }
+
 
     private fun setUniqueDeviceId(context: Context, deviceId: String?) {
         val pref: SharedPreferences = context.getSharedPreferences(
