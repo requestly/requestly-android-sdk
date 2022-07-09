@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
@@ -193,6 +195,7 @@ internal class MainActivity :
             }
     private fun createInfoDialog(){
         val builder= AlertDialog.Builder(this@MainActivity)
+        dialogBinding.root.removeSelf()
         builder.setView(dialogBinding.root)
         val dialog=builder.create()
         dialog.show()
@@ -223,6 +226,11 @@ internal class MainActivity :
     companion object {
         private const val EXPORT_TXT_FILE_NAME = "transactions.txt"
         private const val EXPORT_HAR_FILE_NAME = "transactions.har"
+    }
+    private fun View?.removeSelf() {
+        this ?: return
+        val parentView = parent as? ViewGroup ?: return
+        parentView.removeView(this)
     }
 
 
