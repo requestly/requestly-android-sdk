@@ -67,4 +67,9 @@
     <string name="rq_interceptor_unique_device_id_key">UNIQUE_DEVICE_ID</string>
     <string name="rq_interceptor_capture_enabled">CAPTURE_ENABLED</string>
     <string name="rq_interceptor_settings">Setting</string>
+    <string name="rq_interceptor_more_details">More Details</string>
+    <string name="rq_interceptor_device_id_label">Device Id</string>
+    <string name="rq_interceptor_copy_device_id_desc">Copy Device Id</string>
+    <string name="rq_interceptor_app_id_label">App Id</string>
+
 </resources>

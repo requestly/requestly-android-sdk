@@ -1,9 +1,15 @@
 package io.requestly.android.okhttp.internal.ui
 
+import android.app.AlertDialog
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
@@ -11,8 +17,11 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
+import io.requestly.android.core.SettingsManager
 import io.requestly.android.okhttp.R
+import io.requestly.android.okhttp.api.RQClientProvider
 import io.requestly.android.okhttp.databinding.RqInterceptorActivityMainBinding
+import io.requestly.android.okhttp.databinding.RqInterceptorMoreDetailDialogLayoutBinding
 import io.requestly.android.okhttp.internal.data.entity.HttpTransaction
 import io.requestly.android.okhttp.internal.data.model.DialogData
 import io.requestly.android.okhttp.internal.support.HarUtils
@@ -33,13 +42,14 @@ internal class MainActivity :
 
     private lateinit var mainBinding: RqInterceptorActivityMainBinding
     private lateinit var transactionsAdapter: TransactionAdapter
+    private lateinit var dialogBinding: RqInterceptorMoreDetailDialogLayoutBinding
 
     private val applicationName: CharSequence
         get() = applicationInfo.loadLabel(packageManager)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        dialogBinding = RqInterceptorMoreDetailDialogLayoutBinding.inflate(layoutInflater)
         mainBinding = RqInterceptorActivityMainBinding.inflate(layoutInflater)
         transactionsAdapter = TransactionAdapter(this) { transactionId ->
             TransactionActivity.start(this, transactionId)
@@ -53,18 +63,22 @@ internal class MainActivity :
             tutorialLink.movementMethod = LinkMovementMethod.getInstance()
             transactionsRecyclerView.apply {
                 setHasFixedSize(true)
-                addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL))
+                addItemDecoration(
+                    DividerItemDecoration(
+                        this@MainActivity,
+                        DividerItemDecoration.VERTICAL
+                    )
+                )
                 adapter = transactionsAdapter
             }
         }
 
         viewModel.transactions.observe(
             this,
-            { transactionTuples ->
-                transactionsAdapter.submitList(transactionTuples)
-                mainBinding.tutorialGroup.isVisible = transactionTuples.isEmpty()
-            }
-        )
+        ) { transactionTuples ->
+            transactionsAdapter.submitList(transactionTuples)
+            mainBinding.tutorialGroup.isVisible = transactionTuples.isEmpty()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -82,6 +96,10 @@ internal class MainActivity :
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            R.id.more_details -> {
+                getInfoDialog()
+                true
+            }
             R.id.clear -> {
                 showDialog(
                     getClearDialogData(),
@@ -135,16 +153,22 @@ internal class MainActivity :
         return true
     }
 
-    private fun exportTransactions(fileName: String, block: suspend (List<HttpTransaction>) -> Sharable) {
+    private fun exportTransactions(
+        fileName: String,
+        block: suspend (List<HttpTransaction>) -> Sharable
+    ) {
         lifecycleScope.launch {
             val transactions = viewModel.getAllTransactions()
             if (transactions.isNullOrEmpty()) {
                 Toast
-                    .makeText(this@MainActivity, R.string.rq_interceptor_export_empty_text, Toast.LENGTH_SHORT)
+                    .makeText(
+                        this@MainActivity,
+                        R.string.rq_interceptor_export_empty_text,
+                        Toast.LENGTH_SHORT
+                    )
                     .show()
                 return@launch
             }
-
             val sharableTransactions = block(transactions)
             val shareIntent = sharableTransactions.shareAsFile(
                 activity = this@MainActivity,
@@ -173,8 +197,41 @@ internal class MainActivity :
         negativeButtonText = getString(R.string.rq_interceptor_cancel)
     )
 
+    private fun getInfoDialog() {
+        createInfoDialog()
+        dialogBinding.rqInterceptorDeviceId.text = RQClientProvider.client().deviceId
+        dialogBinding.rqInterceptorAppId.text = SettingsManager.getInstance().getAppToken()
+        addInfoDialogListeners()
+    }
+
+    private fun createInfoDialog() {
+        val builder = AlertDialog.Builder(this@MainActivity)
+        if (dialogBinding.root.parent != null) {
+            (dialogBinding.root.parent as ViewGroup).removeView(dialogBinding.root)
+        }
+        builder.setView(dialogBinding.root)
+        val dialog = builder.create()
+        dialog.show()
+        dialog.setCancelable(true)
+    }
+
+    private fun addInfoDialogListeners() {
+        val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        dialogBinding.rqInterceptorDeviceIdCopyButton.setOnClickListener {
+            Toast.makeText(this@MainActivity, "Device Id Copied!", Toast.LENGTH_SHORT).show()
+            val clipData = ClipData.newPlainText("Device Id", RQClientProvider.client().deviceId)
+            clipboardManager.setPrimaryClip(clipData)
+        }
+        dialogBinding.rqInterceptorAppIdCopyButton.setOnClickListener {
+            Toast.makeText(this@MainActivity, "App Id is copied!", Toast.LENGTH_SHORT).show()
+            val clipData = ClipData.newPlainText("App Id", SettingsManager.getInstance().getAppToken())
+            clipboardManager.setPrimaryClip(clipData)
+        }
+    }
+
     companion object {
         private const val EXPORT_TXT_FILE_NAME = "transactions.txt"
         private const val EXPORT_HAR_FILE_NAME = "transactions.har"
     }
+
 }

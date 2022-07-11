@@ -86,6 +86,7 @@ public class RQCollector @JvmOverloads constructor(
         return deviceId
     }
 
+
     private fun setUniqueDeviceId(context: Context, deviceId: String?) {
         val pref: SharedPreferences = context.getSharedPreferences(
             context.getString(R.string.rq_interceptor_shared_pref_base_key),

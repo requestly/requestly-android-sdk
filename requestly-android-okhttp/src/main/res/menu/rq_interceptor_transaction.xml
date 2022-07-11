@@ -8,6 +8,7 @@
         android:visible="false"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="collapseActionView|ifRoom" />
+
     <item
         android:icon="@drawable/rq_interceptor_ic_decoded_url_white"
         android:title="@string/rq_interceptor_encode_url"
