@@ -70,11 +70,12 @@ internal class MainActivity :
 
 
         viewModel.transactions.observe(
-            this
-        ) { transactionTuples ->
-            transactionsAdapter.submitList(transactionTuples)
-            transactionTuples.isEmpty().also { mainBinding.tutorialGroup.isVisible = it }
-        }
+            this,
+        )   { transactionTuples ->
+                transactionsAdapter.submitList(transactionTuples)
+                mainBinding.tutorialGroup.isVisible = transactionTuples.isEmpty()
+            }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -195,7 +196,9 @@ internal class MainActivity :
             }
     private fun createInfoDialog(){
         val builder= AlertDialog.Builder(this@MainActivity)
-        dialogBinding.root.removeSelf()
+        if(dialogBinding.root.parent!=null){
+            (dialogBinding.root.parent as ViewGroup).removeView(dialogBinding.root)
+        }
         builder.setView(dialogBinding.root)
         val dialog=builder.create()
         dialog.show()
@@ -226,11 +229,6 @@ internal class MainActivity :
     companion object {
         private const val EXPORT_TXT_FILE_NAME = "transactions.txt"
         private const val EXPORT_HAR_FILE_NAME = "transactions.har"
-    }
-    private fun View?.removeSelf() {
-        this ?: return
-        val parentView = parent as? ViewGroup ?: return
-        parentView.removeView(this)
     }
 
 
