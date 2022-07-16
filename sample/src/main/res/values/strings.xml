@@ -8,4 +8,5 @@
 
     <string name="intro_title">Welcome to RQ-Interceptor Sample App</string>
     <string name="intro_body">You can use this sample app to do some HTTP networking and to see how RQ-Interceptor can help you inspect your networking calls.</string>
+    <string name="rq_events">rq events</string>
 </resources>

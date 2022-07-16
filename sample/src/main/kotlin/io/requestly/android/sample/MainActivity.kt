@@ -1,11 +1,16 @@
 package io.requestly.android.sample
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.os.StrictMode
 import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import io.requestly.android.event.MainActivity
+import io.requestly.android.okhttp.api.RQ.getLaunchIntent
 import io.requestly.android.sample.databinding.ActivityMainSampleBinding
+import io.requestly.android.okhttp.api.RQ
 
 private val interceptorTypeSelector = InterceptorTypeSelector()
 
@@ -33,8 +38,12 @@ class MainActivity : AppCompatActivity() {
                     task.run()
                 }
             }
+            launchRqevents?.setOnClickListener {
 
-            launchRqinterceptorDirectly.visibility = if (io.requestly.android.okhttp.api.RQ.isOp) View.VISIBLE else View.GONE
+                startActivity(Intent(this@MainActivity, MainActivity::class.java))
+            }
+
+            launchRqinterceptorDirectly.visibility = if (RQ.isOp) View.VISIBLE else View.GONE
             launchRqinterceptorDirectly.setOnClickListener { launchRqInterceptorDirectly() }
 
             interceptorTypeLabel.movementMethod = LinkMovementMethod.getInstance()
@@ -68,8 +77,10 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+
+
     private fun launchRqInterceptorDirectly() {
         // Optionally launch Chucker directly from your own app UI
-        startActivity(io.requestly.android.okhttp.api.RQ.getLaunchIntent(this))
+        startActivity(getLaunchIntent(this))
     }
 }

@@ -63,6 +63,7 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':requestly-android-event')
     debugImplementation project(':requestly-android-okhttp')
     releaseImplementation project(':requestly-android-okhttp-noop')
     debugImplementation project(':requestly-android')

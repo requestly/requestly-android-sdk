@@ -2,4 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="io.requestly.android.event">
 
+    <application>
+        <activity
+            android:name=".EventsOverview"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+    </application>
+
 </manifest>

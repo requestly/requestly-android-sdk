@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/rq_interceptor_property_label"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Event_property_label"
+        android:textColor="#474646"
+        android:paddingVertical="5sp"
+        app:layout_constraintBottom_toBottomOf="@+id/rq_interceptor_property_value"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rq_interceptor_property_value"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.40" />
+
+    <TextView
+        android:id="@+id/rq_interceptor_property_value"
+        style="@style/Widget.MaterialComponents.TextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:paddingVertical="5sp"
+        android:layout_marginBottom="8dp"
+        android:hint="Event Property"
+        android:background="@drawable/rq_interceptor_events_property_value_custom_desgin"
+        android:paddingHorizontal="5sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.94"
+        app:layout_constraintStart_toEndOf="@+id/rq_interceptor_property_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.40" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
