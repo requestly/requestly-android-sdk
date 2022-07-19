@@ -16,8 +16,6 @@ class AllEventsAdapter(
     private val listener:OnEventClickedListener
 ) : RecyclerView.Adapter<AllEventsAdapter.EventsViewHolder>() {
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventsViewHolder {
         val viewBinding = RqInterceptorEventsListSingleDesignBinding.inflate(
         LayoutInflater.from(parent.context), parent, false

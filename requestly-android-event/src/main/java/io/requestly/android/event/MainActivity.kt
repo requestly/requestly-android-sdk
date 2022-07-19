@@ -3,6 +3,7 @@ package io.requestly.android.event
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.ActionBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.requestly.android.event.Adapters.AllEventsAdapter
 import io.requestly.android.event.databinding.ActivityMainBinding
@@ -12,10 +13,16 @@ class MainActivity : AppCompatActivity(), AllEventsAdapter.OnEventClickedListene
     private lateinit var mainBinding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
         mainBinding=ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainBinding.root)
         fetchData()
         setAllEventRecyclerView()
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     private fun fetchData() {
