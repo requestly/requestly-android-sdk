@@ -7,4 +7,32 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="rq_interceptor_color_primary">#01579b</color>
+    <color name="rq_interceptor_color_primary_variant">#002f6c</color>
+    <color name="rq_interceptor_color_background">#ffffff</color>
+    <color name="rq_interceptor_color_surface">#ffffff</color>
+    <color name="rq_interceptor_color_secondary">#009E09</color>
+    <color name="rq_interceptor_color_error">#F44336</color>
+    <color name="rq_interceptor_color_on_primary">#ffffff</color>
+    <color name="rq_interceptor_color_on_secondary">#000000</color>
+    <color name="rq_interceptor_color_on_background">#000000</color>
+    <color name="rq_interceptor_color_on_surface">#000000</color>
+    <color name="rq_interceptor_color_on_error">#ffffff</color>
+
+    <color name="rq_interceptor_status_default">#212121</color>
+    <color name="rq_interceptor_status_requested">#9E9E9E</color>
+    <color name="rq_interceptor_status_error">#F44336</color>
+    <color name="rq_interceptor_status_500">#B71C1C</color>
+    <color name="rq_interceptor_status_400">#FF9800</color>
+    <color name="rq_interceptor_status_300">#0D47A1</color>
+
+    <color name="rq_interceptor_background_span_color">#ffffff00</color>
+    <color name="rq_interceptor_foreground_span_color">#ffff0000</color>
+
+    <color name="rq_interceptor_chessboard_even_square_light">#F8FAFC</color>
+    <color name="rq_interceptor_chessboard_odd_square_light">#D2DADF</color>
+    <color name="rq_interceptor_chessboard_even_square_dark">#182531</color>
+    <color name="rq_interceptor_chessboard_odd_square_dark">#01101D</color>
+
 </resources>
