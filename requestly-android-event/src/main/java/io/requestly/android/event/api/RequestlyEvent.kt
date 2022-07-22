@@ -8,7 +8,7 @@ import java.lang.Exception
 
 class RequestlyEvent {
     companion object {
-        fun send(eventName: String, eventData: Map<String, Any>): Event {
+        fun send(eventName: String, eventData: Map<String, Any>) {
             var customEvent = Event(
                 eventName = eventName,
                 eventData = stringifyEventDataValues(eventData),
@@ -26,8 +26,6 @@ class RequestlyEvent {
                 }
                 RepositoryProvider.event().insertEvent(customEvent)
             }
-
-            return customEvent
         }
 
         private fun stringifyEventDataValues(eventData: Map<String, Any>): Map<String, String> {
