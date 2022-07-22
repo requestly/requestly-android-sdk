@@ -1,13 +1,13 @@
 package io.requestly.android.sample
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.StrictMode
 import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import io.requestly.android.event.MainActivity
+import io.requestly.android.event.api.RequestlyEvent
+import io.requestly.android.event.ui.MainActivity
 import io.requestly.android.okhttp.api.RQ.getLaunchIntent
 import io.requestly.android.sample.databinding.ActivityMainSampleBinding
 import io.requestly.android.okhttp.api.RQ
@@ -34,17 +34,26 @@ class MainActivity : AppCompatActivity() {
         with(mainBinding) {
             setContentView(root)
             doHttp.setOnClickListener {
+                RequestlyEvent.send(
+                    "HTTP_EVENT",
+                    mapOf("size" to httpTasks.size)
+                )
                 for (task in httpTasks) {
                     task.run()
                 }
             }
             launchRqevents?.setOnClickListener {
-
                 startActivity(Intent(this@MainActivity, MainActivity::class.java))
             }
 
             launchRqinterceptorDirectly.visibility = if (RQ.isOp) View.VISIBLE else View.GONE
-            launchRqinterceptorDirectly.setOnClickListener { launchRqInterceptorDirectly() }
+            launchRqinterceptorDirectly.setOnClickListener {
+                RequestlyEvent.send(
+                    "LAUNCH_API_TRAFFIC_UI",
+                    mapOf("test" to "test")
+                )
+                launchRqInterceptorDirectly()
+            }
 
             interceptorTypeLabel.movementMethod = LinkMovementMethod.getInstance()
             useApplicationInterceptor.setOnCheckedChangeListener { _, isChecked ->
