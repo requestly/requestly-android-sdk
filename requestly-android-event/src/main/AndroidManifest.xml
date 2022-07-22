@@ -4,10 +4,10 @@
 
     <application>
         <activity
-            android:name=".EventsOverview"
+            android:name=".ui.EventOverviewActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="false" />
     </application>
 

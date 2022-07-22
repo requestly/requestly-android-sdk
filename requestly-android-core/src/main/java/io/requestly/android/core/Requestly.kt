@@ -14,6 +14,8 @@ class Requestly {
         }
     }
 
+    lateinit var applicationContext: Context
+
     class Builder(
         private val application: Application,
         private val appToken: String,
@@ -28,6 +30,7 @@ class Requestly {
         fun build () {
             Log.d("RQ-Core", "Start: Building Core")
             Requestly.INSTANCE = Requestly()
+            Requestly.getInstance()?.applicationContext = applicationContext
 
             SettingsManager.getInstance().setAppToken(appToken)
             this.updateFeaturesState()
