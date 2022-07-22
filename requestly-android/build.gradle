@@ -14,6 +14,7 @@ android {
 
 dependencies {
     api project(':requestly-android-core')
+    api project(':requestly-android-event')
 }
 
 apply from: rootProject.file('gradle/gradle-mvn-push.gradle')
