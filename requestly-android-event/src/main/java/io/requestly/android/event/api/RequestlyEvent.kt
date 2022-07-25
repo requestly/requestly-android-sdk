@@ -1,6 +1,7 @@
 package io.requestly.android.event.api
 
 import io.requestly.android.core.Requestly
+import io.requestly.android.event.internal.Utils
 import io.requestly.android.event.internal.data.entity.Event
 import io.requestly.android.event.internal.data.repository.RepositoryProvider
 import kotlinx.coroutines.*
@@ -15,8 +16,7 @@ class RequestlyEvent {
                 timestamp = System.currentTimeMillis()
             )
 
-            // TODO: Insert into Repository
-
+            // Insert into Repository
             CoroutineScope(Dispatchers.IO).launch {
                 // TODO: Remove this hack. Hack to init Repository. Ideally it should get auto init
                 try {
@@ -25,6 +25,14 @@ class RequestlyEvent {
                     RepositoryProvider.initialize((Requestly.getInstance()?.applicationContext!!))
                 }
                 RepositoryProvider.event().insertEvent(customEvent)
+
+                // Show Notification after inserted into Repository since `id` is generated afterwards
+                Requestly.getInstance()?.listNotificationHelper?.show(
+                    customEvent.notificationText,
+                    customEvent.id,
+                    Utils.getDefaultScreenIntent(Requestly.getInstance()?.applicationContext!!),
+                    "Analytics Interceptor"
+                )
             }
         }
 
