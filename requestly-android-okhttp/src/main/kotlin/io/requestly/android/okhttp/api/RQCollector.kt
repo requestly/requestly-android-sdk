@@ -127,9 +127,6 @@ public class RQCollector @JvmOverloads constructor(
             if (showNotification && updated > 0) {
                 notificationHelper.show(transaction)
             }
-
-            // TODO: This should be moved to server side
-//            RQClientProvider.client().addLog(transaction)
         }
     }
 }

@@ -7,7 +7,6 @@ import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import io.requestly.android.event.api.RequestlyEvent
-import io.requestly.android.event.internal.Utils
 import io.requestly.android.okhttp.api.RQ.getLaunchIntent
 import io.requestly.android.sample.databinding.ActivityMainSampleBinding
 import io.requestly.android.okhttp.api.RQ
@@ -47,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                     "Events CTA clicked",
                     mapOf("foo" to "bar")
                 )
-                startActivity(Utils.getLaunchIntent(applicationContext))
+//                startActivity(Utils.getLaunchIntent(applicationContext))
             }
 
             launchRqinterceptorDirectly.visibility = if (RQ.isOp) View.VISIBLE else View.GONE

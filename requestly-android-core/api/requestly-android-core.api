@@ -13,7 +13,13 @@ public final class io/requestly/android/core/Feature : java/lang/Enum {
 
 public final class io/requestly/android/core/Requestly {
 	public static final field Companion Lio/requestly/android/core/Requestly$Companion;
+	public field applicationContext Landroid/content/Context;
+	public field listNotificationHelper Lio/requestly/android/core/internal/support/ListNotificationHelper;
 	public fun <init> ()V
+	public final fun getApplicationContext ()Landroid/content/Context;
+	public final fun getListNotificationHelper ()Lio/requestly/android/core/internal/support/ListNotificationHelper;
+	public final fun setApplicationContext (Landroid/content/Context;)V
+	public final fun setListNotificationHelper (Lio/requestly/android/core/internal/support/ListNotificationHelper;)V
 }
 
 public final class io/requestly/android/core/Requestly$Builder {
@@ -39,5 +45,17 @@ public final class io/requestly/android/core/SettingsManager {
 
 public final class io/requestly/android/core/SettingsManager$Companion {
 	public final fun getInstance ()Lio/requestly/android/core/SettingsManager;
+}
+
+public final class io/requestly/android/core/internal/support/ListNotificationHelper {
+	public static final field Companion Lio/requestly/android/core/internal/support/ListNotificationHelper$Companion;
+	public fun <init> (Landroid/content/Context;)V
+	public final fun dismissNotifications ()V
+	public final fun getContext ()Landroid/content/Context;
+	public final fun show (Ljava/lang/String;JLandroid/app/PendingIntent;Ljava/lang/String;)V
+}
+
+public final class io/requestly/android/core/internal/support/ListNotificationHelper$Companion {
+	public final fun clearBuffer ()V
 }
 

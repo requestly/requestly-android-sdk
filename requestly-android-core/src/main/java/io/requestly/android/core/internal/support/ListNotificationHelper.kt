@@ -19,7 +19,6 @@ class ListNotificationHelper(val context: Context) {
         private const val EVENT_NOTIFICATION_ID = 1140
 
         private const val BUFFER_SIZE = 10
-        private const val INTENT_REQUEST_CODE = 11
         private val notificationBuffer = LongSparseArray<String>()
         private val notificationIdsSet = HashSet<Long>()
 
@@ -70,7 +69,7 @@ class ListNotificationHelper(val context: Context) {
         }
     }
 
-    // TODO: Inherit this class and pass entity here instead of passing String and id
+    // Inherit this class and pass entity here instead of passing String and id
     fun show(notificationText: String, id: Long, intent: PendingIntent, notificationTitle: String) {
         addToBuffer(notificationText, id)
         val builder =
@@ -109,7 +108,7 @@ class ListNotificationHelper(val context: Context) {
         notificationManager.cancel(EVENT_NOTIFICATION_ID)
     }
 
-// TODO: Create clear action to delete all the logs in the DB
+// RQLY-1 Create clear action to delete all the logs in the DB
 //    private fun createClearAction():
 //        NotificationCompat.Action {
 //        val clearTitle = context.getString(R.string.rq_interceptor_clear)
@@ -127,10 +126,10 @@ class ListNotificationHelper(val context: Context) {
 //            pendingBroadcastIntent
 //        )
 //    }
-
-    private fun immutableFlag() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        PendingIntent.FLAG_IMMUTABLE
-    } else {
-        0
-    }
+//
+//    private fun immutableFlag() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//        PendingIntent.FLAG_IMMUTABLE
+//    } else {
+//        0
+//    }
 }

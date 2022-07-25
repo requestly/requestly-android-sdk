@@ -1,6 +1,5 @@
 package io.requestly.android.core
 
-
 class SettingsManager {
     private lateinit var appToken: String
     private lateinit var uniqueDeviceId: String
@@ -8,14 +7,14 @@ class SettingsManager {
     private var featuresState = HashMap<Feature, Boolean>()
 
     companion object {
-        private var settingsManager: SettingsManager? = null
+        private var INSTANCE: SettingsManager? = null
 
         fun getInstance(): SettingsManager {
-            if(settingsManager == null) {
-                settingsManager = SettingsManager()
+            if (INSTANCE == null) {
+                INSTANCE = SettingsManager()
             }
 
-            return settingsManager as SettingsManager
+            return INSTANCE as SettingsManager
         }
     }
 
