@@ -7,7 +7,7 @@ import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import io.requestly.android.event.api.RequestlyEvent
-import io.requestly.android.event.ui.MainActivity
+import io.requestly.android.event.internal.Utils
 import io.requestly.android.okhttp.api.RQ.getLaunchIntent
 import io.requestly.android.sample.databinding.ActivityMainSampleBinding
 import io.requestly.android.okhttp.api.RQ
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
             setContentView(root)
             doHttp.setOnClickListener {
                 RequestlyEvent.send(
-                    "HTTP_EVENT",
+                    "HTTP Traffic Triggered",
                     mapOf("size" to httpTasks.size)
                 )
                 for (task in httpTasks) {
@@ -43,13 +43,17 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             launchRqevents?.setOnClickListener {
-                startActivity(Intent(this@MainActivity, MainActivity::class.java))
+                RequestlyEvent.send(
+                    "Events CTA clicked",
+                    mapOf("foo" to "bar")
+                )
+                startActivity(Utils.getLaunchIntent(applicationContext))
             }
 
             launchRqinterceptorDirectly.visibility = if (RQ.isOp) View.VISIBLE else View.GONE
             launchRqinterceptorDirectly.setOnClickListener {
                 RequestlyEvent.send(
-                    "LAUNCH_API_TRAFFIC_UI",
+                    "API Traffic CTA clicked",
                     mapOf("test" to "test")
                 )
                 launchRqInterceptorDirectly()
@@ -58,11 +62,19 @@ class MainActivity : AppCompatActivity() {
             interceptorTypeLabel.movementMethod = LinkMovementMethod.getInstance()
             useApplicationInterceptor.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
+                    RequestlyEvent.send(
+                        "Interceptor Type Changed",
+                        mapOf("type" to InterceptorType.APPLICATION)
+                    )
                     interceptorTypeSelector.value = InterceptorType.APPLICATION
                 }
             }
             useNetworkInterceptor.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
+                    RequestlyEvent.send(
+                        "Interceptor Type Changed",
+                        mapOf("type" to InterceptorType.NETWORK)
+                    )
                     interceptorTypeSelector.value = InterceptorType.NETWORK
                 }
             }

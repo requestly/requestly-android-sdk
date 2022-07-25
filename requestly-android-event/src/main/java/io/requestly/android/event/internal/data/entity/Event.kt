@@ -22,4 +22,8 @@ class Event (
     @ColumnInfo(name = "status") var status: Boolean? = false,
 ) {
 
+    val notificationText: String
+        get() {
+            return eventName
+        }
 }
