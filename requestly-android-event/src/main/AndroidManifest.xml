@@ -5,10 +5,12 @@
     <application>
         <activity
             android:name=".ui.EventOverviewActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Requestly.Theme"/>
         <activity
             android:name=".ui.MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Requestly.Theme"/>
     </application>
 
 </manifest>
