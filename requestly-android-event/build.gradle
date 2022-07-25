@@ -50,3 +50,6 @@ dependencies {
     kapt("androidx.room:room-compiler:$roomVersion")
     implementation "com.google.code.gson:gson:$gsonVersion"
 }
+
+apply from: rootProject.file('gradle/gradle-mvn-push.gradle')
+apply from: rootProject.file('gradle/kotlin-static-analysis.gradle')
