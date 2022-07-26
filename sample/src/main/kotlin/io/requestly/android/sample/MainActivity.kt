@@ -66,6 +66,7 @@ class MainActivity : AppCompatActivity() {
                         mapOf("type" to InterceptorType.APPLICATION)
                     )
                     interceptorTypeSelector.value = InterceptorType.APPLICATION
+                    testEvent()
                 }
             }
             useNetworkInterceptor.setOnCheckedChangeListener { _, isChecked ->
@@ -75,6 +76,7 @@ class MainActivity : AppCompatActivity() {
                         mapOf("type" to InterceptorType.NETWORK)
                     )
                     interceptorTypeSelector.value = InterceptorType.NETWORK
+                    testEvent()
                 }
             }
         }
@@ -98,6 +100,19 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    private fun testEvent() {
+        RequestlyEvent.send(
+            "Test Event",
+            mapOf(
+                "string" to "Hello",
+                "int" to 1,
+                "float" to 1.0,
+                "array" to listOf(1, 2, 3),
+                "1d map" to mapOf("string" to "hello", "string2" to "hello"),
+                "2d map" to mapOf("string" to mapOf("string" to "hello")),
+            )
+        )
+    }
 
     private fun launchRqInterceptorDirectly() {
         // Optionally launch Chucker directly from your own app UI

@@ -1,5 +1,6 @@
 package io.requestly.android.event.api
 
+import com.google.gson.Gson
 import io.requestly.android.core.Requestly
 import io.requestly.android.event.internal.Utils
 import io.requestly.android.event.internal.data.entity.Event
@@ -40,7 +41,12 @@ class RequestlyEvent {
             var updatedData = emptyMap<String, String>().toMutableMap()
 
             eventData.keys.map {
-                key -> updatedData[key] = eventData[key].toString()
+                key ->
+                    if(eventData[key] is Map<*, *>){
+                        updatedData[key] = Gson().toJson(eventData[key])
+                    } else {
+                        updatedData[key] = eventData[key].toString()
+                    }
             }
 
             return updatedData
