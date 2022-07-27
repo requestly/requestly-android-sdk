@@ -31,7 +31,7 @@
         android:paddingVertical="5sp"
         android:layout_marginBottom="8dp"
         android:hint="Event Property"
-        android:background="@drawable/rq_interceptor_events_property_value_custom_desgin"
+        android:background="@drawable/event_property_value_background"
         android:paddingHorizontal="5sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

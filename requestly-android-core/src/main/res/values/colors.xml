@@ -9,4 +9,10 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="color_primary">#01579b</color>
+
+    <color name="success">#28A745</color>
+    <color name="failure">#DC3545</color>
+
+    <color name="bright_gray">#EBEBEB</color>
+    <color name="gray">#808080</color>
 </resources>

@@ -8,10 +8,10 @@
 
     <View
         android:id="@+id/event_list_item_status_bar"
-        android:layout_width="16dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="2dp"
+        android:layout_width="@dimen/l8"
+        android:layout_height="@dimen/l0"
+        android:layout_marginTop="@dimen/m2"
+        android:layout_marginBottom="@dimen/m2"
         android:background="@color/success"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,38 +20,38 @@
 
     <TextView
         android:id="@+id/event_list_item_name"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/l0"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="@dimen/m8"
         android:gravity="start"
-        android:text="Bottom Bar Shown"
         android:textColor="@color/teal_700"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/event_list_item_status_bar"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.60" />
+        app:layout_constraintWidth_percent="0.60"
+        tools:text="Bottom Bar Shown" />
 
     <TextView
         android:id="@+id/events_list_item_timestamp"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/l0"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="@dimen/m8"
         android:gravity="end"
-        android:paddingVertical="10dp"
-        tools:text="12:01:01 PM"
+        android:paddingVertical="@dimen/p8"
         android:textColor="@color/teal_700"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.25" />
+        app:layout_constraintWidth_percent="0.25"
+        tools:text="12:01:01 PM" />
 
     <View
         android:id="@+id/event_list_item_divider"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/l1"
         app:layout_constraintBottom_toBottomOf="parent"
         android:background="@color/gray"
     />

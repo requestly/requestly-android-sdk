@@ -8,6 +8,7 @@
     <dimen name="p64">64dp</dimen>
 
     <!-- Margins -->
+    <dimen name="m2">2dp</dimen>
     <dimen name="m4">4dp</dimen>
     <dimen name="m8">8dp</dimen>
     <dimen name="m16">16dp</dimen>
@@ -20,5 +21,14 @@
     <dimen name="s16">16sp</dimen>
     <dimen name="s32">32sp</dimen>
     <dimen name="s64">64sp</dimen>
+
+    <!-- Layout Sizes -->
+    <dimen name="l0">0dp</dimen>
+    <dimen name="l1">1dp</dimen>
+    <dimen name="l4">4dp</dimen>
+    <dimen name="l8">8dp</dimen>
+    <dimen name="l16">16dp</dimen>
+    <dimen name="l32">32dp</dimen>
+    <dimen name="l64">64dp</dimen>
 
 </resources>
