@@ -3,4 +3,8 @@
 
     <!-- Notification -->
     <string name="notification_category_name">Requestly Mobile Debugger</string>
+
+
+    <!-- Toolbar - Action Menu -->
+    <string name="clear">Clear</string>
 </resources>
