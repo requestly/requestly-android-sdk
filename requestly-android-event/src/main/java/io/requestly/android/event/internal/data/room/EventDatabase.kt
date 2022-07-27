@@ -8,9 +8,9 @@ import androidx.room.TypeConverters
 import io.requestly.android.event.internal.data.entity.Event
 import io.requestly.android.event.internal.data.entity.MapTypeConverter
 
-@Database(entities = [Event::class], version=1, exportSchema = false)
+@Database(entities = [Event::class], version = 1, exportSchema = false)
 @TypeConverters(MapTypeConverter::class)
-internal abstract class EventDatabase: RoomDatabase() {
+internal abstract class EventDatabase : RoomDatabase() {
 
     abstract fun eventDao(): EventDao
 

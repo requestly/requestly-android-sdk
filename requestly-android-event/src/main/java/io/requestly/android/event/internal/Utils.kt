@@ -6,12 +6,14 @@ import android.content.Intent
 import android.os.Build
 import io.requestly.android.event.ui.MainActivity
 
-class Utils {
+class Utils private constructor() {
     companion object {
-        fun getDefaultScreenIntent (context: Context): PendingIntent {
+        private var requestCode = 8281
+
+        fun getDefaultScreenIntent(context: Context): PendingIntent {
             return PendingIntent.getActivity(
                 context,
-                8281, // TODO: Check why this is useful?
+                requestCode, // @wrongsahil: Check why this is useful?
                 Utils.getLaunchIntent(context),
                 PendingIntent.FLAG_UPDATE_CURRENT or immutableFlag()
             )

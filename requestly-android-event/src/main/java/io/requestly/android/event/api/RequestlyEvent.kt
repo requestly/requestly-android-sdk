@@ -5,10 +5,12 @@ import io.requestly.android.core.Requestly
 import io.requestly.android.event.internal.Utils
 import io.requestly.android.event.internal.data.entity.Event
 import io.requestly.android.event.internal.data.repository.RepositoryProvider
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class RequestlyEvent {
+class RequestlyEvent private constructor() {
     companion object {
         fun send(eventName: String, eventData: Map<String, Any>) {
             var customEvent = Event(
@@ -19,7 +21,8 @@ class RequestlyEvent {
 
             // Insert into Repository
             CoroutineScope(Dispatchers.IO).launch {
-                // TODO: Remove this hack. Hack to init Repository. Ideally it should get auto init
+                // @wrongsahil: Remove this hack. Hack to init Repository. Ideally it should get auto init
+                @Suppress("TooGenericExceptionCaught", "SwallowedException")
                 try {
                     RepositoryProvider.event()
                 } catch (err: Exception) {
@@ -42,11 +45,11 @@ class RequestlyEvent {
 
             eventData.keys.map {
                 key ->
-                    if(eventData[key] is Map<*, *>){
-                        updatedData[key] = Gson().toJson(eventData[key])
-                    } else {
-                        updatedData[key] = eventData[key].toString()
-                    }
+                if (eventData[key] is Map<*, *>) {
+                    updatedData[key] = Gson().toJson(eventData[key])
+                } else {
+                    updatedData[key] = eventData[key].toString()
+                }
             }
 
             return updatedData

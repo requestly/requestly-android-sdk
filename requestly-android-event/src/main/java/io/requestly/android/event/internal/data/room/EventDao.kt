@@ -1,9 +1,12 @@
 package io.requestly.android.event.internal.data.room
 
 import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Update
 import io.requestly.android.event.internal.data.entity.Event
-
 
 @Dao
 internal interface EventDao {

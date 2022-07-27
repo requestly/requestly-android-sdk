@@ -8,15 +8,14 @@ import io.requestly.android.event.R
 import io.requestly.android.event.databinding.EventsListItemBinding
 import io.requestly.android.event.internal.data.entity.Event
 import java.text.SimpleDateFormat
-import java.util.*
-
+import java.util.Date
 
 class EventListAdapter(
     private val context: Context,
     private val onEventClickListener: (Long) -> Unit,
 ) : RecyclerView.Adapter<EventListAdapter.EventsViewHolder>() {
 
-    private var eventsList : List<Event> = emptyList()
+    private var eventsList: List<Event> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventsViewHolder {
         val viewBinding = EventsListItemBinding.inflate(
@@ -34,13 +33,13 @@ class EventListAdapter(
         val resultdate = Date(eventsList[position].timestamp ?: 0)
         holder.timestamp.text = dateFormatter.format(resultdate)
 
-        if(eventsList[position].status == true) {
+        if (eventsList[position].status == true) {
             holder.statusBar.setBackgroundResource(R.color.success)
         } else {
             holder.statusBar.setBackgroundResource(R.color.failure)
         }
 
-        holder.name.setOnClickListener{
+        holder.name.setOnClickListener {
             onEventClickListener(eventsList[position].id)
         }
     }
@@ -54,9 +53,9 @@ class EventListAdapter(
         notifyDataSetChanged()
     }
 
-    class EventsViewHolder(itemView: EventsListItemBinding): RecyclerView.ViewHolder(itemView.root){
-        val name=itemView.eventListItemName
-        val timestamp=itemView.eventsListItemTimestamp
-        val statusBar=itemView.eventListItemStatusBar
+    class EventsViewHolder(itemView: EventsListItemBinding) : RecyclerView.ViewHolder(itemView.root) {
+        val name = itemView.eventListItemName
+        val timestamp = itemView.eventsListItemTimestamp
+        val statusBar = itemView.eventListItemStatusBar
     }
 }

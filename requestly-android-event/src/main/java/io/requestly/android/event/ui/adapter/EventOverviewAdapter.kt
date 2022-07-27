@@ -10,7 +10,7 @@ import io.requestly.android.event.internal.data.entity.Event
 class EventOverviewAdapter(
     private var event: Event?,
     private val context: Context,
-): RecyclerView.Adapter<EventOverviewAdapter.EventPropertyViewHolder>() {
+) : RecyclerView.Adapter<EventOverviewAdapter.EventPropertyViewHolder>() {
     private var eventKeys: List<String> = emptyList()
 
     init {
@@ -27,14 +27,16 @@ class EventOverviewAdapter(
         notifyDataSetChanged()
     }
 
-    class EventPropertyViewHolder(itemView: EventOverviewPropertyBinding) :RecyclerView.ViewHolder(itemView.root) {
-        val label=itemView.rqInterceptorPropertyLabel
-        val propertyValue=itemView.rqInterceptorPropertyValue
+    class EventPropertyViewHolder(itemView: EventOverviewPropertyBinding) : RecyclerView.ViewHolder(itemView.root) {
+        val label = itemView.rqInterceptorPropertyLabel
+        val propertyValue = itemView.rqInterceptorPropertyValue
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventPropertyViewHolder {
         val viewBinding = EventOverviewPropertyBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false
+            LayoutInflater.from(parent.context),
+            parent,
+            false
         )
         return EventPropertyViewHolder(viewBinding)
     }
@@ -46,6 +48,6 @@ class EventOverviewAdapter(
     }
 
     override fun getItemCount(): Int {
-       return eventKeys.size
+        return eventKeys.size
     }
 }

@@ -5,9 +5,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 
-
 @Entity(tableName = "events")
-class Event (
+class Event(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var id: Long = 0,
@@ -15,7 +14,8 @@ class Event (
     @ColumnInfo(name = "name") var eventName: String,
 
     @TypeConverters(MapTypeConverter::class)
-    @ColumnInfo(name = "data") var eventData: Map<String, String>,
+    @ColumnInfo(name = "data")
+    var eventData: Map<String, String>,
 
     @ColumnInfo(name = "timestamp") var timestamp: Long? = System.currentTimeMillis(),
 

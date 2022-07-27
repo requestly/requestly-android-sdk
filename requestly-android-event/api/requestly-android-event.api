@@ -1,6 +1,5 @@
 public final class io/requestly/android/event/api/RequestlyEvent {
 	public static final field Companion Lio/requestly/android/event/api/RequestlyEvent$Companion;
-	public fun <init> ()V
 }
 
 public final class io/requestly/android/event/api/RequestlyEvent$Companion {
@@ -59,7 +58,6 @@ public final class io/requestly/android/event/databinding/EventsListItemBinding 
 
 public final class io/requestly/android/event/internal/Utils {
 	public static final field Companion Lio/requestly/android/event/internal/Utils$Companion;
-	public fun <init> ()V
 }
 
 public final class io/requestly/android/event/internal/Utils$Companion {

@@ -127,7 +127,6 @@ class MainActivity : AppCompatActivity() {
                 "float18" to 1.0,
                 "float19" to 1.0,
                 "float20" to 1.0,
-                "array" to listOf(1, 2, 3),
                 "1d map" to mapOf("string" to "hello", "string2" to "hello"),
                 "2d map" to mapOf("string" to mapOf("string" to "hello")),
             )

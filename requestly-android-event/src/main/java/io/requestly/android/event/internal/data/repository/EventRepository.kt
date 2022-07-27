@@ -1,9 +1,6 @@
 package io.requestly.android.event.internal.data.repository
 
 import androidx.lifecycle.LiveData
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.Update
 import io.requestly.android.event.internal.data.entity.Event
 
 internal interface EventRepository {

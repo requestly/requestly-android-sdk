@@ -1,19 +1,19 @@
 package io.requestly.android.event.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.requestly.android.event.R
-import io.requestly.android.event.ui.adapter.EventListAdapter
 import io.requestly.android.event.databinding.ActivityMainBinding
 import io.requestly.android.event.internal.data.repository.RepositoryProvider
+import io.requestly.android.event.ui.adapter.EventListAdapter
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
     private lateinit var mainBinding: ActivityMainBinding
     private val viewModel: EventListViewModel by viewModels()
     private lateinit var eventsListAdapter: EventListAdapter
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity(){
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
+        return when (item.itemId) {
             R.id.clear -> {
                 viewModel.clearTransactions()
                 true
@@ -59,20 +59,20 @@ class MainActivity : AppCompatActivity(){
             this
         ) {
             eventsList ->
-                eventsListAdapter.updateEventsList(eventsList)
-                mainBinding.tutorialGroup.isVisible = eventsList.isEmpty()
+            eventsListAdapter.updateEventsList(eventsList)
+            mainBinding.tutorialGroup.isVisible = eventsList.isEmpty()
         }
     }
 
-    private fun initEventRecyclerView(){
+    private fun initEventRecyclerView() {
         mainBinding.rqInterceptorAllEventsRecyclerview.layoutManager = LinearLayoutManager(this)
         eventsListAdapter = EventListAdapter(
             this
         ) {
             eventId ->
-                val intent = Intent(this, EventOverviewActivity::class.java)
-                intent.putExtra(R.string.INTENT_EVENT_ID_KEY.toString(), eventId)
-                this.startActivity(intent)
+            val intent = Intent(this, EventOverviewActivity::class.java)
+            intent.putExtra(R.string.INTENT_EVENT_ID_KEY.toString(), eventId)
+            this.startActivity(intent)
         }
         mainBinding.rqInterceptorAllEventsRecyclerview.adapter = eventsListAdapter
     }

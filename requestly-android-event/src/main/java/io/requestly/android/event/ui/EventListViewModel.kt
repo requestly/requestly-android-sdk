@@ -8,9 +8,9 @@ import io.requestly.android.event.internal.data.entity.Event
 import io.requestly.android.event.internal.data.repository.RepositoryProvider
 import kotlinx.coroutines.launch
 
-class EventListViewModel: ViewModel() {
+class EventListViewModel : ViewModel() {
     val events: LiveData<List<Event>> = with(RepositoryProvider.event()) {
-       getSortedEvents()
+        getSortedEvents()
     }
 
     suspend fun getAllEvents(): List<Event> = RepositoryProvider.event().getAllEvents()

@@ -6,7 +6,7 @@ import io.requestly.android.event.internal.data.room.EventDatabase
 
 internal class EventDatabaseRepository(
     private val database: EventDatabase
-): EventRepository {
+) : EventRepository {
 
     private val eventDao get() = database.eventDao()
 

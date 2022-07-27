@@ -1,7 +1,10 @@
 package io.requestly.android.event.ui
 
 import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import io.requestly.android.event.internal.data.entity.Event
 import io.requestly.android.event.internal.data.repository.RepositoryProvider
 import kotlinx.coroutines.launch
