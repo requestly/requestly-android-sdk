@@ -15,4 +15,7 @@
 
     <color name="bright_gray">#EBEBEB</color>
     <color name="gray">#808080</color>
+
+    <color name="requestly_primary">#175EF2</color>
+    <color name="requestly_seconday">#FAD408</color>
 </resources>

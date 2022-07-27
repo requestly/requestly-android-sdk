@@ -6,11 +6,11 @@
         <activity
             android:name=".ui.EventOverviewActivity"
             android:exported="false"
-            android:theme="@style/Requestly.Theme"/>
+            android:theme="@style/Theme.Requestly"/>
         <activity
             android:name=".ui.MainActivity"
             android:exported="false"
-            android:theme="@style/Requestly.Theme"/>
+            android:theme="@style/Theme.Requestly"/>
     </application>
 
 </manifest>
