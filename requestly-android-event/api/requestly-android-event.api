@@ -8,23 +8,29 @@ public final class io/requestly/android/event/api/RequestlyEvent$Companion {
 }
 
 public final class io/requestly/android/event/databinding/ActivityEventOverviewBinding : androidx/viewbinding/ViewBinding {
+	public final field appBarLayout Lcom/google/android/material/appbar/AppBarLayout;
 	public final field eventOverviewDivider Landroid/view/View;
 	public final field eventOverviewTitle Landroid/widget/TextView;
 	public final field rqInterceptorEventOverviewRecyclerview Landroidx/recyclerview/widget/RecyclerView;
+	public final field toolbar Lcom/google/android/material/appbar/MaterialToolbar;
 	public static fun bind (Landroid/view/View;)Lio/requestly/android/event/databinding/ActivityEventOverviewBinding;
 	public synthetic fun getRoot ()Landroid/view/View;
-	public fun getRoot ()Landroidx/core/widget/NestedScrollView;
+	public fun getRoot ()Landroidx/constraintlayout/widget/ConstraintLayout;
 	public static fun inflate (Landroid/view/LayoutInflater;)Lio/requestly/android/event/databinding/ActivityEventOverviewBinding;
 	public static fun inflate (Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Z)Lio/requestly/android/event/databinding/ActivityEventOverviewBinding;
 }
 
 public final class io/requestly/android/event/databinding/ActivityMainBinding : androidx/viewbinding/ViewBinding {
+	public final field appBarLayout Lcom/google/android/material/appbar/AppBarLayout;
 	public final field rqInterceptorAllEventsRecyclerview Landroidx/recyclerview/widget/RecyclerView;
-	public final field rqInterceptorTextview Landroid/widget/TextView;
-	public final field rqInterceptorView2 Landroid/view/View;
+	public final field toolbar Lcom/google/android/material/appbar/MaterialToolbar;
+	public final field tutorialDescription Landroid/widget/TextView;
+	public final field tutorialGroup Landroidx/constraintlayout/widget/Group;
+	public final field tutorialLink Landroid/widget/TextView;
+	public final field tutorialTitle Landroid/widget/TextView;
 	public static fun bind (Landroid/view/View;)Lio/requestly/android/event/databinding/ActivityMainBinding;
 	public synthetic fun getRoot ()Landroid/view/View;
-	public fun getRoot ()Landroidx/core/widget/NestedScrollView;
+	public fun getRoot ()Landroidx/constraintlayout/widget/ConstraintLayout;
 	public static fun inflate (Landroid/view/LayoutInflater;)Lio/requestly/android/event/databinding/ActivityMainBinding;
 	public static fun inflate (Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Z)Lio/requestly/android/event/databinding/ActivityMainBinding;
 }
@@ -49,19 +55,6 @@ public final class io/requestly/android/event/databinding/EventsListItemBinding 
 	public fun getRoot ()Landroidx/constraintlayout/widget/ConstraintLayout;
 	public static fun inflate (Landroid/view/LayoutInflater;)Lio/requestly/android/event/databinding/EventsListItemBinding;
 	public static fun inflate (Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Z)Lio/requestly/android/event/databinding/EventsListItemBinding;
-}
-
-public final class io/requestly/android/event/databinding/RqInterceptorEventsListSingleDesignBinding : androidx/viewbinding/ViewBinding {
-	public final field rqInterceptorBarAllEvents Landroid/view/View;
-	public final field rqInterceptorEventNameAllEvents Landroid/widget/TextView;
-	public final field rqInterceptorTimeStampAllEvents Landroid/widget/TextView;
-	public final field space Landroid/widget/Space;
-	public final field view Landroid/view/View;
-	public static fun bind (Landroid/view/View;)Lio/requestly/android/event/databinding/RqInterceptorEventsListSingleDesignBinding;
-	public synthetic fun getRoot ()Landroid/view/View;
-	public fun getRoot ()Landroidx/constraintlayout/widget/ConstraintLayout;
-	public static fun inflate (Landroid/view/LayoutInflater;)Lio/requestly/android/event/databinding/RqInterceptorEventsListSingleDesignBinding;
-	public static fun inflate (Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Z)Lio/requestly/android/event/databinding/RqInterceptorEventsListSingleDesignBinding;
 }
 
 public final class io/requestly/android/event/internal/Utils {
@@ -119,13 +112,15 @@ public final class io/requestly/android/event/internal/data/room/EventDatabase_I
 
 public final class io/requestly/android/event/ui/EventListViewModel : androidx/lifecycle/ViewModel {
 	public fun <init> ()V
-	public final fun clearTransactions (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun clearTransactions ()V
 	public final fun getAllEvents (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public final fun getEvents ()Landroidx/lifecycle/LiveData;
 }
 
 public final class io/requestly/android/event/ui/EventOverviewActivity : androidx/appcompat/app/AppCompatActivity {
 	public fun <init> ()V
+	public fun onCreateOptionsMenu (Landroid/view/Menu;)Z
+	public fun onOptionsItemSelected (Landroid/view/MenuItem;)Z
 }
 
 public final class io/requestly/android/event/ui/EventOverviewViewModel : androidx/lifecycle/ViewModel {
@@ -137,6 +132,8 @@ public final class io/requestly/android/event/ui/EventOverviewViewModel : androi
 
 public final class io/requestly/android/event/ui/MainActivity : androidx/appcompat/app/AppCompatActivity {
 	public fun <init> ()V
+	public fun onCreateOptionsMenu (Landroid/view/Menu;)Z
+	public fun onOptionsItemSelected (Landroid/view/MenuItem;)Z
 }
 
 public final class io/requestly/android/event/ui/adapter/EventListAdapter : androidx/recyclerview/widget/RecyclerView$Adapter {
