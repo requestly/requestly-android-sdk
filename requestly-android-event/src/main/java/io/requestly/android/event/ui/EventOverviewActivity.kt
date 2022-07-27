@@ -2,6 +2,8 @@ package io.requestly.android.event.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.requestly.android.event.R
@@ -17,6 +19,9 @@ class EventOverviewActivity : AppCompatActivity() {
     }
     private lateinit var eventOverviewAdapter: EventOverviewAdapter
 
+    private val applicationName: CharSequence
+        get() = applicationInfo.loadLabel(packageManager)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityEventOverviewBinding.inflate(layoutInflater)
@@ -30,6 +35,26 @@ class EventOverviewActivity : AppCompatActivity() {
             if (event != null) {
                 binding.eventOverviewTitle.text = event.eventName
                 eventOverviewAdapter.updateEvent(event)
+            }
+        }
+
+        initToolbar()
+    }
+
+    private fun initToolbar() {
+        setSupportActionBar(binding.toolbar)
+        binding.toolbar.subtitle = applicationName
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.event_overview_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            else -> {
+                super.onOptionsItemSelected(item)
             }
         }
     }
