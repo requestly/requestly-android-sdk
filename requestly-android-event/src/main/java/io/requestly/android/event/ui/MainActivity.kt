@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.requestly.android.event.R
 import io.requestly.android.event.ui.adapter.EventListAdapter
@@ -56,7 +57,11 @@ class MainActivity : AppCompatActivity(){
     private fun initEventListeners() {
         viewModel.events.observe(
             this
-        ) { eventsList -> eventsListAdapter.updateEventsList(eventsList) }
+        ) {
+            eventsList ->
+                eventsListAdapter.updateEventsList(eventsList)
+                mainBinding.tutorialGroup.isVisible = eventsList.isEmpty()
+        }
     }
 
     private fun initEventRecyclerView(){

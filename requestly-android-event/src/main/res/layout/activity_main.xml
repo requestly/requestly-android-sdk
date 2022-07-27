@@ -30,4 +30,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appBarLayout"
      />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/tutorialGroup"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:constraint_referenced_ids="tutorialTitle,tutorialLink,tutorialDescription" />
+
+    <TextView
+        android:id="@+id/tutorialTitle"
+        style="@style/h3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/m16"
+        android:layout_marginBottom="@dimen/m8"
+        android:text="@string/requestly_event_tutorial_title"
+        app:layout_constraintBottom_toTopOf="@id/tutorialDescription" />
+
+    <TextView
+        android:id="@+id/tutorialDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/m16"
+        android:gravity="center_vertical"
+        android:text="@string/requestly_event_tutorial_description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tutorialLink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/m16"
+        android:layout_marginTop="@dimen/m8"
+        android:gravity="center_vertical"
+        android:text="@string/requestly_event_tutorial_link"
+        app:layout_constraintTop_toBottomOf="@id/tutorialDescription" />
 </androidx.constraintlayout.widget.ConstraintLayout>
