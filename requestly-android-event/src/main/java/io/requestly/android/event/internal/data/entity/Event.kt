@@ -19,7 +19,7 @@ class Event (
 
     @ColumnInfo(name = "timestamp") var timestamp: Long? = System.currentTimeMillis(),
 
-    @ColumnInfo(name = "status") var status: Boolean? = false,
+    @ColumnInfo(name = "status") var status: Boolean? = true,
 ) {
 
     val notificationText: String
