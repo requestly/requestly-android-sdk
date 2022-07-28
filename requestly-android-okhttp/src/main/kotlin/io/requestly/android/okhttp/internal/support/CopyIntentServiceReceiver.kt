@@ -1,6 +1,10 @@
 package io.requestly.android.okhttp.internal.support
 
-import android.content.*
+import android.content.BroadcastReceiver
+import android.content.ClipboardManager
+import android.content.ClipData
+import android.content.Context
+import android.content.Intent
 import android.widget.Toast
 import io.requestly.android.okhttp.api.RQClientProvider
 

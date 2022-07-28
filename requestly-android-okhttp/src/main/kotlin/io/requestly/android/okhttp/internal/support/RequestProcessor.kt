@@ -35,6 +35,7 @@ internal class RequestProcessor(
             return request
         }
 
+        @SuppressWarnings("VariableNaming")
         val JSON: MediaType? = "application/json; charset=utf-8".toMediaTypeOrNull()
         val json: String = HarUtils.harStringFromTransaction(
             listOf(transaction),

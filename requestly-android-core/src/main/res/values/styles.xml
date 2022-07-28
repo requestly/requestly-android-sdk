@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Headers -->
+    <style name="h1" parent="android:TextAppearance">
+        <item name="android:textSize">@dimen/s64</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="h2" parent="android:TextAppearance">
+        <item name="android:textSize">@dimen/s32</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="h3" parent="android:TextAppearance">
+        <item name="android:textSize">@dimen/s16</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="h4" parent="android:TextAppearance">
+        <item name="android:textSize">@dimen/s8</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="h5" parent="android:TextAppearance">
+        <item name="android:textSize">@dimen/s4</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

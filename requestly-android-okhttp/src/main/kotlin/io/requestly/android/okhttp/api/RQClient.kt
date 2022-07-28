@@ -1,3 +1,4 @@
+@file:Suppress("TooGenericExceptionCaught")
 package io.requestly.android.okhttp.api
 
 import android.util.Log
@@ -13,14 +14,15 @@ import retrofit2.http.GET
 import java.lang.Exception
 
 
-public class RQClient(public var deviceId: String?, private val sdkId: String, public var captureEnabled: Boolean = true) {
+public class RQClient(
+    public var deviceId: String?, private val sdkId: String, public var captureEnabled: Boolean = true
+) {
     private val api = Retrofit.Builder()
                         .baseUrl(RQConstants.RQ_SERVER_BASE_URL)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build()
                         .create<RQService>()
 
-    // TODO: This shouldn't directly connect with cloud function. Should call server instead
     internal suspend fun initDevice(): String? {
         val deviceModel: String = android.os.Build.MODEL
         val deviceName: String = android.os.Build.MANUFACTURER + "_" + android.os.Build.PRODUCT

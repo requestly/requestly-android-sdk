@@ -1,0 +1,8 @@
+<resources>
+    <string name="INTENT_EVENT_ID_KEY">event_id</string>
+
+    <!-- Tutorial -->
+    <string name="requestly_event_tutorial_title">Requestly Events Debugger</string>
+    <string name="requestly_event_tutorial_description">This tab displays Analytics events recorded with the Requestly Debugger. Send a new event using <b>RequestlyEvent.send()</b> to debug the events.</string>
+    <string name="requestly_event_tutorial_link"><a href="https://github.com/requestly/requestly-android-sdk">Check the setup instructions on GitHub</a></string>
+</resources>

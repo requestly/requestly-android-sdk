@@ -1,0 +1,169 @@
+public final class io/requestly/android/event/api/RequestlyEvent {
+	public static final field Companion Lio/requestly/android/event/api/RequestlyEvent$Companion;
+}
+
+public final class io/requestly/android/event/api/RequestlyEvent$Companion {
+	public final fun send (Ljava/lang/String;Ljava/util/Map;)V
+}
+
+public final class io/requestly/android/event/databinding/ActivityEventOverviewBinding : androidx/viewbinding/ViewBinding {
+	public final field appBarLayout Lcom/google/android/material/appbar/AppBarLayout;
+	public final field eventOverviewDivider Landroid/view/View;
+	public final field eventOverviewTitle Landroid/widget/TextView;
+	public final field rqInterceptorEventOverviewRecyclerview Landroidx/recyclerview/widget/RecyclerView;
+	public final field toolbar Lcom/google/android/material/appbar/MaterialToolbar;
+	public static fun bind (Landroid/view/View;)Lio/requestly/android/event/databinding/ActivityEventOverviewBinding;
+	public synthetic fun getRoot ()Landroid/view/View;
+	public fun getRoot ()Landroidx/constraintlayout/widget/ConstraintLayout;
+	public static fun inflate (Landroid/view/LayoutInflater;)Lio/requestly/android/event/databinding/ActivityEventOverviewBinding;
+	public static fun inflate (Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Z)Lio/requestly/android/event/databinding/ActivityEventOverviewBinding;
+}
+
+public final class io/requestly/android/event/databinding/ActivityMainBinding : androidx/viewbinding/ViewBinding {
+	public final field appBarLayout Lcom/google/android/material/appbar/AppBarLayout;
+	public final field rqInterceptorAllEventsRecyclerview Landroidx/recyclerview/widget/RecyclerView;
+	public final field toolbar Lcom/google/android/material/appbar/MaterialToolbar;
+	public final field tutorialDescription Landroid/widget/TextView;
+	public final field tutorialGroup Landroidx/constraintlayout/widget/Group;
+	public final field tutorialLink Landroid/widget/TextView;
+	public final field tutorialTitle Landroid/widget/TextView;
+	public static fun bind (Landroid/view/View;)Lio/requestly/android/event/databinding/ActivityMainBinding;
+	public synthetic fun getRoot ()Landroid/view/View;
+	public fun getRoot ()Landroidx/constraintlayout/widget/ConstraintLayout;
+	public static fun inflate (Landroid/view/LayoutInflater;)Lio/requestly/android/event/databinding/ActivityMainBinding;
+	public static fun inflate (Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Z)Lio/requestly/android/event/databinding/ActivityMainBinding;
+}
+
+public final class io/requestly/android/event/databinding/EventOverviewPropertyBinding : androidx/viewbinding/ViewBinding {
+	public final field rqInterceptorPropertyLabel Landroid/widget/TextView;
+	public final field rqInterceptorPropertyValue Landroid/widget/TextView;
+	public static fun bind (Landroid/view/View;)Lio/requestly/android/event/databinding/EventOverviewPropertyBinding;
+	public synthetic fun getRoot ()Landroid/view/View;
+	public fun getRoot ()Landroidx/constraintlayout/widget/ConstraintLayout;
+	public static fun inflate (Landroid/view/LayoutInflater;)Lio/requestly/android/event/databinding/EventOverviewPropertyBinding;
+	public static fun inflate (Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Z)Lio/requestly/android/event/databinding/EventOverviewPropertyBinding;
+}
+
+public final class io/requestly/android/event/databinding/EventsListItemBinding : androidx/viewbinding/ViewBinding {
+	public final field eventListItemDivider Landroid/view/View;
+	public final field eventListItemName Landroid/widget/TextView;
+	public final field eventListItemStatusBar Landroid/view/View;
+	public final field eventsListItemTimestamp Landroid/widget/TextView;
+	public static fun bind (Landroid/view/View;)Lio/requestly/android/event/databinding/EventsListItemBinding;
+	public synthetic fun getRoot ()Landroid/view/View;
+	public fun getRoot ()Landroidx/constraintlayout/widget/ConstraintLayout;
+	public static fun inflate (Landroid/view/LayoutInflater;)Lio/requestly/android/event/databinding/EventsListItemBinding;
+	public static fun inflate (Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Z)Lio/requestly/android/event/databinding/EventsListItemBinding;
+}
+
+public final class io/requestly/android/event/internal/Utils {
+	public static final field Companion Lio/requestly/android/event/internal/Utils$Companion;
+}
+
+public final class io/requestly/android/event/internal/Utils$Companion {
+	public final fun getDefaultScreenIntent (Landroid/content/Context;)Landroid/app/PendingIntent;
+	public final fun getLaunchIntent (Landroid/content/Context;)Landroid/content/Intent;
+}
+
+public final class io/requestly/android/event/internal/data/entity/Event {
+	public fun <init> (JLjava/lang/String;Ljava/util/Map;Ljava/lang/Long;Ljava/lang/Boolean;)V
+	public synthetic fun <init> (JLjava/lang/String;Ljava/util/Map;Ljava/lang/Long;Ljava/lang/Boolean;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getEventData ()Ljava/util/Map;
+	public final fun getEventName ()Ljava/lang/String;
+	public final fun getId ()J
+	public final fun getNotificationText ()Ljava/lang/String;
+	public final fun getStatus ()Ljava/lang/Boolean;
+	public final fun getTimestamp ()Ljava/lang/Long;
+	public final fun setEventData (Ljava/util/Map;)V
+	public final fun setEventName (Ljava/lang/String;)V
+	public final fun setId (J)V
+	public final fun setStatus (Ljava/lang/Boolean;)V
+	public final fun setTimestamp (Ljava/lang/Long;)V
+}
+
+public final class io/requestly/android/event/internal/data/entity/MapTypeConverter {
+	public fun <init> ()V
+	public final fun mapToString (Ljava/util/Map;)Ljava/lang/String;
+	public final fun stringToMap (Ljava/lang/String;)Ljava/util/Map;
+}
+
+public final class io/requestly/android/event/internal/data/room/EventDao_Impl : io/requestly/android/event/internal/data/room/EventDao {
+	public fun <init> (Landroidx/room/RoomDatabase;)V
+	public fun deleteAll (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun deleteBefore (JLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getAll (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getById (J)Landroidx/lifecycle/LiveData;
+	public static fun getRequiredConverters ()Ljava/util/List;
+	public fun getSorted ()Landroidx/lifecycle/LiveData;
+	public fun insert (Lio/requestly/android/event/internal/data/entity/Event;)Ljava/lang/Long;
+	public fun update (Lio/requestly/android/event/internal/data/entity/Event;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/requestly/android/event/internal/data/room/EventDatabase_Impl {
+	public static final field Companion Lio/requestly/android/event/internal/data/room/EventDatabase$Companion;
+	public fun <init> ()V
+	public fun clearAllTables ()V
+	public fun eventDao ()Lio/requestly/android/event/internal/data/room/EventDao;
+	public fun getAutoMigrations (Ljava/util/Map;)Ljava/util/List;
+	public fun getRequiredAutoMigrationSpecs ()Ljava/util/Set;
+}
+
+public final class io/requestly/android/event/ui/EventListViewModel : androidx/lifecycle/ViewModel {
+	public fun <init> ()V
+	public final fun clearTransactions ()V
+	public final fun getAllEvents (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getEvents ()Landroidx/lifecycle/LiveData;
+}
+
+public final class io/requestly/android/event/ui/EventOverviewActivity : androidx/appcompat/app/AppCompatActivity {
+	public fun <init> ()V
+	public fun onCreateOptionsMenu (Landroid/view/Menu;)Z
+	public fun onOptionsItemSelected (Landroid/view/MenuItem;)Z
+}
+
+public final class io/requestly/android/event/ui/EventOverviewViewModel : androidx/lifecycle/ViewModel {
+	public field event Landroidx/lifecycle/LiveData;
+	public fun <init> (J)V
+	public final fun getEvent ()Landroidx/lifecycle/LiveData;
+	public final fun setEvent (Landroidx/lifecycle/LiveData;)V
+}
+
+public final class io/requestly/android/event/ui/MainActivity : androidx/appcompat/app/AppCompatActivity {
+	public fun <init> ()V
+	public fun onCreateOptionsMenu (Landroid/view/Menu;)Z
+	public fun onOptionsItemSelected (Landroid/view/MenuItem;)Z
+}
+
+public final class io/requestly/android/event/ui/adapter/EventListAdapter : androidx/recyclerview/widget/RecyclerView$Adapter {
+	public fun <init> (Landroid/content/Context;Lkotlin/jvm/functions/Function1;)V
+	public fun getItemCount ()I
+	public synthetic fun onBindViewHolder (Landroidx/recyclerview/widget/RecyclerView$ViewHolder;I)V
+	public fun onBindViewHolder (Lio/requestly/android/event/ui/adapter/EventListAdapter$EventsViewHolder;I)V
+	public synthetic fun onCreateViewHolder (Landroid/view/ViewGroup;I)Landroidx/recyclerview/widget/RecyclerView$ViewHolder;
+	public fun onCreateViewHolder (Landroid/view/ViewGroup;I)Lio/requestly/android/event/ui/adapter/EventListAdapter$EventsViewHolder;
+	public final fun updateEventsList (Ljava/util/List;)V
+}
+
+public final class io/requestly/android/event/ui/adapter/EventListAdapter$EventsViewHolder : androidx/recyclerview/widget/RecyclerView$ViewHolder {
+	public fun <init> (Lio/requestly/android/event/databinding/EventsListItemBinding;)V
+	public final fun getName ()Landroid/widget/TextView;
+	public final fun getStatusBar ()Landroid/view/View;
+	public final fun getTimestamp ()Landroid/widget/TextView;
+}
+
+public final class io/requestly/android/event/ui/adapter/EventOverviewAdapter : androidx/recyclerview/widget/RecyclerView$Adapter {
+	public fun <init> (Lio/requestly/android/event/internal/data/entity/Event;Landroid/content/Context;)V
+	public fun getItemCount ()I
+	public synthetic fun onBindViewHolder (Landroidx/recyclerview/widget/RecyclerView$ViewHolder;I)V
+	public fun onBindViewHolder (Lio/requestly/android/event/ui/adapter/EventOverviewAdapter$EventPropertyViewHolder;I)V
+	public synthetic fun onCreateViewHolder (Landroid/view/ViewGroup;I)Landroidx/recyclerview/widget/RecyclerView$ViewHolder;
+	public fun onCreateViewHolder (Landroid/view/ViewGroup;I)Lio/requestly/android/event/ui/adapter/EventOverviewAdapter$EventPropertyViewHolder;
+	public final fun updateEvent (Lio/requestly/android/event/internal/data/entity/Event;)V
+}
+
+public final class io/requestly/android/event/ui/adapter/EventOverviewAdapter$EventPropertyViewHolder : androidx/recyclerview/widget/RecyclerView$ViewHolder {
+	public fun <init> (Lio/requestly/android/event/databinding/EventOverviewPropertyBinding;)V
+	public final fun getLabel ()Landroid/widget/TextView;
+	public final fun getPropertyValue ()Landroid/widget/TextView;
+}
+

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="io.requestly.android.event">
+
+    <application>
+        <activity
+            android:name=".ui.EventOverviewActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Requestly"/>
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Requestly"/>
+    </application>
+
+</manifest>

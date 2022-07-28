@@ -100,6 +100,17 @@
         app:layout_constraintTop_toBottomOf="@+id/do_http"
         app:layout_constraintWidth_max="@dimen/max_width" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/launch_rqevents"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:text="@string/rq_events"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/launch_rqinterceptor_directly"
+        app:layout_constraintWidth_max="@dimen/max_width" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
