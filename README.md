@@ -1,6 +1,20 @@
 # Requestly Android SDK
-Requestly Android SDK lets you debug your android apps without needing you to setup any proxies or install any certificates everytime. All it requires is a one time setup of 5 lines of code.
 
+[![GitHub release](https://img.shields.io/github/release/requestly/requestly-android-sdk.svg)](https://github.com/appspector/android-sdk/releases)
+[![Maven](https://img.shields.io/badge/-Maven-green?logo=apachemaven)](https://search.maven.org/search?q=io.requestly%20-library)
+
+Requestly Android SDK lets you debug your android apps without needing you to setup any proxies or install any certificates everytime. It makes easy to identify & debug your Android Apps faster and save your time.
+
+- [Installation](#installation)
+- [SDK Initialization](#sdk-initialization)
+- [API Debugger Initialization](#api-debugger-initialization)
+  - [okHttp](#okhttp)
+  - [Retrofit](#retrofit)
+- [Features](#features)
+  - [API Debugger](#api-debugger)
+  - [Analytics Event Debugger](#analytics-event-debugger)
+- [Acknowledgments](#acknowledgments)
+  
 ## Installation
 The best way to install the Requestly Android SDK is with a build system like Gradle. This ensures you can easily upgrade to the latest versions.
 
@@ -8,14 +22,14 @@ RQInterceptor is distributed through [Maven Central](https://search.maven.org/se
 
 ```
 dependencies {
-    debugImplementation "io.requestly:requestly-android:2.0.0"
-    releaseImplementation "io.requestly:requestly-android-noop:2.0.0"
-    debugImplementation "io.requestly:requestly-android-okhttp:2.0.0"
-    releaseImplementation "io.requestly:requestly-android-okhttp-noop:2.0.0"
+    debugImplementation "io.requestly:requestly-android:2.1.0"
+    releaseImplementation "io.requestly:requestly-android-noop:2.1.0"
+    debugImplementation "io.requestly:requestly-android-okhttp:2.1.0"
+    releaseImplementation "io.requestly:requestly-android-okhttp-noop:2.1.0"
 }
 ```
 
-## Initialization
+## SDK Initialization
 Initialize the Requestly SDK in your Application class onCreate method.
 
 ```
@@ -32,7 +46,7 @@ class App : Application(){
 
 To get the sdk key, you need to create an app. Follow the steps [here](https://docs.requestly.io/android/tutorial/create-app) to create an app.
 
-## Interceptor Initialization
+## API Debugger Initialization
 To configure the Interceptor, you need to initialize the RQCollector and then add rqInterceptor as the last interceptor to your okHttpClient
 
 ### okHttp
@@ -55,6 +69,30 @@ Retrofit.Builder()
     .client(okHttpClient) // okHttpClient with RQInterceptor
     .build();
 ```
+
+## Features
+
+### API Debugger
+Lets you view and modify HTTP traffic. It comes with these capabilities to:
+- **InApp Inspector** : Directly view your HTTP request from your phone.
+- **Modify API**: Modify Response, Redirect Request, Delay Request and many more.
+
+![Api Debugger](./assets/api-debugger.png)
+
+<br />
+
+
+### Analytics Event Debugger
+Debug & Validate your Analytics Events directly from your App. The SDK provides a simple API to send your events.
+
+```kotlin
+RequestlyEvent.send(<eventName: String>, <eventData:Map<String, Any>>)
+```
+
+![Api Debugger](./assets/events-debugger.png)
+
+<br />
+
 ## Acknowledgments
 Special Thanks to chuckerteam for maintaining such an awesome project because of which rq-interceptor was possible
 https://github.com/chuckerteam/chucker
