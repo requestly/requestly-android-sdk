@@ -1,6 +1,6 @@
 # Requestly Android SDK
 
-[![GitHub release](https://img.shields.io/github/release/requestly/requestly-android-sdk.svg)](https://github.com/appspector/android-sdk/releases)
+[![GitHub release](https://img.shields.io/github/release/requestly/requestly-android-sdk.svg)](https://github.com/requestly/requestly-android-sdk/releases)
 [![Maven](https://img.shields.io/badge/-Maven-green?logo=apachemaven)](https://search.maven.org/search?q=io.requestly%20-library)
 
 Requestly Android SDK lets you debug your android apps without needing you to setup any proxies or install any certificates everytime. It makes easy to identify & debug your Android Apps faster and save your time.
