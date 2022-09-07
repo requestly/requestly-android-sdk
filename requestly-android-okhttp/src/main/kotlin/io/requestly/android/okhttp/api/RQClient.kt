@@ -15,7 +15,7 @@ import java.lang.Exception
 
 
 public class RQClient(
-    public var deviceId: String?, private val sdkId: String, public var captureEnabled: Boolean = true
+    public var deviceId: String?, private val sdkId: String, public var captureEnabled: Boolean = false
 ) {
     private val api = Retrofit.Builder()
                         .baseUrl(RQConstants.RQ_SERVER_BASE_URL)

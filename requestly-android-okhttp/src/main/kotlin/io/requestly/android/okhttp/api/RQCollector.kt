@@ -72,7 +72,7 @@ public class RQCollector @JvmOverloads constructor(
             context.getString(R.string.rq_interceptor_shared_pref_base_key), 0
         )
         return pref.getBoolean(
-            context.getString(R.string.rq_interceptor_capture_enabled), true
+            context.getString(R.string.rq_interceptor_capture_enabled), false
         )
     }
 

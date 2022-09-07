@@ -20,7 +20,7 @@ internal object RQClientProvider {
     /**
      * Idempotent method. Must be called before accessing the client.
      */
-    fun initialize(deviceId: String?, sdkId: String, captureEnabled: Boolean = true) {
+    fun initialize(deviceId: String?, sdkId: String, captureEnabled: Boolean = false) {
         if (rqClient == null) {
             rqClient = RQClient(deviceId, sdkId, captureEnabled)
         }
