@@ -4,7 +4,6 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import io.requestly.android.event.ui.MainActivity
 
 class Utils private constructor() {
     companion object {
@@ -20,8 +19,8 @@ class Utils private constructor() {
         }
 
         fun getLaunchIntent(context: Context): Intent {
-            return Intent(context, MainActivity::class.java)
-                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            return Intent(context, io.requestly.android.core.ui.MainRequestlyActivity::class.java)
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra("STARTING_FLOW", "ANALYTICS")
         }
 
         private fun immutableFlag() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

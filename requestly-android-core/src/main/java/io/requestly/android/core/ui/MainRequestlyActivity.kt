@@ -31,6 +31,15 @@ class MainRequestlyActivity : AppCompatActivity(), ToFlowNavigatable {
         bottomNavView.setupWithNavController(navController)
         navigator.navController = navController
         setupMenu()
+        handleOnStartNavigation()
+    }
+
+    private fun handleOnStartNavigation() {
+        var startFlow = intent.getStringExtra("STARTING_FLOW")
+
+        if(startFlow == "ANALYTICS") {
+            navigator.navigateToFlow(NavigationFlow.AnalyticsFlow)
+        }
     }
 
     private fun setupMenu() {
