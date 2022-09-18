@@ -2,6 +2,10 @@ package io.requestly.android.core.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import androidx.core.view.MenuProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -26,6 +30,25 @@ class MainRequestlyActivity : AppCompatActivity(), ToFlowNavigatable {
         val navController = findNavController(R.id.nav_host_fragment)
         bottomNavView.setupWithNavController(navController)
         navigator.navController = navController
+        setupMenu()
+    }
+
+    private fun setupMenu() {
+        addMenuProvider(object: MenuProvider {
+            override fun onPrepareMenu(menu: Menu) {
+                // Handle for example visibility of menu items
+            }
+
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.app_bar_menu, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                // Validate and handle the selected menu item
+                // TODO: Hack Right now. This gets called before the fragment menu clicks
+                return false
+            }
+        })
     }
 
     // Required when navigation from X module to Y. Eg. Network -> Analytics
