@@ -33,10 +33,10 @@ class MainActivity : AppCompatActivity() {
         with(mainBinding) {
             setContentView(root)
             doHttp.setOnClickListener {
-                RequestlyEvent.send(
-                    "HTTP Traffic Triggered",
-                    mapOf("size" to httpTasks.size)
-                )
+//                RequestlyEvent.send(
+//                    "HTTP Traffic Triggered",
+//                    mapOf("size" to httpTasks.size)
+//                )
                 for (task in httpTasks) {
                     task.run()
                 }
@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
                     "Events CTA clicked",
                     mapOf("foo" to "bar")
                 )
+                startActivity(Intent(applicationContext, Class.forName("io.requestly.android.core.ui.MainRequestlyActivity")))
 //                startActivity(Utils.getLaunchIntent(applicationContext))
             }
 

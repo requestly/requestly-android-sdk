@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="network_flow" type="id"/>
+    <item name="analytics_flow" type="id"/>
+</resources>
