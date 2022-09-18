@@ -7,5 +7,18 @@
     <fragment
         android:id="@+id/analyticsHomeFragment"
         android:name="io.requestly.android.event.ui.AnalyticsHomeFragment"
-        android:label="AnalyticsHomeFragment" />
+        android:label="AnalyticsHomeFragment" >
+        <action
+            android:id="@+id/action_analyticsHomeFragment_to_eventOverviewFragment"
+            app:destination="@id/eventOverviewFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/eventOverviewFragment"
+        android:name="io.requestly.android.event.ui.EventOverviewFragment"
+        android:label="EventOverviewFragment">
+        <argument
+            android:name="event_id"
+            app:argType="long" />
+    </fragment>
 </navigation>
