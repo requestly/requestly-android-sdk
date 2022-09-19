@@ -15,18 +15,6 @@
         android:maxSdkVersion="25" />
 
     <application>
-        <activity
-            android:name="io.requestly.android.okhttp.internal.ui.MainActivity"
-            android:label="@string/rq_interceptor_name"
-            android:launchMode="singleTask"
-            android:taskAffinity="io.requestly.rq_interceptor.task"
-            android:theme="@style/RqInterceptor.Theme" />
-
-        <activity
-            android:name="io.requestly.android.okhttp.internal.ui.transaction.TransactionActivity"
-            android:parentActivityName="io.requestly.android.okhttp.internal.ui.MainActivity"
-            android:theme="@style/RqInterceptor.Theme" />
-
         <service
             android:name="io.requestly.android.okhttp.internal.support.ClearDatabaseService"
             android:exported="false"

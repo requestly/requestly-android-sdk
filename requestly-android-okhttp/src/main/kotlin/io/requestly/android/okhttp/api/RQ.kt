@@ -11,7 +11,6 @@ import androidx.core.content.getSystemService
 import io.requestly.android.okhttp.R
 import io.requestly.android.okhttp.internal.support.Logger
 import io.requestly.android.okhttp.internal.support.NotificationHelper
-import io.requestly.android.okhttp.internal.ui.MainActivity
 
 /**
  * RQ-Interceptor methods and utilities to interact with the library.
