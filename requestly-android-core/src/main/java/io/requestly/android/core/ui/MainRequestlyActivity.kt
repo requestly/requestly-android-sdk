@@ -39,6 +39,8 @@ class MainRequestlyActivity : AppCompatActivity(), ToFlowNavigatable {
 
         if(startFlow == "ANALYTICS") {
             navigator.navigateToFlow(NavigationFlow.AnalyticsFlow)
+        } else {
+            // Go To Default Destination i.e: Network
         }
     }
 
