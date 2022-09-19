@@ -1,13 +1,13 @@
 package io.requestly.android.okhttp.internal.ui.transaction
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import io.requestly.android.okhttp.R
 import io.requestly.android.okhttp.databinding.RqInterceptorFragmentTransactionOverviewBinding
@@ -19,11 +19,7 @@ internal class TransactionOverviewFragment : Fragment() {
     private val viewModel: TransactionViewModel by activityViewModels { TransactionViewModelFactory() }
 
     private lateinit var overviewBinding: RqInterceptorFragmentTransactionOverviewBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
+    private lateinit var menuHost: MenuHost
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,24 +30,42 @@ internal class TransactionOverviewFragment : Fragment() {
         return overviewBinding.root
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        menu.findItem(R.id.save_body).isVisible = false
-        viewModel.doesUrlRequireEncoding.observe(
-            viewLifecycleOwner,
-            Observer { menu.findItem(R.id.encode_url).isVisible = it }
-        )
-
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        menuHost = requireActivity()
+//        setupMenu()
 
         viewModel.transaction.combineLatest(viewModel.encodeUrl).observe(
-            viewLifecycleOwner,
-            Observer { (transaction, encodeUrl) -> populateUI(transaction, encodeUrl) }
-        )
+            viewLifecycleOwner
+        ) { (transaction, encodeUrl) -> populateUI(transaction, encodeUrl) }
     }
+
+    private fun setupMenu() {
+        menuHost.addMenuProvider(object: MenuProvider {
+            override fun onPrepareMenu(menu: Menu) {
+                // Handle for example visibility of menu items
+            }
+
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menu.findItem(R.id.save_body)?.isVisible = false
+                viewModel.doesUrlRequireEncoding.observe(
+                    viewLifecycleOwner,
+                    Observer { menu.findItem(R.id.encode_url).isVisible = it }
+                )
+                menuInflater.inflate(R.menu.rq_interceptor_transaction, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return false
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
+
+    override fun onDestroy() {
+        Log.d("Requestly", "Transaction Overview Destroyed")
+        super.onDestroy()
+    }
+
 
     private fun populateUI(transaction: HttpTransaction?, encodeUrl: Boolean) {
         with(overviewBinding) {

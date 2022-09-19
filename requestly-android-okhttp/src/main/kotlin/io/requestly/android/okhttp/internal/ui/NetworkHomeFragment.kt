@@ -17,6 +17,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import io.requestly.android.core.SettingsManager
 import io.requestly.android.okhttp.R
@@ -55,7 +56,9 @@ internal class NetworkHomeFragment :
         transactionsAdapter = TransactionAdapter(requireContext()) {
             transactionId ->
             Log.d("Requestly", "Transaction clicked")
-//            TransactionActivity.start(this, transactionId)
+            findNavController().navigate(
+                NetworkHomeFragmentDirections.actionNetworkHomeFragmentToTransactionFragment(transactionId)
+            )
         }
 
         with(mainBinding) {

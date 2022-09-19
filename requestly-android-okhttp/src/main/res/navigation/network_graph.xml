@@ -4,10 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@id/network_flow"
     tools:ignore="ResourceName"
-    app:startDestination="@id/network_fragment">
+    app:startDestination="@id/network_home_fragment">
 
     <fragment
-        android:id="@+id/network_fragment"
+        android:id="@+id/network_home_fragment"
         android:name="io.requestly.android.okhttp.internal.ui.NetworkHomeFragment"
-        android:label="Network" />
+        android:label="Network">
+        <action
+            android:id="@+id/action_networkHomeFragment_to_transactionFragment"
+            app:destination="@id/transactionFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/transactionFragment"
+        android:name="io.requestly.android.okhttp.internal.ui.transaction.TransactionFragment"
+        android:label="Network Transaction" >
+        <argument
+            android:name="transaction_id"
+            app:argType="long" />
+    </fragment>
 </navigation>
