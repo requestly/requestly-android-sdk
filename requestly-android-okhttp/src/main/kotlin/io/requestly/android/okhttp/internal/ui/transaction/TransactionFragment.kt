@@ -181,7 +181,8 @@ internal class TransactionFragment : BaseRequestlyNetworkFragment() {
     }
 
     private fun setupViewPager(viewPager: ViewPager) {
-        viewPager.adapter = TransactionPagerAdapter(requireContext(), requireFragmentManager())
+        // Passing childFragmentManager is important here for handling lifecycles
+        viewPager.adapter = TransactionPagerAdapter(requireContext(), childFragmentManager)
         viewPager.addOnPageChangeListener(
             object : ViewPager.SimpleOnPageChangeListener() {
                 override fun onPageSelected(position: Int) {

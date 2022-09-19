@@ -21,6 +21,11 @@ internal class TransactionOverviewFragment : Fragment() {
     private lateinit var overviewBinding: RqInterceptorFragmentTransactionOverviewBinding
     private lateinit var menuHost: MenuHost
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d("Requestly", "Transaction Overview onCreate")
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
