@@ -6,7 +6,7 @@ import android.view.*
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import io.requestly.android.okhttp.R
@@ -16,7 +16,9 @@ import io.requestly.android.okhttp.internal.support.combineLatest
 
 internal class TransactionOverviewFragment : Fragment() {
 
-    private val viewModel: TransactionViewModel by activityViewModels { TransactionViewModelFactory() }
+    private val viewModel: TransactionViewModel by viewModels(
+        ownerProducer = { requireParentFragment() }
+    )
 
     private lateinit var overviewBinding: RqInterceptorFragmentTransactionOverviewBinding
     private lateinit var menuHost: MenuHost
@@ -38,7 +40,7 @@ internal class TransactionOverviewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         menuHost = requireActivity()
-//        setupMenu()
+        setupMenu()
 
         viewModel.transaction.combineLatest(viewModel.encodeUrl).observe(
             viewLifecycleOwner
@@ -48,16 +50,14 @@ internal class TransactionOverviewFragment : Fragment() {
     private fun setupMenu() {
         menuHost.addMenuProvider(object: MenuProvider {
             override fun onPrepareMenu(menu: Menu) {
-                // Handle for example visibility of menu items
-            }
-
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menu.findItem(R.id.save_body)?.isVisible = false
                 viewModel.doesUrlRequireEncoding.observe(
                     viewLifecycleOwner,
-                    Observer { menu.findItem(R.id.encode_url).isVisible = it }
+                    Observer { menu.findItem(R.id.encode_url)?.isVisible = it }
                 )
-                menuInflater.inflate(R.menu.rq_interceptor_transaction, menu)
+            }
+
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -70,7 +70,6 @@ internal class TransactionOverviewFragment : Fragment() {
         Log.d("Requestly", "Transaction Overview Destroyed")
         super.onDestroy()
     }
-
 
     private fun populateUI(transaction: HttpTransaction?, encodeUrl: Boolean) {
         with(overviewBinding) {

@@ -14,7 +14,7 @@ import androidx.core.text.HtmlCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -33,7 +33,9 @@ import java.io.IOException
 internal class TransactionPayloadFragment :
     Fragment(), SearchView.OnQueryTextListener {
 
-    private val viewModel: TransactionViewModel by activityViewModels { TransactionViewModelFactory() }
+    private val viewModel: TransactionViewModel by viewModels(
+        ownerProducer = { requireParentFragment() }
+    )
 
     private val payloadType: PayloadType by lazy(LazyThreadSafetyMode.NONE) {
         arguments?.getSerializable(ARG_TYPE) as PayloadType
@@ -88,7 +90,7 @@ internal class TransactionPayloadFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         menuHost = requireActivity()
-//        setupMenu()
+        setupMenu()
 
         payloadBinding.payloadRecyclerView.apply {
             setHasFixedSize(true)
@@ -121,10 +123,6 @@ internal class TransactionPayloadFragment :
     private fun setupMenu() {
         menuHost.addMenuProvider(object: MenuProvider {
             override fun onPrepareMenu(menu: Menu) {
-                // Handle for example visibility of menu items
-            }
-
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 val transaction = viewModel.transaction.value
 
                 if (shouldShowSearchIcon(transaction)) {
@@ -138,10 +136,6 @@ internal class TransactionPayloadFragment :
                 if (shouldShowSaveIcon(transaction)) {
                     menu.findItem(R.id.save_body).apply {
                         isVisible = true
-                        setOnMenuItemClickListener {
-                            createFileToSaveBody()
-                            true
-                        }
                     }
                 }
 
@@ -152,11 +146,19 @@ internal class TransactionPayloadFragment :
                 } else {
                     menu.findItem(R.id.encode_url).isVisible = false
                 }
-                menuInflater.inflate(R.menu.rq_interceptor_transaction, menu)
+            }
+
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return false
+                return when(menuItem.itemId) {
+                    R.id.save_body -> {
+                        createFileToSaveBody()
+                        true
+                    }
+                    else -> false
+                }
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }

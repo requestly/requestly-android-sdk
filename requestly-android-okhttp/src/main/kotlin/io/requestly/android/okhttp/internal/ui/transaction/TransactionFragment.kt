@@ -7,7 +7,7 @@ import android.util.Log
 import android.view.*
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.ViewPager
@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
 
 internal class TransactionFragment : BaseRequestlyNetworkFragment() {
 
-    private val viewModel: TransactionViewModel by activityViewModels {
+    private val viewModel: TransactionViewModel by viewModels {
         val arguments = TransactionFragmentArgs.fromBundle(requireArguments())
         Log.d("Requestly", "TransactionId ${arguments.transactionId}")
         TransactionViewModelFactory(arguments.transactionId)
@@ -113,6 +113,10 @@ internal class TransactionFragment : BaseRequestlyNetworkFragment() {
                         }
                         true
                     }
+                    R.id.encode_url -> {
+                        viewModel.switchUrlEncoding()
+                        true
+                    }
                     else -> false
                 }
             }
@@ -121,10 +125,6 @@ internal class TransactionFragment : BaseRequestlyNetworkFragment() {
 
     private fun setUpUrlEncoding(menu: Menu) {
         val encodeUrlMenuItem = menu.findItem(R.id.encode_url)
-        encodeUrlMenuItem.setOnMenuItemClickListener {
-            viewModel.switchUrlEncoding()
-            return@setOnMenuItemClickListener true
-        }
         viewModel.encodeUrl.observe(
             viewLifecycleOwner
         ) { encode ->
@@ -181,7 +181,7 @@ internal class TransactionFragment : BaseRequestlyNetworkFragment() {
     }
 
     private fun setupViewPager(viewPager: ViewPager) {
-        // Passing childFragmentManager is important here for handling lifecycles
+        // IMP: Passing childFragmentManager is important here for handling lifecycles
         viewPager.adapter = TransactionPagerAdapter(requireContext(), childFragmentManager)
         viewPager.addOnPageChangeListener(
             object : ViewPager.SimpleOnPageChangeListener() {
