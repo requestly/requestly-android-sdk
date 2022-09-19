@@ -44,8 +44,6 @@ android {
             }
         }
     }
-
-    resourcePrefix 'rq_interceptor_'
 }
 
 dependencies {

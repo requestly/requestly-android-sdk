@@ -15,11 +15,6 @@
         app:showAsAction="ifRoom"
         />
     <item
-        android:id="@+id/settings"
-        android:icon="@drawable/rq_interceptor_settings"
-        android:title="@string/rq_interceptor_settings"
-        app:showAsAction="ifRoom" />
-    <item
         android:id="@+id/export"
         android:icon="@drawable/rq_interceptor_ic_share_white"
         android:title="@string/rq_interceptor_export"
