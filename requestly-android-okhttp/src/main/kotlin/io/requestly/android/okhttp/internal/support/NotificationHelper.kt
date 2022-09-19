@@ -11,7 +11,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import io.requestly.android.okhttp.R
 import io.requestly.android.okhttp.internal.data.entity.HttpTransaction
-import io.requestly.android.okhttp.internal.ui.BaseRQInterceptorActivity
+import io.requestly.android.okhttp.internal.ui.BaseRequestlyNetworkFragment
 import java.util.HashSet
 
 internal class NotificationHelper(val context: Context) {
@@ -75,7 +75,7 @@ internal class NotificationHelper(val context: Context) {
 
     fun show(transaction: HttpTransaction) {
         addToBuffer(transaction)
-        if (!BaseRQInterceptorActivity.isInForeground) {
+        if (!BaseRequestlyNetworkFragment.isInForeground) {
             val builder =
                 NotificationCompat.Builder(context, TRANSACTIONS_CHANNEL_ID)
                     .setContentIntent(transactionsScreenIntent)
