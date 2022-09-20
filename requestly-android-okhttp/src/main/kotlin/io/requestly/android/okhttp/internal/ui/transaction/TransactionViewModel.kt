@@ -1,5 +1,6 @@
 package io.requestly.android.okhttp.internal.ui.transaction
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,6 +11,14 @@ import io.requestly.android.okhttp.internal.data.repository.RepositoryProvider
 import io.requestly.android.okhttp.internal.support.combineLatest
 
 internal class TransactionViewModel(transactionId: Long) : ViewModel() {
+
+    init {
+        Log.d("Requestly", "TransactionViewModel Created $transactionId")
+    }
+
+    override fun onCleared() {
+        Log.d("Requestly", "TransactionViewModel Destroyed")
+    }
 
     private val mutableEncodeUrl = MutableLiveData<Boolean>(false)
 

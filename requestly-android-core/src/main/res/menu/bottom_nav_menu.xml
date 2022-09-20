@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@id/network_flow"
+        android:icon="@drawable/ic_http_24"
+        android:title="Network" />
+
+    <item
+        android:id="@id/analytics_flow"
+        android:icon="@drawable/ic_analytics_24"
+        android:title="Analytics" />
+
+    <item
+        android:id="@id/logs_flow"
+        android:icon="@drawable/ic_message_24"
+        android:title="Logs (Coming Soon)" />
+</menu>

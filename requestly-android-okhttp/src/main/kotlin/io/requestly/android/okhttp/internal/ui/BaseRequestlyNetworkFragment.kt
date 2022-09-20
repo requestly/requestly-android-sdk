@@ -2,14 +2,14 @@ package io.requestly.android.okhttp.internal.ui
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import io.requestly.android.okhttp.internal.data.repository.RepositoryProvider
 
-internal abstract class BaseRQInterceptorActivity : AppCompatActivity() {
+internal abstract class BaseRequestlyNetworkFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        RepositoryProvider.initialize(applicationContext)
+        RepositoryProvider.initialize(requireActivity().applicationContext)
     }
 
     override fun onResume() {
@@ -28,6 +28,6 @@ internal abstract class BaseRQInterceptorActivity : AppCompatActivity() {
     }
 
     fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 }

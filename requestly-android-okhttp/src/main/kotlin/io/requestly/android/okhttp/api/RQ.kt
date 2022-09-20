@@ -11,7 +11,6 @@ import androidx.core.content.getSystemService
 import io.requestly.android.okhttp.R
 import io.requestly.android.okhttp.internal.support.Logger
 import io.requestly.android.okhttp.internal.support.NotificationHelper
-import io.requestly.android.okhttp.internal.ui.MainActivity
 
 /**
  * RQ-Interceptor methods and utilities to interact with the library.
@@ -34,7 +33,7 @@ public object RQ {
      */
     @JvmStatic
     public fun getLaunchIntent(context: Context): Intent {
-        return Intent(context, MainActivity::class.java)
+        return Intent(context, io.requestly.android.core.ui.MainRequestlyActivity::class.java)
             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
     }
 

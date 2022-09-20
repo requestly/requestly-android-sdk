@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@id/analytics_flow"
+    app:startDestination="@id/analytics_home_fragment">
+
+    <!-- Setting this id from core as they are required to setup appBarConfiguration -->
+    <fragment
+        android:id="@id/analytics_home_fragment"
+        android:name="io.requestly.android.event.ui.AnalyticsHomeFragment"
+        android:label="AnalyticsHomeFragment" >
+        <action
+            android:id="@+id/action_analyticsHomeFragment_to_eventOverviewFragment"
+            app:destination="@id/eventOverviewFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/eventOverviewFragment"
+        android:name="io.requestly.android.event.ui.EventOverviewFragment"
+        android:label="EventOverviewFragment">
+        <argument
+            android:name="event_id"
+            app:argType="long" />
+    </fragment>
+</navigation>

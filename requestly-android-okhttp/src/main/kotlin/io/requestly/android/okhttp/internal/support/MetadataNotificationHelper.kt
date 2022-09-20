@@ -9,7 +9,7 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import io.requestly.android.okhttp.R
-import io.requestly.android.okhttp.internal.ui.BaseRQInterceptorActivity
+import io.requestly.android.okhttp.internal.ui.BaseRequestlyNetworkFragment
 
 internal class MetadataNotificationHelper(val context: Context) {
 
@@ -72,7 +72,7 @@ internal class MetadataNotificationHelper(val context: Context) {
 
 
     fun show(uid: String?, capturingEnabled: Boolean = false) {
-        if (!BaseRQInterceptorActivity.isInForeground) {
+        if (!BaseRequestlyNetworkFragment.isInForeground) {
             val builder =
                 NotificationCompat.Builder(context, CHANNEL_ID)
                     .setSmallIcon(R.drawable.rq_interceptor_ic_transaction_notification)

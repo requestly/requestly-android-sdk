@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
@@ -44,12 +45,10 @@ android {
             }
         }
     }
-
-    resourcePrefix 'rq_interceptor_'
 }
 
 dependencies {
-    implementation project(":requestly-android-core")
+    api project(":requestly-android-core")
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 
     implementation "com.google.android.material:material:$materialComponentsVersion"
@@ -62,6 +61,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
     implementation "androidx.room:room-ktx:$roomVersion"
     implementation "androidx.room:room-runtime:$roomVersion"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "androidx.room:room-compiler:$roomVersion"
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion"
