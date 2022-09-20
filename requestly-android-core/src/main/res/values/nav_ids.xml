@@ -2,4 +2,5 @@
 <resources>
     <item name="network_flow" type="id"/>
     <item name="analytics_flow" type="id"/>
+    <item name="logs_flow" type="id"/>
 </resources>
