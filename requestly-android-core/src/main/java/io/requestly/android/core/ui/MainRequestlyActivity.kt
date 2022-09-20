@@ -7,6 +7,8 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.core.view.MenuProvider
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.requestly.android.core.R
@@ -29,6 +31,11 @@ class MainRequestlyActivity : AppCompatActivity(), ToFlowNavigatable {
         val bottomNavView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment)
         bottomNavView.setupWithNavController(navController)
+
+        // Top Level Destinations for AppBar. To show the up button properly
+         val appBarConfiguration = AppBarConfiguration(setOf(R.id.network_home_fragment, R.id.analytics_home_fragment))
+        setupActionBarWithNavController(navController, appBarConfiguration)
+
         navigator.navController = navController
         setupMenu()
         handleOnStartNavigation()

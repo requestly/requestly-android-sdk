@@ -6,8 +6,9 @@
     tools:ignore="ResourceName"
     app:startDestination="@id/network_home_fragment">
 
+    <!-- Setting this id from core as they are required to setup appBarConfiguration -->
     <fragment
-        android:id="@+id/network_home_fragment"
+        android:id="@id/network_home_fragment"
         android:name="io.requestly.android.okhttp.internal.ui.NetworkHomeFragment"
         android:label="Network">
         <action

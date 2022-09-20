@@ -3,4 +3,7 @@
     <item name="network_flow" type="id"/>
     <item name="analytics_flow" type="id"/>
     <item name="logs_flow" type="id"/>
+
+    <item name="network_home_fragment" type="id"/>
+    <item name="analytics_home_fragment" type="id"/>
 </resources>
