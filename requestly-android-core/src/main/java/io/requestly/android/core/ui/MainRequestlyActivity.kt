@@ -1,10 +1,10 @@
 package io.requestly.android.core.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -39,6 +39,11 @@ class MainRequestlyActivity : AppCompatActivity(), ToFlowNavigatable {
         navigator.navController = navController
         setupMenu()
         handleOnStartNavigation()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return (findNavController(R.id.nav_host_fragment).navigateUp()
+            || super.onSupportNavigateUp())
     }
 
     private fun handleOnStartNavigation() {
