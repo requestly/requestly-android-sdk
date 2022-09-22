@@ -7,7 +7,6 @@
 
     <TextView
         android:id="@+id/rq_interceptor_property_label"
-        style="@style/TextAppearance.AppCompat.Body1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Event_property_label"
@@ -18,7 +17,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/rq_interceptor_property_value"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.40" />
+        app:layout_constraintWidth_percent="0.40"
+        tools:text="Property Label"
+        />
 
     <TextView
         android:id="@+id/rq_interceptor_property_value"
@@ -28,7 +29,7 @@
         android:paddingVertical="5sp"
         android:layout_marginBottom="8dp"
         android:hint="Event Property"
-        android:background="@drawable/event_property_value_background"
+        android:background="?attr/colorSurfaceVariant"
         android:paddingHorizontal="5sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,6 +38,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.40" />
+        app:layout_constraintWidth_percent="0.40"
+        tools:text="Property Value"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
