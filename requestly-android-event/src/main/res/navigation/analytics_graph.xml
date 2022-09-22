@@ -8,7 +8,7 @@
     <fragment
         android:id="@id/analytics_home_fragment"
         android:name="io.requestly.android.event.ui.AnalyticsHomeFragment"
-        android:label="AnalyticsHomeFragment" >
+        android:label="Analytics" >
         <action
             android:id="@+id/action_analyticsHomeFragment_to_eventOverviewFragment"
             app:destination="@id/eventOverviewFragment" />
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/eventOverviewFragment"
         android:name="io.requestly.android.event.ui.EventOverviewFragment"
-        android:label="EventOverviewFragment">
+        android:label="Analytics">
         <argument
             android:name="event_id"
             app:argType="long" />

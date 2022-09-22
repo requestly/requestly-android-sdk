@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/transactionFragment"
         android:name="io.requestly.android.okhttp.internal.ui.transaction.TransactionFragment"
-        android:label="Network Transaction" >
+        android:label="Network" >
         <argument
             android:name="transaction_id"
             app:argType="long" />
