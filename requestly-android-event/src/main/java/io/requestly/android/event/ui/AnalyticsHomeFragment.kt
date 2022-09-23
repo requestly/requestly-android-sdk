@@ -2,7 +2,12 @@ package io.requestly.android.event.ui
 
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
@@ -48,7 +53,7 @@ class AnalyticsHomeFragment : Fragment() {
         viewModel.events.observe(
             viewLifecycleOwner
         ) {
-                eventsList ->
+            eventsList ->
             eventsListAdapter.updateEventsList(eventsList)
             mainBinding.tutorialGroup.isVisible = eventsList.isEmpty()
         }
@@ -58,35 +63,41 @@ class AnalyticsHomeFragment : Fragment() {
         mainBinding.rqInterceptorAllEventsRecyclerview.layoutManager = LinearLayoutManager(requireContext())
         eventsListAdapter = EventListAdapter(requireContext()) {
             eventId ->
-            Log.d("Requestly","Clicked Analytics Event")
-            findNavController().navigate(AnalyticsHomeFragmentDirections.actionAnalyticsHomeFragmentToEventOverviewFragment(eventId))
+            Log.d("Requestly", "Clicked Analytics Event")
+            findNavController().navigate(
+                AnalyticsHomeFragmentDirections.actionAnalyticsHomeFragmentToEventOverviewFragment(eventId)
+            )
         }
         mainBinding.rqInterceptorAllEventsRecyclerview.adapter = eventsListAdapter
     }
 
     private fun setupMenu() {
-        menuHost.addMenuProvider(object: MenuProvider {
-            override fun onPrepareMenu(menu: Menu) {
-                // Handle for example visibility of menu items
-            }
+        menuHost.addMenuProvider(
+            object : MenuProvider {
+                override fun onPrepareMenu(menu: Menu) {
+                    // Handle for example visibility of menu items
+                }
 
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.events_list_menu, menu)
-            }
+                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                    menuInflater.inflate(R.menu.events_list_menu, menu)
+                }
 
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                // Validate and handle the selected menu item
-                return when (menuItem.itemId) {
-                    R.id.clear -> {
-                        Log.d("Requestly", "Cleared")
-                        viewModel.clearTransactions()
-                        true
-                    }
-                    else -> {
-                        false
+                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                    // Validate and handle the selected menu item
+                    return when (menuItem.itemId) {
+                        R.id.clear -> {
+                            Log.d("Requestly", "Cleared")
+                            viewModel.clearTransactions()
+                            true
+                        }
+                        else -> {
+                            false
+                        }
                     }
                 }
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+            },
+            viewLifecycleOwner,
+            Lifecycle.State.RESUMED
+        )
     }
 }

@@ -11,6 +11,15 @@ public final class io/requestly/android/core/Feature : java/lang/Enum {
 	public static fun values ()[Lio/requestly/android/core/Feature;
 }
 
+public final class io/requestly/android/core/MainNavGraphDirections {
+	public static final field Companion Lio/requestly/android/core/MainNavGraphDirections$Companion;
+}
+
+public final class io/requestly/android/core/MainNavGraphDirections$Companion {
+	public final fun actionGlobalAnalyticsFlow ()Landroidx/navigation/NavDirections;
+	public final fun actionGlobalNetworkFlow ()Landroidx/navigation/NavDirections;
+}
+
 public final class io/requestly/android/core/Requestly {
 	public static final field Companion Lio/requestly/android/core/Requestly$Companion;
 	public field applicationContext Landroid/content/Context;
@@ -47,6 +56,15 @@ public final class io/requestly/android/core/SettingsManager$Companion {
 	public final fun getInstance ()Lio/requestly/android/core/SettingsManager;
 }
 
+public final class io/requestly/android/core/databinding/ActivityMainRequestlyBinding : androidx/viewbinding/ViewBinding {
+	public final field navView Lcom/google/android/material/bottomnavigation/BottomNavigationView;
+	public static fun bind (Landroid/view/View;)Lio/requestly/android/core/databinding/ActivityMainRequestlyBinding;
+	public synthetic fun getRoot ()Landroid/view/View;
+	public fun getRoot ()Landroidx/constraintlayout/widget/ConstraintLayout;
+	public static fun inflate (Landroid/view/LayoutInflater;)Lio/requestly/android/core/databinding/ActivityMainRequestlyBinding;
+	public static fun inflate (Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Z)Lio/requestly/android/core/databinding/ActivityMainRequestlyBinding;
+}
+
 public final class io/requestly/android/core/internal/support/ListNotificationHelper {
 	public static final field Companion Lio/requestly/android/core/internal/support/ListNotificationHelper$Companion;
 	public fun <init> (Landroid/content/Context;)V
@@ -57,5 +75,42 @@ public final class io/requestly/android/core/internal/support/ListNotificationHe
 
 public final class io/requestly/android/core/internal/support/ListNotificationHelper$Companion {
 	public final fun clearBuffer ()V
+}
+
+public abstract class io/requestly/android/core/navigation/NavigationFlow {
+}
+
+public final class io/requestly/android/core/navigation/NavigationFlow$AnalyticsFlow : io/requestly/android/core/navigation/NavigationFlow {
+	public static final field INSTANCE Lio/requestly/android/core/navigation/NavigationFlow$AnalyticsFlow;
+}
+
+public final class io/requestly/android/core/navigation/NavigationFlow$NetworkFlow : io/requestly/android/core/navigation/NavigationFlow {
+	public static final field INSTANCE Lio/requestly/android/core/navigation/NavigationFlow$NetworkFlow;
+}
+
+public final class io/requestly/android/core/navigation/Navigator {
+	public field navController Landroidx/navigation/NavController;
+	public fun <init> ()V
+	public final fun getNavController ()Landroidx/navigation/NavController;
+	public final fun navigateToFlow (Lio/requestly/android/core/navigation/NavigationFlow;)V
+	public final fun setNavController (Landroidx/navigation/NavController;)V
+}
+
+public abstract interface class io/requestly/android/core/navigation/ToFlowNavigatable {
+	public abstract fun navigateToFlow (Lio/requestly/android/core/navigation/NavigationFlow;)V
+}
+
+public final class io/requestly/android/core/ui/MainRequestlyActivity : androidx/appcompat/app/AppCompatActivity, io/requestly/android/core/navigation/ToFlowNavigatable {
+	public fun <init> ()V
+	public fun navigateToFlow (Lio/requestly/android/core/navigation/NavigationFlow;)V
+	public fun onSupportNavigateUp ()Z
+}
+
+public final class io/requestly/android/core/ui/MainRequestlyActivity$inlined$sam$i$androidx_navigation_ui_AppBarConfiguration_OnNavigateUpListener$0 : androidx/navigation/ui/AppBarConfiguration$OnNavigateUpListener, kotlin/jvm/internal/FunctionAdapter {
+	public fun <init> (Lkotlin/jvm/functions/Function0;)V
+	public final fun equals (Ljava/lang/Object;)Z
+	public final fun getFunctionDelegate ()Lkotlin/Function;
+	public final fun hashCode ()I
+	public final synthetic fun onNavigateUp ()Z
 }
 

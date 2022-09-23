@@ -46,7 +46,9 @@ class MainActivity : AppCompatActivity() {
                     "Events CTA clicked",
                     mapOf("foo" to "bar")
                 )
-                startActivity(Intent(applicationContext, Class.forName("io.requestly.android.core.ui.MainRequestlyActivity")))
+                startActivity(Intent(applicationContext, Class.forName(
+                    "io.requestly.android.core.ui.MainRequestlyActivity"))
+                )
 //                startActivity(Utils.getLaunchIntent(applicationContext))
             }
 
