@@ -12,7 +12,12 @@
         android:title="Analytics" />
 
     <item
-        android:id="@id/logs_flow"
+        android:id="@id/host_switcher_flow"
         android:icon="@drawable/ic_message_24"
-        android:title="Logs (Coming Soon)" />
+        android:title="Host Switcher" />
+
+<!--    <item-->
+<!--        android:id="@id/logs_flow"-->
+<!--        android:icon="@drawable/ic_message_24"-->
+<!--        android:title="Logs (Coming Soon)" />-->
 </menu>

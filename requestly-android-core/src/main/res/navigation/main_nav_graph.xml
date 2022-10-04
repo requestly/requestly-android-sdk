@@ -6,6 +6,7 @@
 
     <include app:graph="@navigation/network_graph" />
     <include app:graph="@navigation/analytics_graph" />
+    <include app:graph="@navigation/host_switcher_graph" />
 
     <action
         android:id="@+id/action_global_network_flow"
@@ -15,6 +16,11 @@
     <action
         android:id="@+id/action_global_analytics_flow"
         app:destination="@id/analytics_flow"
+        app:popUpTo="@id/main_nav_graph" />
+
+    <action
+        android:id="@+id/action_global_host_switcher"
+        app:destination="@id/host_switcher_flow"
         app:popUpTo="@id/main_nav_graph" />
 
 </navigation>

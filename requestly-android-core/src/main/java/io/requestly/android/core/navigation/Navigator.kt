@@ -14,6 +14,9 @@ class Navigator {
         is NavigationFlow.AnalyticsFlow -> navController.navigate(
             MainNavGraphDirections.actionGlobalAnalyticsFlow()
         )
+        is NavigationFlow.HostSwitcherFlow -> navController.navigate(
+            MainNavGraphDirections.actionGlobalHostSwitcher()
+        )
 //        is NavigationFlow.DashboardFlow -> navController.navigate(
 //            MainNavGraphDirections.actionGlobalDashboardFlow(navigationFlow.msg)
 //        )
