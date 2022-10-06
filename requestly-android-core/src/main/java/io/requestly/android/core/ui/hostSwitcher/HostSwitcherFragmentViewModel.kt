@@ -19,9 +19,6 @@ class HostSwitcherFragmentViewModel: ViewModel() {
     }
 
     fun createItem(startingText: String, provisionalText: String) {
-
-        Log.d("HOST_SWITCHER", "length -> ${rulesListLive.value?.size}")
-
         val newRule = SwitchingRule(startingText, provisionalText, true, UUID.randomUUID().toString())
         _rulesListLive.value = _rulesListLive.value!! + newRule
     }
