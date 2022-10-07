@@ -1,4 +1,6 @@
-# Requestly Android SDK
+<p align="center"><img src="https://user-images.githubusercontent.com/16779465/194505910-b6a7be70-df20-4b1a-9730-06a48cdd75ac.png" alt="Requestly Logo" width="50%"/></p>
+
+<h2 align="center">Chrome like developer tool for Android debug builds</h2>
 
 [![GitHub release](https://img.shields.io/github/release/requestly/requestly-android-sdk.svg)](https://github.com/requestly/requestly-android-sdk/releases)
 [![Maven](https://img.shields.io/badge/-Maven-green?logo=apachemaven)](https://search.maven.org/search?q=io.requestly%20-library)
@@ -13,6 +15,7 @@ Requestly Android SDK lets you debug your android apps without needing you to se
 - [Features](#features)
   - [API Debugger](#api-debugger)
   - [Analytics Event Debugger](#analytics-event-debugger)
+  - [Logs Debugger](#logs-debugger-coming-soon)
 - [Acknowledgments](#acknowledgments)
   
 ## Installation
@@ -22,10 +25,10 @@ RQInterceptor is distributed through [Maven Central](https://search.maven.org/se
 
 ```
 dependencies {
-    debugImplementation "io.requestly:requestly-android:2.1.0"
-    releaseImplementation "io.requestly:requestly-android-noop:2.1.0"
-    debugImplementation "io.requestly:requestly-android-okhttp:2.1.0"
-    releaseImplementation "io.requestly:requestly-android-okhttp-noop:2.1.0"
+    debugImplementation "io.requestly:requestly-android:2.2.0"
+    releaseImplementation "io.requestly:requestly-android-noop:2.2.0"
+    debugImplementation "io.requestly:requestly-android-okhttp:2.2.0"
+    releaseImplementation "io.requestly:requestly-android-okhttp-noop:2.2.0"
 }
 ```
 
@@ -77,7 +80,7 @@ Lets you view and modify HTTP traffic. It comes with these capabilities to:
 - **InApp Inspector** : Directly view your HTTP request from your phone.
 - **Modify API**: Modify Response, Redirect Request, Delay Request and many more.
 
-![Api Debugger](./assets/api-debugger.png)
+<img width="400" alt="Api Debugger" src="./assets/api-debugger.png">
 
 <br />
 
@@ -89,7 +92,14 @@ Debug & Validate your Analytics Events directly from your App. The SDK provides 
 RequestlyEvent.send(<eventName: String>, <eventData:Map<String, Any>>)
 ```
 
-![Api Debugger](./assets/events-debugger.png)
+<img width="400" alt="Events Debugger" src="./assets/events-debugger.png">
+
+<br />
+
+### Logs Debugger (Coming Soon)
+Debug your Logs directly from your App. No need to connect your device to your computer to know what's happening inside your app.
+
+<img width="400" alt="Logs Debugger" src="./assets/logs-debugger.png">
 
 <br />
 
