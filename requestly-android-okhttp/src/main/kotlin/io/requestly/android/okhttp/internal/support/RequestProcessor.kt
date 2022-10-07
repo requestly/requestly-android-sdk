@@ -2,6 +2,10 @@ package io.requestly.android.okhttp.internal.support
 
 import android.content.Context
 import android.util.Log
+import com.google.gson.reflect.TypeToken
+import io.requestly.android.core.KeyValueStorageManager
+import io.requestly.android.core.ui.hostSwitcher.HostSwitcherFragmentViewModel
+import io.requestly.android.core.ui.hostSwitcher.SwitchingRule
 import io.requestly.android.okhttp.R
 import io.requestly.android.okhttp.api.BodyDecoder
 import io.requestly.android.okhttp.api.RQClientProvider
@@ -25,6 +29,20 @@ internal class RequestProcessor(
     private val headersToRedact: Set<String>,
     private val bodyDecoders: List<BodyDecoder>,
 ) {
+
+    private val switchingRulesMap = HashMap<String, String>()
+
+    init {
+        val typeToken = object : TypeToken<List<SwitchingRule>>() {}
+        val storageChangeListener: () -> Unit = {
+            KeyValueStorageManager.getList(HostSwitcherFragmentViewModel.KEY_NAME, typeToken)?.forEach {
+                switchingRulesMap[it.startingText] = it.provisionalText
+            }
+        }
+        storageChangeListener()
+        KeyValueStorageManager.registerChangeListener(HostSwitcherFragmentViewModel.KEY_NAME, storageChangeListener)
+    }
+
     fun process(request: Request, transaction: HttpTransaction): Request {
         processMetadata(request, transaction)
         processPayload(request, transaction)

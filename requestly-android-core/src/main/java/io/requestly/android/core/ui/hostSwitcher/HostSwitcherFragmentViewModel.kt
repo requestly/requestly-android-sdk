@@ -17,7 +17,9 @@ data class SwitchingRule(
 
 class HostSwitcherFragmentViewModel: ViewModel() {
 
-    private val KEY_NAME = "io.requestly.host_switch_rules_key"
+    companion object {
+        const val KEY_NAME = "io.requestly.host_switch_rules_key"
+    }
 
     private var _rulesListLive = MutableLiveData<List<SwitchingRule>>()
     val rulesListLive: LiveData<List<SwitchingRule>> = _rulesListLive

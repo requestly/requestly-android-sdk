@@ -11,6 +11,7 @@ object KeyValueStorageManager {
 
     private lateinit var mSharedPref: SharedPreferences
     private lateinit var gson: Gson
+    private var changeListeners: MutableList<SharedPreferences.OnSharedPreferenceChangeListener> = mutableListOf()
 
     fun initialize(context: Context) {
         mSharedPref = context.getSharedPreferences(FILE_NAME, 0)
@@ -36,5 +37,15 @@ object KeyValueStorageManager {
     fun <T> getList(key: String, typeToken: TypeToken<T>): T? {
         val json = mSharedPref.getString(key, null) ?: return null
         return gson.fromJson(json, typeToken.type)
+    }
+
+    fun registerChangeListener(forKey: String, changeListener: () -> Unit) {
+        val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
+            if (key === forKey) {
+                changeListener()
+            }
+        }
+        changeListeners.add(listener)
+        mSharedPref.registerOnSharedPreferenceChangeListener(listener)
     }
 }
