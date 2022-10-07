@@ -2,8 +2,16 @@
 
 <h2 align="center">Chrome like developer tool for Android debug builds</h2>
 
-[![GitHub release](https://img.shields.io/github/release/requestly/requestly-android-sdk.svg)](https://github.com/requestly/requestly-android-sdk/releases)
-[![Maven](https://img.shields.io/badge/-Maven-green?logo=apachemaven)](https://search.maven.org/search?q=io.requestly%20-library)
+<p align="center">
+    <a href="https://github.com/requestly/requestly-android-sdk/releases"><img alt="GitHub release" src="https://img.shields.io/github/release/requestly/requestly-android-sdk.svg"></a>
+    <a href="https://search.maven.org/search?q=io.requestly%20-library"><img alt="Maven" src="https://img.shields.io/badge/-Maven-green?logo=apachemaven"></a>
+</p>
+
+<p align="center">
+    <img height="250" alt="Api Debugger" src="./assets/api-debugger.png">
+    <img height="250" alt="Events Debugger" src="./assets/events-debugger.png">
+    <img height="250" alt="Logs Debugger" src="./assets/logs-debugger.png">
+</p>
 
 Requestly Android SDK lets you debug your android apps without needing you to setup any proxies or install any certificates everytime. It makes easy to identify & debug your Android Apps faster and save your time.
 
@@ -82,9 +90,6 @@ Lets you view and modify HTTP traffic. It comes with these capabilities to:
 
 <img width="400" alt="Api Debugger" src="./assets/api-debugger.png">
 
-<br />
-
-
 ### Analytics Event Debugger
 Debug & Validate your Analytics Events directly from your App. The SDK provides a simple API to send your events.
 
@@ -94,14 +99,10 @@ RequestlyEvent.send(<eventName: String>, <eventData:Map<String, Any>>)
 
 <img width="400" alt="Events Debugger" src="./assets/events-debugger.png">
 
-<br />
-
 ### Logs Debugger (Coming Soon)
 Debug your Logs directly from your App. No need to connect your device to your computer to know what's happening inside your app.
 
 <img width="400" alt="Logs Debugger" src="./assets/logs-debugger.png">
-
-<br />
 
 ## Acknowledgments
 Special Thanks to chuckerteam for maintaining such an awesome project because of which rq-interceptor was possible
