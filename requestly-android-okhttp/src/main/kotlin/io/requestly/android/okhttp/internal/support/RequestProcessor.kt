@@ -20,6 +20,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okio.Buffer
 import okio.ByteString
 import okio.IOException
+import kotlin.reflect.typeOf
 
 
 internal class RequestProcessor(
@@ -35,19 +36,36 @@ internal class RequestProcessor(
     init {
         val typeToken = object : TypeToken<List<SwitchingRule>>() {}
         val storageChangeListener: () -> Unit = {
-            KeyValueStorageManager.getList(HostSwitcherFragmentViewModel.KEY_NAME, typeToken)?.forEach {
-                switchingRulesMap[it.startingText] = it.provisionalText
-            }
+            switchingRulesMap.clear()
+            KeyValueStorageManager.getList(HostSwitcherFragmentViewModel.KEY_NAME, typeToken)
+                ?.forEach {
+                    if (it.isActive) {
+                        switchingRulesMap[it.startingText] = it.provisionalText
+                    }
+                }
         }
         storageChangeListener()
-        KeyValueStorageManager.registerChangeListener(HostSwitcherFragmentViewModel.KEY_NAME, storageChangeListener)
+        KeyValueStorageManager.registerChangeListener(
+            HostSwitcherFragmentViewModel.KEY_NAME,
+            storageChangeListener
+        )
     }
 
-    fun process(request: Request, transaction: HttpTransaction): Request {
+    fun process(req: Request, transaction: HttpTransaction): Request {
+        var urlString = req.url.toString()
+        switchingRulesMap.forEach {
+            urlString = urlString.replace(it.key, it.value, ignoreCase = true)
+        }
+
+        val request = req
+            .newBuilder()
+            .url(urlString)
+            .build()
+
         processMetadata(request, transaction)
         processPayload(request, transaction)
 
-        if(!RQClientProvider.client().captureEnabled){
+        if (!RQClientProvider.client().captureEnabled) {
             Log.d(RQConstants.LOG_TAG, "Capturing Not enabled. Passing through requests")
             collector.onRequestSent(transaction)
             return request
@@ -64,7 +82,7 @@ internal class RequestProcessor(
         val newRequest: Request = request.newBuilder()
             .method("POST", body)
             .header("content-type", "application/json")
-            .header("rq_device_id", collector.uniqueDeviceId?:"")
+            .header("rq_device_id", collector.uniqueDeviceId ?: "")
             .header("rq_sdk_id", collector.sdkKey)
             .url("${RQConstants.RQ_SERVER_BASE_URL}/${RQConstants.PROXY_REQUEST_PATH}")
             .build()
@@ -106,7 +124,8 @@ internal class RequestProcessor(
             Logger.error("Failed to read request payload", e)
             return
         }
-        val limitingSource = LimitingSource(requestSource.uncompress(request.headers), maxContentLength)
+        val limitingSource =
+            LimitingSource(requestSource.uncompress(request.headers), maxContentLength)
 
         val contentBuffer = Buffer().apply { limitingSource.use { writeAll(it) } }
 
