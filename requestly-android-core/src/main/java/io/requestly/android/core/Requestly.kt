@@ -34,6 +34,7 @@ class Requestly {
             Requestly.getInstance()?.listNotificationHelper = ListNotificationHelper(applicationContext)
 
             SettingsManager.getInstance().setAppToken(appToken)
+            KeyValueStorageManager.initialize(applicationContext)
             this.updateFeaturesState()
             Log.d("RQ-Core", "Finish: Building Core")
         }
