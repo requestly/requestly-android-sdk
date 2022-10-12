@@ -1,9 +1,13 @@
 package io.requestly.android.core.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
 import androidx.navigation.findNavController
@@ -17,10 +21,13 @@ import io.requestly.android.core.navigation.NavigationFlow
 import io.requestly.android.core.navigation.Navigator
 import io.requestly.android.core.navigation.ToFlowNavigatable
 
+
 class MainRequestlyActivity : AppCompatActivity(), ToFlowNavigatable {
 
     private lateinit var binding: ActivityMainRequestlyBinding
     private var navigator = Navigator()
+
+    private val viewModel: MainRequestlyActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +52,22 @@ class MainRequestlyActivity : AppCompatActivity(), ToFlowNavigatable {
         navigator.navController = navController
         setupMenu()
         handleOnStartNavigation()
+
+        binding.updateNotifyStripView.visibility = View.GONE
+        viewModel.versionUpdateLiveData.observe(this) { data ->
+            if (data == null) {
+                binding.updateNotifyStripView.visibility = View.GONE
+                return@observe
+            }
+            binding.updateNotifyStripView.visibility = View.VISIBLE
+            binding.updateNotifyStripText.text = data.displayText
+            binding.updateNotifyStripButton.text = data.ctaText
+            binding.updateNotifyStripButton.setOnClickListener {
+                val intent: Intent =
+                    Intent(Intent.ACTION_VIEW).setData(Uri.parse(data.url))
+                startActivity(intent)
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
