@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/host_switcher_flow"
+    tools:ignore="ResourceName"
+    app:startDestination="@id/host_switcher_fragment">
+
+    <!-- Setting this id from core as they are required to setup appBarConfiguration -->
+    <fragment
+        android:id="@id/host_switcher_fragment"
+        android:name="io.requestly.android.core.ui.hostSwitcher.HostSwitcherFragment"
+        android:label="Host Switcher">
+    </fragment>
+</navigation>

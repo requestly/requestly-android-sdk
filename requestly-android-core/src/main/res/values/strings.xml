@@ -7,4 +7,5 @@
 
     <!-- Toolbar - Action Menu -->
     <string name="clear">Clear</string>
+    <string name="add">Add New</string>
 </resources>
