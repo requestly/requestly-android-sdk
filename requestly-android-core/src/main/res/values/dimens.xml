@@ -31,4 +31,12 @@
     <dimen name="l32">32dp</dimen>
     <dimen name="l64">64dp</dimen>
 
+
+    <!-- LYNX -->
+    <dimen name="divider_height">0dp</dimen>
+    <dimen name="trace_padding">4dp</dimen>
+    <dimen name="filter_layout_height">40dp</dimen>
+    <dimen name="filter_edit_text_padding">4dp</dimen>
+    <dimen name="trace_font_size">12sp</dimen>
+
 </resources>

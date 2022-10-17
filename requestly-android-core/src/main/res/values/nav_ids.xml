@@ -8,4 +8,5 @@
     <item name="network_home_fragment" type="id"/>
     <item name="analytics_home_fragment" type="id"/>
     <item name="host_switcher_fragment" type="id"/>
+    <item name="logs_home_fragment" type="id"/>
 </resources>
