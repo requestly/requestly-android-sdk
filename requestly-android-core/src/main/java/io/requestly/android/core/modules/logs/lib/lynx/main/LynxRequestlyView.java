@@ -220,6 +220,7 @@ public class LynxRequestlyView extends RelativeLayout implements LynxRequestlyPr
   private void attachPresenterView() {
       if (isPresenterReady()) {
           presenter.setPresenterView(this);
+          presenter.onNewTraces(Collections.emptyList());
       }
   }
 
