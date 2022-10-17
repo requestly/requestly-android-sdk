@@ -25,7 +25,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -49,7 +48,6 @@ import io.requestly.android.core.Requestly;
 import io.requestly.android.core.modules.logs.lib.lynx.main.model.Trace;
 import io.requestly.android.core.modules.logs.lib.lynx.main.model.TraceLevel;
 import io.requestly.android.core.modules.logs.lib.lynx.main.presenter.LynxRequestlyPresenter;
-import io.requestly.android.core.modules.logs.lib.lynx.main.renderer.TraceRendererBuilder;
 import io.requestly.android.core.modules.logs.lib.lynx.main.ui.TracesListAdapter;
 
 /**
