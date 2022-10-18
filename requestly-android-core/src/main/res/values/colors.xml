@@ -78,5 +78,25 @@
     <color name="md_theme_dark_shadow">#000000</color>
     <color name="md_theme_dark_surfaceTint">#B5C4FF</color>
     <color name="md_theme_dark_surfaceTintColor">#B5C4FF</color>
+
+
+    <!-- Feat: Logs -->
+    <color name="log_default_primary_text_color">#45464F</color>
+    <color name="log_default_secondary_text_color">#8F909A</color>
+    <color name="log_default_primary_background_color">#E2E1EC</color>
+    <color name="log_default_secondary_background_color">#45464F</color>
+    <color name="log_default_border_color">#3a3a3a</color>
+
+    <color name="log_error_primary_text_color">#ff3b35</color>
+    <color name="log_error_secondary_text_color">#ffffff</color>
+    <color name="log_error_primary_background_color">#fef1f0</color>
+    <color name="log_error_secondary_background_color">#ef5056</color>
+    <color name="log_error_border_color">#fee5e4</color>
+
+    <color name="log_warning_primary_text_color">#5c3c00</color>
+    <color name="log_warning_secondary_text_color">#ffffff</color>
+    <color name="log_warning_primary_background_color">#fffbe5</color>
+    <color name="log_warning_secondary_background_color">#f5bd02</color>
+    <color name="log_warning_border_color">#fff6c9</color>
 </resources>
 

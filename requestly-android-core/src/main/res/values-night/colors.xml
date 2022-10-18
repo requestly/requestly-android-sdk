@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!-- Feat: Logs -->
+    <color name="log_default_primary_text_color">#C6C6D0</color>
+    <color name="log_default_secondary_text_color">#8F909A</color>
+    <color name="log_default_primary_background_color">#45464F</color>
+    <color name="log_default_secondary_background_color">#45464F</color>
+    <color name="log_default_border_color">#3a3a3a</color>
+
+    <color name="log_error_primary_text_color">#ff8080</color>
+    <color name="log_error_secondary_text_color">#ffffff</color>
+    <color name="log_error_primary_background_color">#290000</color>
+    <color name="log_error_secondary_background_color">#ec3941</color>
+    <color name="log_error_border_color">#5c0000</color>
+
+    <color name="log_warning_primary_text_color">#f2ab27</color>
+    <color name="log_warning_secondary_text_color">#ffffff</color>
+    <color name="log_warning_primary_background_color">#332b00</color>
+    <color name="log_warning_secondary_background_color">#f4bd03</color>
+    <color name="log_warning_border_color">#594a00</color>
+
+
+</resources>
+

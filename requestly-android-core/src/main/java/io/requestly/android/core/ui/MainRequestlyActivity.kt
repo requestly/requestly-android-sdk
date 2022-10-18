@@ -32,7 +32,14 @@ class MainRequestlyActivity : AppCompatActivity(), ToFlowNavigatable {
         bottomNavView.setupWithNavController(navController)
 
         // Top Level Destinations for AppBar. To show the up button properly
-        val appBarConfiguration = AppBarConfiguration(setOf(R.id.network_home_fragment, R.id.analytics_home_fragment, R.id.host_switcher_fragment))
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.network_home_fragment,
+                R.id.analytics_home_fragment,
+                R.id.host_switcher_fragment,
+                R.id.logs_home_fragment,
+            )
+        )
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         navigator.navController = navController

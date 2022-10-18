@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@id/logs_flow"
+    app:startDestination="@id/logs_home_fragment">
+
+    <fragment
+        android:id="@id/logs_home_fragment"
+        android:name="io.requestly.android.core.modules.logs.ui.LogsHomeFragment"
+        android:label="Logs">
+    </fragment>
+
+</navigation>

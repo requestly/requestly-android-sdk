@@ -8,4 +8,5 @@
     <!-- Toolbar - Action Menu -->
     <string name="clear">Clear</string>
     <string name="add">Add New</string>
+    <string name="et_filter_hint_text">Logcat filter</string>
 </resources>
