@@ -8,9 +8,7 @@
 </p>
 
 <p align="center">
-    <img height="250" alt="Api Debugger" src="./assets/api-debugger.png">
-    <img height="250" alt="Events Debugger" src="./assets/events-debugger.png">
-    <img height="250" alt="Logs Debugger" src="./assets/logs-debugger.png">
+    <img height="500" alt="Api Debugger" src="./assets/quick-preview.png">
 </p>
 
 Requestly Android SDK lets you debug your android apps without needing you to setup any proxies or install any certificates everytime. It makes easy to identify & debug your Android Apps faster and save your time.
@@ -33,10 +31,10 @@ RQInterceptor is distributed through [Maven Central](https://search.maven.org/se
 
 ```
 dependencies {
-    debugImplementation "io.requestly:requestly-android:2.2.0"
-    releaseImplementation "io.requestly:requestly-android-noop:2.2.0"
-    debugImplementation "io.requestly:requestly-android-okhttp:2.2.0"
-    releaseImplementation "io.requestly:requestly-android-okhttp-noop:2.2.0"
+    debugImplementation "io.requestly:requestly-android:2.4.0"
+    releaseImplementation "io.requestly:requestly-android-noop:2.4.0"
+    debugImplementation "io.requestly:requestly-android-okhttp:2.4.0"
+    releaseImplementation "io.requestly:requestly-android-okhttp-noop:2.4.0"
 }
 ```
 
