@@ -1,4 +1,4 @@
-package io.requestly.android.core.ui
+package io.requestly.android.core.network
 
 import com.google.gson.annotations.SerializedName
 import retrofit2.Call
@@ -12,6 +12,6 @@ data class RQSDKVersionInfo(
     @SerializedName("redirectUrl") val redirectUrl: String?)
 
 interface RQSDKVersionUpdateService {
-    @GET("getLatestVersion")
+    @GET("androidSdk/latestVersion")
     fun getLatestVersion(): Call<RQSDKVersionInfo>
 }
