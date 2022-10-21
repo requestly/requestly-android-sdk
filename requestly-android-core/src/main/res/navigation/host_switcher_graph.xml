@@ -9,7 +9,7 @@
     <!-- Setting this id from core as they are required to setup appBarConfiguration -->
     <fragment
         android:id="@id/host_switcher_fragment"
-        android:name="io.requestly.android.core.ui.hostSwitcher.HostSwitcherFragment"
+        android:name="io.requestly.android.core.modules.hostSwitcher.HostSwitcherFragment"
         android:label="Host Switcher">
     </fragment>
 </navigation>

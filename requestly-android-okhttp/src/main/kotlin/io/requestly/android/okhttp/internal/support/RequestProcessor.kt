@@ -4,8 +4,8 @@ import android.content.Context
 import android.util.Log
 import com.google.gson.reflect.TypeToken
 import io.requestly.android.core.KeyValueStorageManager
-import io.requestly.android.core.ui.hostSwitcher.HostSwitcherFragmentViewModel
-import io.requestly.android.core.ui.hostSwitcher.SwitchingRule
+import io.requestly.android.core.modules.hostSwitcher.HostSwitcherFragmentViewModel
+import io.requestly.android.core.modules.hostSwitcher.SwitchingRule
 import io.requestly.android.okhttp.R
 import io.requestly.android.okhttp.api.BodyDecoder
 import io.requestly.android.okhttp.api.RQClientProvider
@@ -20,7 +20,6 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okio.Buffer
 import okio.ByteString
 import okio.IOException
-import kotlin.reflect.typeOf
 
 
 internal class RequestProcessor(

@@ -1,4 +1,4 @@
-package io.requestly.android.core.ui.hostSwitcher
+package io.requestly.android.core.modules.hostSwitcher
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

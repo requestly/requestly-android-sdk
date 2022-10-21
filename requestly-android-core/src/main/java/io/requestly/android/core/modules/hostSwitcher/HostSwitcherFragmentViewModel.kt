@@ -1,4 +1,4 @@
-package io.requestly.android.core.ui.hostSwitcher
+package io.requestly.android.core.modules.hostSwitcher
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

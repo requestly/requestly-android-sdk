@@ -1,6 +1,5 @@
-package io.requestly.android.core.ui.hostSwitcher
+package io.requestly.android.core.modules.hostSwitcher
 
-import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
