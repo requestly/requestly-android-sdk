@@ -13,6 +13,10 @@ object NetworkManager {
         .build()
     }
 
+    val requestlyApiService: RequestlyApiService by lazy {
+        client.create(RequestlyApiService::class.java)
+    }
+
     fun <S> create(serviceClass: Class<S>): S {
         return client.create(serviceClass)
     }
