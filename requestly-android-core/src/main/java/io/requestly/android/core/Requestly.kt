@@ -115,6 +115,7 @@ class Requestly {
             Log.d(Constants.LOG_TAG, "random appToken initialized: $anonAppToken")
 
             SettingsManager.getInstance().setAppToken(anonAppToken)
+            SettingsManager.getInstance().setCaptureEnabled(false)
             SettingsManager.getInstance().setIsAnonymousSession(true)
         }
 
@@ -143,10 +144,8 @@ class Requestly {
                         responseBody?.deviceId?.let {
                             SettingsManager.getInstance().setUniqueDeviceId(it)
                         }
-                        // Handle responseBody.isAnonymousSession here
-                        // Right now making it false for success calls
                         SettingsManager.getInstance().setIsAnonymousSession(
-                             responseBody?.isAnonymousSession?:false  // @TODO: Change this default to true
+                             responseBody?.isAnonymousSession?:true
                         )
                     } else {
                         Log.d(Constants.LOG_TAG, "Error /initSdkDevice; ${response.code()}; ${response.errorBody()?.string()}" )
