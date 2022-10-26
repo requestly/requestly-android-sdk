@@ -8,6 +8,7 @@ class SettingsManager {
     private var appToken: String? = null
     private var uniqueDeviceId: String? = null
     private var captureEnabled: Boolean = false
+    private var isAnonymousSession: Boolean = true // This will enable/disable the `CONNECT` button
 
     private var featuresState = HashMap<Feature, Boolean>()
 
@@ -55,6 +56,14 @@ class SettingsManager {
 
     fun getCaptureEnabled(): Boolean {
         return this.captureEnabled
+    }
+
+    fun setIsAnonymousSession(isAnonymousSession: Boolean) {
+        this.isAnonymousSession = isAnonymousSession
+    }
+
+    fun getIsAnonymousSession(): Boolean {
+        return this.isAnonymousSession
     }
 
     fun setFeatureState(feature: Feature, state: Boolean) {

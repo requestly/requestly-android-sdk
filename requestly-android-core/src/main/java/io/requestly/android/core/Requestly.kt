@@ -65,6 +65,8 @@ class Requestly {
                 appToken?.let {
                     Log.d(Constants.LOG_TAG, "appToken initialized: $it")
                     SettingsManager.getInstance().setAppToken(it)
+                    // Setting this false after verifying whether SDK key exist or not (/initSdkDevice)
+                    SettingsManager.getInstance().setIsAnonymousSession(true)
                 }
 
                 // Build individual features modules
@@ -95,7 +97,10 @@ class Requestly {
 
         private suspend fun initSdk() {
             val appToken = SettingsManager.getInstance().getAppToken()
-            if(appToken == null){
+            if(
+                this.appToken==null &&
+                (appToken == null || !appToken.startsWith(Constants.ANONYMOUS_APP_TOKEN_PREFIX))
+            ){
                 initAnonymousSdk()
             }
             Log.d(Constants.LOG_TAG, "appToken: ${SettingsManager.getInstance().getAppToken()}")
@@ -106,12 +111,11 @@ class Requestly {
         private fun initAnonymousSdk() {
             // initUUID
             val randomUUID = UUID.randomUUID().toString()
-            val anonAppToken = "anonymous-$randomUUID"
+            val anonAppToken = "${Constants.ANONYMOUS_APP_TOKEN_PREFIX}$randomUUID"
             Log.d(Constants.LOG_TAG, "random appToken initialized: $anonAppToken")
 
-            // Set on Settings Manager
-                // Set in Storage
             SettingsManager.getInstance().setAppToken(anonAppToken)
+            SettingsManager.getInstance().setIsAnonymousSession(true)
         }
 
         private suspend fun initDevice() {
@@ -139,11 +143,18 @@ class Requestly {
                         responseBody?.deviceId?.let {
                             SettingsManager.getInstance().setUniqueDeviceId(it)
                         }
+                        // Handle responseBody.isAnonymousSession here
+                        // Right now making it false for success calls
+                        SettingsManager.getInstance().setIsAnonymousSession(
+                             responseBody?.isAnonymousSession?:false  // @TODO: Change this default to true
+                        )
                     } else {
                         Log.d(Constants.LOG_TAG, "Error /initSdkDevice; ${response.code()}; ${response.errorBody()?.string()}" )
+                        SettingsManager.getInstance().setIsAnonymousSession(true)
                     }
                 } catch (err: Exception) {
                     Log.d(Constants.LOG_TAG, "Exception /initSdkDevice \n$err" )
+                    SettingsManager.getInstance().setIsAnonymousSession(true)
                 }
             }
         }

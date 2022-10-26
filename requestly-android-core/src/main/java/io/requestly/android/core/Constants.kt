@@ -6,4 +6,6 @@ object Constants {
     const val STORAGE_CAPTURE_ENABLED_KEY = "capture_enabled"
 
     const val LOG_TAG = "requestly-android-sdk"
+
+    const val ANONYMOUS_APP_TOKEN_PREFIX = "anonymous-"
 }

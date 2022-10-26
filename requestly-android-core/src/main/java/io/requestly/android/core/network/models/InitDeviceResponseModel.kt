@@ -8,4 +8,7 @@ data class InitDeviceResponseModel(
 
     @SerializedName("device-id")
     var deviceId: String?,
+
+    @SerializedName("is_anonymous_session")
+    var isAnonymousSession: Boolean? = true,
 )
