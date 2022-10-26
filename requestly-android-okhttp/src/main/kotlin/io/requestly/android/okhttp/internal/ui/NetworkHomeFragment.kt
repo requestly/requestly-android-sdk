@@ -26,7 +26,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import io.requestly.android.core.SettingsManager
 import io.requestly.android.okhttp.R
-import io.requestly.android.okhttp.api.RQClientProvider
 import io.requestly.android.okhttp.databinding.FragmentNetworkHomeBinding
 import io.requestly.android.okhttp.databinding.RqInterceptorMoreDetailDialogLayoutBinding
 import io.requestly.android.okhttp.internal.data.entity.HttpTransaction
@@ -220,7 +219,7 @@ internal class NetworkHomeFragment :
 
     private fun getInfoDialog() {
         createInfoDialog()
-        dialogBinding.rqInterceptorDeviceId.text = RQClientProvider.client().deviceId
+        dialogBinding.rqInterceptorDeviceId.text = SettingsManager.getInstance().getUniqueDeviceId()
         dialogBinding.rqInterceptorAppId.text = SettingsManager.getInstance().getAppToken()
         addInfoDialogListeners()
     }
@@ -240,7 +239,7 @@ internal class NetworkHomeFragment :
         val clipboardManager = requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         dialogBinding.rqInterceptorDeviceIdCopyButton.setOnClickListener {
             Toast.makeText(context, "Device Id Copied!", Toast.LENGTH_SHORT).show()
-            val clipData = ClipData.newPlainText("Device Id", RQClientProvider.client().deviceId)
+            val clipData = ClipData.newPlainText("Device Id", SettingsManager.getInstance().getUniqueDeviceId())
             clipboardManager.setPrimaryClip(clipData)
         }
         dialogBinding.rqInterceptorAppIdCopyButton.setOnClickListener {

@@ -4,11 +4,11 @@ import android.content.Context
 import android.util.Log
 import com.google.gson.reflect.TypeToken
 import io.requestly.android.core.KeyValueStorageManager
+import io.requestly.android.core.SettingsManager
 import io.requestly.android.core.modules.hostSwitcher.HostSwitcherFragmentViewModel
 import io.requestly.android.core.modules.hostSwitcher.SwitchingRule
 import io.requestly.android.okhttp.R
 import io.requestly.android.okhttp.api.BodyDecoder
-import io.requestly.android.okhttp.api.RQClientProvider
 import io.requestly.android.okhttp.api.RQCollector
 import io.requestly.android.okhttp.internal.RQConstants
 import io.requestly.android.okhttp.internal.data.entity.HttpTransaction
@@ -64,7 +64,7 @@ internal class RequestProcessor(
         processMetadata(request, transaction)
         processPayload(request, transaction)
 
-        if (!RQClientProvider.client().captureEnabled) {
+        if (!SettingsManager.getInstance().getCaptureEnabled()) {
             Log.d(RQConstants.LOG_TAG, "Capturing Not enabled. Passing through requests")
             collector.onRequestSent(transaction)
             return request
@@ -81,8 +81,8 @@ internal class RequestProcessor(
         val newRequest: Request = request.newBuilder()
             .method("POST", body)
             .header("content-type", "application/json")
-            .header("rq_device_id", collector.uniqueDeviceId ?: "")
-            .header("rq_sdk_id", collector.sdkKey)
+            .header("rq_device_id", SettingsManager.getInstance().getUniqueDeviceId() ?: "")
+            .header("rq_sdk_id", SettingsManager.getInstance().getAppToken() ?: "")
             .url("${RQConstants.RQ_SERVER_BASE_URL}/${RQConstants.PROXY_REQUEST_PATH}")
             .build()
 

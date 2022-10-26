@@ -7,6 +7,7 @@ package io.requestly.android.core
 class SettingsManager {
     private var appToken: String? = null
     private var uniqueDeviceId: String? = null
+    private var captureEnabled: Boolean = false
 
     private var featuresState = HashMap<Feature, Boolean>()
 
@@ -26,6 +27,7 @@ class SettingsManager {
         // Get configs from shared preferences
         this.uniqueDeviceId = KeyValueStorageManager.getString(Constants.STORAGE_DEVICE_ID_KEY)
         this.appToken = KeyValueStorageManager.getString(Constants.STORAGE_APP_TOKEN_KEY)
+        this.captureEnabled = KeyValueStorageManager.getBoolean(Constants.STORAGE_CAPTURE_ENABLED_KEY, false)
     }
 
     fun setAppToken(appToken: String) {
@@ -44,6 +46,15 @@ class SettingsManager {
 
     fun getUniqueDeviceId(): String? {
         return this.uniqueDeviceId
+    }
+
+    fun setCaptureEnabled(captureEnabled: Boolean) {
+        this.captureEnabled = captureEnabled
+        KeyValueStorageManager.putBoolean(Constants.STORAGE_CAPTURE_ENABLED_KEY, captureEnabled)
+    }
+
+    fun getCaptureEnabled(): Boolean {
+        return this.captureEnabled
     }
 
     fun setFeatureState(feature: Feature, state: Boolean) {

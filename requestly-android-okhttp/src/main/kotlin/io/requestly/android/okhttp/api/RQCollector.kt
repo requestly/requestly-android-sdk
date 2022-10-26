@@ -1,11 +1,7 @@
 package io.requestly.android.okhttp.api
 
 import android.content.Context
-import android.content.SharedPreferences
-import android.util.Log
 import io.requestly.android.core.SettingsManager
-import io.requestly.android.okhttp.R
-import io.requestly.android.okhttp.internal.RQConstants
 import io.requestly.android.okhttp.internal.data.entity.HttpTransaction
 import io.requestly.android.okhttp.internal.data.repository.RepositoryProvider
 import io.requestly.android.okhttp.internal.support.MetadataNotificationHelper
@@ -28,11 +24,9 @@ import kotlinx.coroutines.withContext
  */
 public class RQCollector @JvmOverloads constructor(
     context: Context,
-    public var uniqueDeviceId: String? = null,
     public var showNotification: Boolean = true,
     retentionPeriod: RetentionManager.Period = RetentionManager.Period.ONE_WEEK
 ) {
-    public var sdkKey: String
     private val retentionManager: RetentionManager = RetentionManager(context, retentionPeriod)
     private val notificationHelper: NotificationHelper = NotificationHelper(context)
     private val metadataNotificationHelper: MetadataNotificationHelper = MetadataNotificationHelper(context)
@@ -40,63 +34,10 @@ public class RQCollector @JvmOverloads constructor(
 
     init {
         RepositoryProvider.initialize(context)
-        this.uniqueDeviceId = getUniqueDeviceId(context)
-
-        var captureEnabled = getCaptureEnabled(context)
-        Log.d(RQConstants.LOG_TAG, "CaptureEnabled Before init: $captureEnabled")
-        Log.d(RQConstants.LOG_TAG, "applicationToken from core ${SettingsManager.getInstance().getAppToken()}")
-        sdkKey = SettingsManager.getInstance().getAppToken()
-
-        RQClientProvider.initialize(uniqueDeviceId, sdkKey, captureEnabled)
-        scope.launch {
-            var deviceId = RQClientProvider.client().initDevice()
-            if(uniqueDeviceId == null) {
-                setUniqueDeviceId(context, deviceId)
-            }
-
-            captureEnabled = getCaptureEnabled(context)
-            Log.d(RQConstants.LOG_TAG, "CaptureEnabled after init: $captureEnabled")
-            RQClientProvider.client().captureEnabled = captureEnabled
-
-            metadataNotificationHelper.show(uniqueDeviceId, RQClientProvider.client().captureEnabled)
-        }
-    }
-
-    private fun getCaptureEnabled(context: Context): Boolean {
-        // When deviceId is not yet initialized on server side
-        if(uniqueDeviceId == null) {
-            Log.d(RQConstants.LOG_TAG, "DeviceId not initialized yet")
-            return false
-        }
-        val pref: SharedPreferences = context.getSharedPreferences(
-            context.getString(R.string.rq_interceptor_shared_pref_base_key), 0
+        metadataNotificationHelper.show(
+            SettingsManager.getInstance().getUniqueDeviceId(),
+            SettingsManager.getInstance().getCaptureEnabled(),
         )
-        return pref.getBoolean(
-            context.getString(R.string.rq_interceptor_capture_enabled), false
-        )
-    }
-
-    private fun getUniqueDeviceId(context: Context): String? {
-        val pref: SharedPreferences = context.getSharedPreferences(
-            context.getString(R.string.rq_interceptor_shared_pref_base_key),
-            0
-        )
-        var deviceId =  pref.getString(context.getString(R.string.rq_interceptor_unique_device_id_key), null)
-        Log.d(RQConstants.LOG_TAG, "deviceId get from cache: $deviceId")
-        return deviceId
-    }
-
-
-    private fun setUniqueDeviceId(context: Context, deviceId: String?) {
-        val pref: SharedPreferences = context.getSharedPreferences(
-            context.getString(R.string.rq_interceptor_shared_pref_base_key),
-            0
-        )
-        val editor = pref.edit()
-        editor.putString(context.getString(R.string.rq_interceptor_unique_device_id_key), deviceId)
-        editor.apply()
-        this.uniqueDeviceId = deviceId
-        Log.d(RQConstants.LOG_TAG, "deviceId set in cache $deviceId")
     }
 
     /**
