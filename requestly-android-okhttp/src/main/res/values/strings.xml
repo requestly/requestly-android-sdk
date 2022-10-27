@@ -6,6 +6,7 @@
     <string name="rq_interceptor_clear">Clear</string>
     <string name="rq_interceptor_connect">Connect</string>
     <string name="rq_interceptor_disconnect">Disconnect</string>
+    <string name="rq_interceptor_connect_available">Connect Unavailable</string>
     <string name="rq_interceptor_encode_url">Encode URL</string>
     <string name="rq_interceptor_cancel">Cancel</string>
     <string name="rq_interceptor_overview">Overview</string>

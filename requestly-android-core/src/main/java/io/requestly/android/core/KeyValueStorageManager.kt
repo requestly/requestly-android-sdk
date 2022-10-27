@@ -29,6 +29,17 @@ object KeyValueStorageManager {
         }
     }
 
+    fun getBoolean(key: String, defaultValue: Boolean): Boolean {
+        return mSharedPref.getBoolean(key, defaultValue)
+    }
+
+    fun putBoolean(key: String, value: Boolean) {
+        with(mSharedPref.edit()) {
+            this.putBoolean(key, value)
+            this.commit()
+        }
+    }
+
     fun <T> putList(key: String, list: List<T>) {
         val json = gson.toJson(list)
         putString(key, json)

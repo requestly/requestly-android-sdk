@@ -7,6 +7,11 @@ import io.requestly.android.core.internal.support.ListNotificationHelper
 import io.requestly.android.core.modules.logs.lib.lynx.main.LynxConfig
 import io.requestly.android.core.modules.logs.lib.lynx.main.model.*
 import io.requestly.android.core.modules.logs.lib.lynx.main.presenter.LynxRequestlyPresenter
+import io.requestly.android.core.network.NetworkManager
+import io.requestly.android.core.network.models.InitDeviceResponseModel
+import kotlinx.coroutines.*
+import java.lang.Exception
+import java.util.UUID
 
 class Requestly {
     companion object {
@@ -28,9 +33,12 @@ class Requestly {
 
     class Builder(
         private val application: Application,
-        private val appToken: String,
+        private val appToken: String? = null,
     ) {
         private var applicationContext: Context = application.applicationContext
+
+        private val job = Job()
+        private val applicationScope = CoroutineScope(Dispatchers.Main + job)
 
         // Start Configuration: Different Configurations of Builder
         private var networkLoggerUIState = true
@@ -41,21 +49,37 @@ class Requestly {
         // End Configuration
 
         fun build() {
-            Log.d("RQ-Core", "Start: Building Core")
-            INSTANCE = Requestly()
-            getInstance()?.applicationContext = applicationContext
-            getInstance()?.listNotificationHelper = ListNotificationHelper(applicationContext)
+            applicationScope.launch {
+                Log.d(Constants.LOG_TAG, "Start: Building Core")
 
-            SettingsManager.getInstance().setAppToken(appToken)
-            KeyValueStorageManager.initialize(applicationContext)
-            this.updateFeaturesState()
+                // Create Requestly Instance
+                INSTANCE = Requestly()
+                getInstance().applicationContext = applicationContext
+                getInstance().listNotificationHelper = ListNotificationHelper(applicationContext)
 
-            buildLogsModule()
-            Log.d("RQ-Core", "Finish: Building Core")
+                // Init KeyValueStorageManager
+                KeyValueStorageManager.initialize(applicationContext)
+
+                // Init SettingsManager Singleton
+                // Overrides the token set previously
+                appToken?.let {
+                    Log.d(Constants.LOG_TAG, "appToken initialized: $it")
+                    SettingsManager.getInstance().setAppToken(it)
+                    // Setting this false after verifying whether SDK key exist or not (/initSdkDevice)
+                    SettingsManager.getInstance().setIsAnonymousSession(true)
+                }
+
+                // Build individual features modules
+                buildLogsModule()
+                Log.d(Constants.LOG_TAG, "Finish: Building Core")
+
+                // Init SDK
+                initSdk()
+            }
         }
 
-        // TODO: @wrongSahil
-        fun buildLogsModule() {
+        /** START: Build Individual Modules **/
+        private fun buildLogsModule() {
             // LynxConfig init
             // Lynx init
             // LynxRequestlyPresenter init
@@ -69,12 +93,72 @@ class Requestly {
             getInstance().logsLynxPresenter = presenter
         }
 
-        private fun updateFeaturesState() {
-            Log.d("RQ-Core", "Start: Updating Features")
-            SettingsManager.getInstance().setFeatureState(Feature.NETWORK_LOGGER_UI, this.networkLoggerUIState)
-            Log.d("RQ-Core", "End: Updating Features")
+        /** END: Build Individual Modules **/
+
+        private suspend fun initSdk() {
+            val appToken = SettingsManager.getInstance().getAppToken()
+            if(
+                this.appToken==null &&
+                (appToken == null || !appToken.startsWith(Constants.ANONYMOUS_APP_TOKEN_PREFIX))
+            ){
+                initAnonymousSdk()
+            }
+            Log.d(Constants.LOG_TAG, "appToken: ${SettingsManager.getInstance().getAppToken()}")
+            initDevice()
         }
 
+        // Called only once if sdkId is not given. Later on fetched from storage in SettingsManager
+        private fun initAnonymousSdk() {
+            // initUUID
+            val randomUUID = UUID.randomUUID().toString()
+            val anonAppToken = "${Constants.ANONYMOUS_APP_TOKEN_PREFIX}$randomUUID"
+            Log.d(Constants.LOG_TAG, "random appToken initialized: $anonAppToken")
+
+            SettingsManager.getInstance().setAppToken(anonAppToken)
+            SettingsManager.getInstance().setCaptureEnabled(false)
+            SettingsManager.getInstance().setIsAnonymousSession(true)
+        }
+
+        private suspend fun initDevice() {
+            // Call /initDevice (null/non-null)
+            // set in Settings Manager from Response
+                // set deviceId storage
+            val deviceModel: String = android.os.Build.MODEL
+            val deviceName: String = android.os.Build.MANUFACTURER + "_" + android.os.Build.PRODUCT
+            val deviceId = SettingsManager.getInstance().getUniqueDeviceId()
+            val appToken = SettingsManager.getInstance().getAppToken()!! //initAnonymousSdk called before
+
+            withContext(Dispatchers.IO) {
+                try {
+                    Log.d(Constants.LOG_TAG, "/initSdkDevice called; deviceId:$deviceId; appToken:$appToken")
+                    val response = NetworkManager.requestlyApiService.initDevice(
+                        deviceId,
+                        appToken,
+                        deviceModel,
+                        deviceName,
+                        false, // Sending this false only
+                    )
+                    if(response.isSuccessful) {
+                        val responseBody: InitDeviceResponseModel? = response.body()
+                        Log.d(Constants.LOG_TAG, "Success /initSdkDevice " + response.body().toString() )
+                        responseBody?.deviceId?.let {
+                            SettingsManager.getInstance().setUniqueDeviceId(it)
+                        }
+                        SettingsManager.getInstance().setIsAnonymousSession(
+                             responseBody?.isAnonymousSession?:true
+                        )
+                    } else {
+                        Log.d(Constants.LOG_TAG, "Error /initSdkDevice; ${response.code()}; ${response.errorBody()?.string()}" )
+                        SettingsManager.getInstance().setIsAnonymousSession(true)
+                    }
+                } catch (err: Exception) {
+                    Log.d(Constants.LOG_TAG, "Exception /initSdkDevice \n$err" )
+                    SettingsManager.getInstance().setIsAnonymousSession(true)
+                }
+            }
+        }
+
+        /** START: Set Individual features configs **/
         fun setNetworkLoggerUIState(visible: Boolean = true): Builder {
             this.networkLoggerUIState = visible
             return this
@@ -94,5 +178,6 @@ class Requestly {
             logsConfig.samplingRate = samplingRate
             return this
         }
+        /** END: Set Individual features configs **/
     }
 }

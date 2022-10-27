@@ -34,7 +34,7 @@ public class RQInterceptor private constructor(
 
     private val decoders = builder.decoders + BUILT_IN_DECODERS
 
-    private val collector = builder.collector ?: RQCollector(builder.context, "")
+    private val collector = builder.collector ?: RQCollector(builder.context)
 
     private val requestProcessor = RequestProcessor(
         builder.context,

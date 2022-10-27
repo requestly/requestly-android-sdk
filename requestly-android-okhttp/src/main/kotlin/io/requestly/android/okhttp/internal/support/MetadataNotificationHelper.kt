@@ -8,6 +8,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
+import io.requestly.android.core.SettingsManager
 import io.requestly.android.okhttp.R
 import io.requestly.android.okhttp.internal.ui.BaseRequestlyNetworkFragment
 
@@ -35,22 +36,31 @@ internal class MetadataNotificationHelper(val context: Context) {
 
     private fun createConnectionAction(capturingEnabled: Boolean):
         NotificationCompat.Action {
-        val connectTitle = context.getString(
-            if(capturingEnabled) R.string.rq_interceptor_disconnect else R.string.rq_interceptor_connect
-        )
-        val connectBroadcastIntent =
-            Intent(context, RQConnectionIntentServiceReceiver::class.java)
-        val pendingBroadcastIntent = PendingIntent.getBroadcast(
-            context,
-            INTENT_REQUEST_CODE,
-            connectBroadcastIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT or immutableFlag()
-        )
-        return NotificationCompat.Action(
-            R.drawable.rq_interceptor_ic_transaction_notification,
-            connectTitle,
-            pendingBroadcastIntent
-        )
+        if(!SettingsManager.getInstance().getIsAnonymousSession()) {
+            val connectTitle = context.getString(
+                if(capturingEnabled) R.string.rq_interceptor_disconnect else R.string.rq_interceptor_connect
+            )
+            val connectBroadcastIntent =
+                Intent(context, RQConnectionIntentServiceReceiver::class.java)
+            val pendingBroadcastIntent = PendingIntent.getBroadcast(
+                context,
+                INTENT_REQUEST_CODE,
+                connectBroadcastIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT or immutableFlag()
+            )
+            return NotificationCompat.Action(
+                R.drawable.rq_interceptor_ic_transaction_notification,
+                connectTitle,
+                pendingBroadcastIntent
+            )
+        } else {
+            val title = context.getString(R.string.rq_interceptor_connect_available)
+            return NotificationCompat.Action(
+                R.drawable.rq_interceptor_ic_transaction_notification,
+                title,
+                null
+            )
+        }
     }
 
     private fun createCopyDeviceIdAction():
