@@ -16,12 +16,21 @@ class MetadataNotificationHelper(val context: Context) {
 
     companion object {
         private const val CHANNEL_ID = "rq_interceptor_metadata"
-        public const val NOTIFICATION_ID = 1139
+        const val NOTIFICATION_ID = 1139
         private const val INTENT_REQUEST_CODE = 11
     }
 
     private val notificationManager: NotificationManager =
         context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+    private val homeScreenIntent by lazy {
+        PendingIntent.getActivity(
+            context,
+            NOTIFICATION_ID,
+            Utils.getMainActivityLaunchIntent(context),
+            PendingIntent.FLAG_UPDATE_CURRENT or immutableFlag()
+        )
+    }
 
     init {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -83,6 +92,7 @@ class MetadataNotificationHelper(val context: Context) {
     fun show(uid: String?, capturingEnabled: Boolean = false) {
         val builder =
             NotificationCompat.Builder(context, CHANNEL_ID)
+                .setContentIntent(homeScreenIntent)
                 .setSmallIcon(R.drawable.ic_requestly_24)
                 .setColor(ContextCompat.getColor(context, R.color.requestly_primary))
                 .setContentTitle("DeviceId: $uid")
