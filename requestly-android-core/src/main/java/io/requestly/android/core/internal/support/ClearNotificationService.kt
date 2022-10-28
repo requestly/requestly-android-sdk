@@ -1,4 +1,4 @@
-package io.requestly.android.okhttp.internal.support
+package io.requestly.android.core.internal.support
 
 import android.app.NotificationManager
 import android.app.Service
@@ -7,6 +7,7 @@ import android.os.Binder
 import android.os.IBinder
 
 
+// TODO: Improve This
 internal class ClearNotificationService : Service() {
     class KillBinder(val service: Service) : Binder()
 

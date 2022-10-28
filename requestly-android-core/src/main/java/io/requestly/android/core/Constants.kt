@@ -8,4 +8,10 @@ object Constants {
     const val LOG_TAG = "requestly-android-sdk"
 
     const val ANONYMOUS_APP_TOKEN_PREFIX = "anonymous-"
+
+    // Notification
+    const val NOTIFICATION_CONNECT_TEXT = "Connect"
+    const val NOTIFICATION_DISCONNECT_TEXT = "Disconnect"
+    const val NOTIFICATION_CONNECT_UNAVAILABLE_TEXT = "Connect Unavailable"
+    const val NOTIFICATION_CHANNEL_NAME = "Requestly Android Sdk"
 }

@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.util.Log
 import io.requestly.android.core.internal.support.ListNotificationHelper
+import io.requestly.android.core.internal.support.MetadataNotificationHelper
 import io.requestly.android.core.modules.logs.lib.lynx.main.LynxConfig
 import io.requestly.android.core.modules.logs.lib.lynx.main.model.*
 import io.requestly.android.core.modules.logs.lib.lynx.main.presenter.LynxRequestlyPresenter
@@ -25,6 +26,7 @@ class Requestly {
 
     lateinit var applicationContext: Context
     lateinit var listNotificationHelper: ListNotificationHelper
+    lateinit var metadataNotificationHelper: MetadataNotificationHelper
 
     // Logs Helpers
     var logsConfig: LynxConfig = LynxConfig()
@@ -73,9 +75,24 @@ class Requestly {
                 buildLogsModule()
                 Log.d(Constants.LOG_TAG, "Finish: Building Core")
 
+                // Init Notifications
+                // TODO: Create Notification Manager Class
+                initNotifications()
+
                 // Init SDK
                 initSdk()
             }
+        }
+
+        private fun showNotifications() {
+            getInstance().metadataNotificationHelper.show(
+                SettingsManager.getInstance().getUniqueDeviceId(),
+                SettingsManager.getInstance().getCaptureEnabled()
+            )
+        }
+
+        private fun initNotifications() {
+            getInstance().metadataNotificationHelper = MetadataNotificationHelper(getInstance().applicationContext)
         }
 
         /** START: Build Individual Modules **/
@@ -155,6 +172,7 @@ class Requestly {
                     Log.d(Constants.LOG_TAG, "Exception /initSdkDevice \n$err" )
                     SettingsManager.getInstance().setIsAnonymousSession(true)
                 }
+                showNotifications()
             }
         }
 

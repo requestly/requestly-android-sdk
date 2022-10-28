@@ -10,6 +10,19 @@
             android:theme="@style/Theme.RequestlyBaseTheme"
             android:name=".ui.MainRequestlyActivity"
             android:exported="false" />
+
+        <service
+            android:name="io.requestly.android.core.internal.support.RQConnectionService"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <receiver
+            android:name="io.requestly.android.core.internal.support.RQConnectionIntentServiceReceiver"
+            android:exported="false" />
+
+        <receiver
+            android:name="io.requestly.android.core.internal.support.CopyIntentServiceReceiver"
+            android:exported="false" />
     </application>
 
 </manifest>

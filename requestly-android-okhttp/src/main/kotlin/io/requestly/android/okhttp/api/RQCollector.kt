@@ -1,10 +1,8 @@
 package io.requestly.android.okhttp.api
 
 import android.content.Context
-import io.requestly.android.core.SettingsManager
 import io.requestly.android.okhttp.internal.data.entity.HttpTransaction
 import io.requestly.android.okhttp.internal.data.repository.RepositoryProvider
-import io.requestly.android.okhttp.internal.support.MetadataNotificationHelper
 import io.requestly.android.okhttp.internal.support.NotificationHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -29,15 +27,10 @@ public class RQCollector @JvmOverloads constructor(
 ) {
     private val retentionManager: RetentionManager = RetentionManager(context, retentionPeriod)
     private val notificationHelper: NotificationHelper = NotificationHelper(context)
-    private val metadataNotificationHelper: MetadataNotificationHelper = MetadataNotificationHelper(context)
     private val scope = MainScope()
 
     init {
         RepositoryProvider.initialize(context)
-        metadataNotificationHelper.show(
-            SettingsManager.getInstance().getUniqueDeviceId(),
-            SettingsManager.getInstance().getCaptureEnabled(),
-        )
     }
 
     /**

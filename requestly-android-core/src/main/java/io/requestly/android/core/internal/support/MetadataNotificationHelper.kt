@@ -1,4 +1,4 @@
-package io.requestly.android.okhttp.internal.support
+package io.requestly.android.core.internal.support
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -8,11 +8,11 @@ import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
+import io.requestly.android.core.Constants
+import io.requestly.android.core.R
 import io.requestly.android.core.SettingsManager
-import io.requestly.android.okhttp.R
-import io.requestly.android.okhttp.internal.ui.BaseRequestlyNetworkFragment
 
-internal class MetadataNotificationHelper(val context: Context) {
+class MetadataNotificationHelper(val context: Context) {
 
     companion object {
         private const val CHANNEL_ID = "rq_interceptor_metadata"
@@ -27,7 +27,7 @@ internal class MetadataNotificationHelper(val context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val transactionsChannel = NotificationChannel(
                 CHANNEL_ID,
-                context.getString(R.string.rq_interceptor_metadata_notification_category),
+                Constants.NOTIFICATION_CHANNEL_NAME,
                 NotificationManager.IMPORTANCE_LOW
             )
             notificationManager.createNotificationChannels(listOf(transactionsChannel))
@@ -37,9 +37,8 @@ internal class MetadataNotificationHelper(val context: Context) {
     private fun createConnectionAction(capturingEnabled: Boolean):
         NotificationCompat.Action {
         if(!SettingsManager.getInstance().getIsAnonymousSession()) {
-            val connectTitle = context.getString(
-                if(capturingEnabled) R.string.rq_interceptor_disconnect else R.string.rq_interceptor_connect
-            )
+            val connectTitle =
+                if (capturingEnabled) Constants.NOTIFICATION_DISCONNECT_TEXT else Constants.NOTIFICATION_CONNECT_TEXT
             val connectBroadcastIntent =
                 Intent(context, RQConnectionIntentServiceReceiver::class.java)
             val pendingBroadcastIntent = PendingIntent.getBroadcast(
@@ -49,14 +48,14 @@ internal class MetadataNotificationHelper(val context: Context) {
                 PendingIntent.FLAG_UPDATE_CURRENT or immutableFlag()
             )
             return NotificationCompat.Action(
-                R.drawable.rq_interceptor_ic_transaction_notification,
+                R.drawable.ic_requestly_24,
                 connectTitle,
                 pendingBroadcastIntent
             )
         } else {
-            val title = context.getString(R.string.rq_interceptor_connect_available)
+            val title = Constants.NOTIFICATION_CONNECT_UNAVAILABLE_TEXT
             return NotificationCompat.Action(
-                R.drawable.rq_interceptor_ic_transaction_notification,
+                R.drawable.ic_requestly_24,
                 title,
                 null
             )
@@ -74,7 +73,7 @@ internal class MetadataNotificationHelper(val context: Context) {
             PendingIntent.FLAG_UPDATE_CURRENT or immutableFlag()
         )
         return NotificationCompat.Action(
-            R.drawable.rq_interceptor_ic_transaction_notification,
+            R.drawable.ic_requestly_24,
             "Copy DeviceId",
             pendingBroadcastIntent
         )
@@ -82,22 +81,20 @@ internal class MetadataNotificationHelper(val context: Context) {
 
 
     fun show(uid: String?, capturingEnabled: Boolean = false) {
-        if (!BaseRequestlyNetworkFragment.isInForeground) {
-            val builder =
-                NotificationCompat.Builder(context, CHANNEL_ID)
-                    .setSmallIcon(R.drawable.rq_interceptor_ic_transaction_notification)
-                    .setColor(ContextCompat.getColor(context, R.color.rq_interceptor_color_primary))
-                    .setContentTitle("DeviceId: $uid")
-                    .addAction(createCopyDeviceIdAction())
-                    .addAction(createConnectionAction(capturingEnabled))
+        val builder =
+            NotificationCompat.Builder(context, CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_requestly_24)
+                .setColor(ContextCompat.getColor(context, R.color.requestly_primary))
+                .setContentTitle("DeviceId: $uid")
+                .addAction(createCopyDeviceIdAction())
+                .addAction(createConnectionAction(capturingEnabled))
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                builder.setPriority(NotificationManager.IMPORTANCE_HIGH)
-            }
-
-            builder.setContentText("Capturing: $capturingEnabled")
-            notificationManager.notify(NOTIFICATION_ID, builder.build())
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            builder.setPriority(NotificationManager.IMPORTANCE_HIGH)
         }
+
+        builder.setContentText("Capturing: $capturingEnabled")
+        notificationManager.notify(NOTIFICATION_ID, builder.build())
     }
 
     private fun immutableFlag() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

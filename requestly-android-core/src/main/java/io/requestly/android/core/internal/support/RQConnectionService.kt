@@ -1,4 +1,4 @@
-package io.requestly.android.okhttp.internal.support
+package io.requestly.android.core.internal.support
 
 import android.content.Context
 import android.content.Intent
@@ -7,6 +7,7 @@ import io.requestly.android.core.SettingsManager
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
+// TODO: Improve this
 internal class RQConnectionService : JobIntentService() {
     private val scope = MainScope()
 
