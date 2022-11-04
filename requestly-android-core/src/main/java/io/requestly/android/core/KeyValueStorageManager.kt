@@ -4,16 +4,24 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import java.io.File
+import java.lang.ref.WeakReference
 
 object KeyValueStorageManager {
 
     private const val FILE_NAME = "io.requestly.requestly_pref_file"
 
+    /**
+     * Full path to the default directory assigned to the package for its
+     * persistent data.
+     */
+    private lateinit var mContext: WeakReference<Context>
     private lateinit var mSharedPref: SharedPreferences
     private lateinit var gson: Gson
     private var changeListeners: MutableList<SharedPreferences.OnSharedPreferenceChangeListener> = mutableListOf()
 
     fun initialize(context: Context) {
+        mContext = WeakReference(context)
         mSharedPref = context.getSharedPreferences(FILE_NAME, 0)
         gson = Gson()
     }
@@ -59,4 +67,18 @@ object KeyValueStorageManager {
         changeListeners.add(listener)
         mSharedPref.registerOnSharedPreferenceChangeListener(listener)
     }
+
+    fun fetchDataFromAllSharedPrefFiles() {
+        val context = mContext.get() ?: return
+
+        val prefsDir = File(context.applicationInfo.dataDir, "shared_prefs")
+        if(prefsDir.exists() && prefsDir.isDirectory) {
+            prefsDir.list()?.forEach {
+                val sharedPreferences = context.getSharedPreferences(it.removeSuffix(".xml"), 0)
+                sharedPreferences.all
+            }
+        }
+    }
+
 }
+
