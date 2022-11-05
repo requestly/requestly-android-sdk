@@ -21,7 +21,8 @@ Requestly Android SDK lets you debug your android apps without needing you to se
 - [Features](#features)
   - [API Debugger](#api-debugger)
   - [Analytics Event Debugger](#analytics-event-debugger)
-  - [Logs Debugger](#logs-debugger-coming-soon)
+  - [Logs Debugger](#logs-debugger)
+  - [Host Switcher](#host-switcher)
 - [Acknowledgments](#acknowledgments)
   
 ## Installation
@@ -31,10 +32,10 @@ RQInterceptor is distributed through [Maven Central](https://search.maven.org/se
 
 ```
 dependencies {
-    debugImplementation "io.requestly:requestly-android:2.4.0"
-    releaseImplementation "io.requestly:requestly-android-noop:2.4.0"
-    debugImplementation "io.requestly:requestly-android-okhttp:2.4.0"
-    releaseImplementation "io.requestly:requestly-android-okhttp-noop:2.4.0"
+    debugImplementation "io.requestly:requestly-android:2.4.2"
+    releaseImplementation "io.requestly:requestly-android-noop:2.4.2"
+    debugImplementation "io.requestly:requestly-android-okhttp:2.4.2"
+    releaseImplementation "io.requestly:requestly-android-okhttp-noop:2.4.2"
 }
 ```
 
@@ -47,12 +48,12 @@ class App : Application(){
         super.onCreate()
         
         // Initialize Requestly SDK like this
-        Requestly.Builder(this, "<your-sdk-key>")
+        Requestly.Builder(this, [optional "<your-sdk-key>"])
             .build()
     }
 }
 ```
-
+> `sdk-key` is optional. You can use local devtool features without sdk-key. <br/>
 To get the sdk key, you need to create an app. Follow the steps [here](https://docs.requestly.io/android/tutorial/create-app) to create an app.
 
 ## API Debugger Initialization
@@ -97,10 +98,15 @@ RequestlyEvent.send(<eventName: String>, <eventData:Map<String, Any>>)
 
 <img width="400" alt="Events Debugger" src="./assets/events-debugger.png">
 
-### Logs Debugger (Coming Soon)
+### Logs Debugger
 Debug your Logs directly from your App. No need to connect your device to your computer to know what's happening inside your app.
 
 <img width="400" alt="Logs Debugger" src="./assets/logs-debugger.png">
+
+### Host Switcher
+Switch between production and staging APIs easily in your Android debug builds. Eg. api.requestly.io → staging.requestly.io
+
+<img width="400" alt="Logs Debugger" src="./assets/host-switcher.jpeg">
 
 ## Acknowledgments
 Special Thanks to chuckerteam for maintaining such an awesome project because of which rq-interceptor was possible
