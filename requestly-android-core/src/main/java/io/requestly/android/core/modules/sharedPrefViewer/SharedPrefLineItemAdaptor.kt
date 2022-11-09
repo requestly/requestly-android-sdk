@@ -1,6 +1,7 @@
 package io.requestly.android.core.modules.sharedPrefViewer
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import io.requestly.android.core.databinding.SharedPrefLineItemBinding
@@ -43,12 +44,14 @@ class SharedPrefLineItemAdaptor(var items: List<SharedPrefLineItemModel>) :
         private val prefValueTextView = itemView.prefValueTextView
         private val editPrefButton = itemView.editPrefButton
         private val deletePrefButton = itemView.deletePrefButton
+        private val prefValueExtraInfoTextView = itemView.prefValueExtraInfoTextView
 
         fun bindTo(model: SharedPrefLineItemModel) {
             dataTypeTextView.text = model.dataTypeText
-            fileNameTextView.text = model.prefKeyText
+            fileNameTextView.text = model.fileName
             prefKeyTextView.text = model.prefKeyText
             prefValueTextView.text = model.prefValueText
+            prefValueExtraInfoTextView.visibility = View.GONE
             editPrefButton.setOnClickListener {
                 model.onEditClickListener?.let { it1 -> it1() }
             }

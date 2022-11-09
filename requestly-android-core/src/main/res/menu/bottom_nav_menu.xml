@@ -20,4 +20,9 @@
         android:id="@id/logs_flow"
         android:icon="@drawable/ic_console_24"
         android:title="Logs" />
+
+    <item
+        android:id="@id/shared_pref_viewer_flow"
+        android:icon="@drawable/ic_baseline_storage_24"
+        android:title="SharedPref Viewer" />
 </menu>

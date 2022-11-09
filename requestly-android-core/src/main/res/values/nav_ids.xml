@@ -4,9 +4,11 @@
     <item name="analytics_flow" type="id"/>
     <item name="host_switcher_flow" type="id"/>
     <item name="logs_flow" type="id"/>
+    <item name="shared_pref_viewer_flow" type="id"/>
 
     <item name="network_home_fragment" type="id"/>
     <item name="analytics_home_fragment" type="id"/>
     <item name="host_switcher_fragment" type="id"/>
     <item name="logs_home_fragment" type="id"/>
+    <item name="shared_pref_viewer_fragment" type="id"/>
 </resources>
