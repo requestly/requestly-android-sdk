@@ -87,6 +87,8 @@ class HostSwitcherFragment : Fragment() {
         val adaptor = HostSwitchItemAdaptor(items)
         viewModel.rulesListLive.observe(viewLifecycleOwner) {
             adaptor.items = it.map(mapper)
+            // Its fine to use notifyDataSetChanged here.
+            // Data size is small enough to not cause Frame skips or lags.
             adaptor.notifyDataSetChanged()
         }
         mainBinding.hostSwitcherRulesRecyclerView.adapter = adaptor
