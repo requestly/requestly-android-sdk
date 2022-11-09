@@ -39,7 +39,8 @@ enum class SharedPrefType {
 
 object KeyValueStorageManager {
 
-    private const val FILE_NAME = "io.requestly.requestly_pref_file"
+    private const val REQUESTLY_SHARED_PREF_FILE_PREFIX = "io.requestly."
+    private const val FILE_NAME = "${REQUESTLY_SHARED_PREF_FILE_PREFIX}requestly_pref_file"
 
     /**
      * Full path to the default directory assigned to the package for its
@@ -164,18 +165,21 @@ object KeyValueStorageManager {
 
         if (!prefsDir.exists() || !prefsDir.isDirectory) return emptyList()
 
-        return prefsDir.list()?.flatMap { filename ->
-            val fileNameWithOutExtension = filename.removeSuffix(".xml")
-            val thisPref = context.getSharedPreferences(fileNameWithOutExtension, 0)
-            return@flatMap thisPref.all.map { entry ->
-                SharedPrefFileData(
-                    key = entry.key,
-                    value = entry.value,
-                    dataType = detectType(entry.value),
-                    fileName = fileNameWithOutExtension,
-                )
-            }
-        } ?: emptyList()
+        return prefsDir
+            .list()
+            ?.filter { !it.startsWith(REQUESTLY_SHARED_PREF_FILE_PREFIX) }
+            ?.flatMap { filename ->
+                val fileNameWithOutExtension = filename.removeSuffix(".xml")
+                val thisPref = context.getSharedPreferences(fileNameWithOutExtension, 0)
+                return@flatMap thisPref.all.map { entry ->
+                    SharedPrefFileData(
+                        key = entry.key,
+                        value = entry.value,
+                        dataType = detectType(entry.value),
+                        fileName = fileNameWithOutExtension,
+                    )
+                }
+            } ?: emptyList()
     }
 
     private fun detectType(value: Any?): SharedPrefType? {
