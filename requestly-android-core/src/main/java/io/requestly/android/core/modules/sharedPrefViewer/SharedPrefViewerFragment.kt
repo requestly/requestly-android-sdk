@@ -46,6 +46,8 @@ class SharedPrefViewerFragment : Fragment() {
     }
 
     private fun initFileSelectorSpinner() {
+        // Keeping a copy of the list, because `adaptor.clear()` removes all entries from the
+        // live data also. Ideally this should be handled in viewModel itself.
         val files = viewModel.prefFilesNamesLive.value?.toMutableList() ?: emptyList()
         val adaptor = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, files)
         adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
