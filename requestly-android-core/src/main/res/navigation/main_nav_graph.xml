@@ -8,6 +8,7 @@
     <include app:graph="@navigation/analytics_graph" />
     <include app:graph="@navigation/host_switcher_graph" />
     <include app:graph="@navigation/logs_graph" />
+    <include app:graph="@navigation/shared_pref_viewer_graph" />
 
     <action
         android:id="@+id/action_global_network_flow"
