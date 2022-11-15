@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/dataTypeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:background="#DEF5E5"
+        android:padding="4dp"
+        android:text="STRING"
+        android:textColor="#395144"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/fileNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="#FAD4D4"
+        android:padding="4dp"
+        android:text="FILENAME"
+        android:textColor="#B71C1C"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Key"
+        android:textAllCaps="true"
+        android:textColor="#73777B"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/prefKeyTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/prefKeyTextView" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Value"
+        android:textAllCaps="true"
+        android:textColor="#73777B"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/prefValueTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/prefValueTextView" />
+
+    <TextView
+        android:id="@+id/prefKeyTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/black"
+        android:textStyle="italic"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/dataTypeTextView" />
+
+    <TextView
+        android:id="@+id/prefValueTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="4"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/prefKeyTextView"
+        app:layout_constraintTop_toBottomOf="@+id/prefKeyTextView" />
+
+    <TextView
+        android:id="@+id/prefValueExtraInfoTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="#C4DDFF"
+        android:ellipsize="end"
+        android:maxLines="4"
+        android:padding="2dp"
+        android:text="JSON Detected"
+        android:textColor="#001D6E"
+        android:textSize="10sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="@+id/prefValueTextView"
+        app:layout_constraintTop_toBottomOf="@+id/prefValueTextView" />
+
+    <TextView
+        android:id="@+id/editPrefButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
+        android:text="Edit"
+        android:textAllCaps="true"
+        android:textColor="#0000EE"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/deletePrefButton"
+        app:layout_constraintTop_toBottomOf="@+id/prefValueTextView" />
+
+    <TextView
+        android:id="@+id/deletePrefButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Delete"
+        android:textAllCaps="true"
+        android:textColor="#0000EE"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/editPrefButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editPrefButton" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="#D3D3D3"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -63,9 +63,6 @@ android {
 }
 
 dependencies {
-    debugImplementation project(':requestly-android-okhttp')
-    releaseImplementation project(':requestly-android-okhttp-noop')
-
     debugImplementation project(':requestly-android')
     releaseImplementation project(':requestly-android-noop')
 
