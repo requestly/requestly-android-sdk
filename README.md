@@ -32,10 +32,10 @@ RQInterceptor is distributed through [Maven Central](https://search.maven.org/se
 
 ```
 dependencies {
-    debugImplementation "io.requestly:requestly-android:2.4.2"
-    releaseImplementation "io.requestly:requestly-android-noop:2.4.2"
-    debugImplementation "io.requestly:requestly-android-okhttp:2.4.2"
-    releaseImplementation "io.requestly:requestly-android-okhttp-noop:2.4.2"
+    debugImplementation "io.requestly:requestly-android:2.4.3"
+    releaseImplementation "io.requestly:requestly-android-noop:2.4.3"
+    debugImplementation "io.requestly:requestly-android-okhttp:2.4.3"
+    releaseImplementation "io.requestly:requestly-android-okhttp-noop:2.4.3"
 }
 ```
 
