@@ -1,0 +1,31 @@
+name: Publish Snapshot
+on: workflow_dispatch
+
+jobs:
+  publish:
+    if: ${{ github.repository == 'requestly/requestly-android-sdk'}}
+    runs-on: [ubuntu-latest]
+
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v3
+
+    - name: Publish to Maven Local
+      run: ./gradlew publishToMavenLocal
+      env:
+        ORG_GRADLE_PROJECT_SIGNING_KEY: ${{ secrets.ORG_GRADLE_PROJECT_SIGNING_KEY }}
+        ORG_GRADLE_PROJECT_SIGNING_PWD: ${{ secrets.ORG_GRADLE_PROJECT_SIGNING_PWD }}
+
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: 'requestly-android-sdk-snapshot-artifacts'
+        path: '~/.m2/repository/'
+
+    - name: Publish to the Staging Repository
+      run: ./gradlew publishReleasePublicationToSnapshotRepository --no-parallel
+      env:
+        ORG_GRADLE_PROJECT_SIGNING_KEY: ${{ secrets.ORG_GRADLE_PROJECT_SIGNING_KEY }}
+        ORG_GRADLE_PROJECT_SIGNING_PWD: ${{ secrets.ORG_GRADLE_PROJECT_SIGNING_PWD }}
+        ORG_GRADLE_PROJECT_NEXUS_USERNAME: ${{ secrets.ORG_GRADLE_PROJECT_NEXUS_USERNAME }}
+        ORG_GRADLE_PROJECT_NEXUS_PASSWORD: ${{ secrets.ORG_GRADLE_PROJECT_NEXUS_PASSWORD }}
