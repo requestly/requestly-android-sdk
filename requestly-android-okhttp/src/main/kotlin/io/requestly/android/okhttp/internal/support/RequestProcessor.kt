@@ -31,8 +31,28 @@ internal class RequestProcessor(
 ) {
 
     private val switchingRulesMap = HashMap<String, String>()
+    private var isStorageListenerInitDone = false
 
-    init {
+    // NOT WORKING with Hilt
+//    init {
+//        val typeToken = object : TypeToken<List<SwitchingRule>>() {}
+//        val storageChangeListener: () -> Unit = {
+//            switchingRulesMap.clear()
+//            KeyValueStorageManager.getList(HostSwitcherFragmentViewModel.KEY_NAME, typeToken)
+//                ?.forEach {
+//                    if (it.isActive) {
+//                        switchingRulesMap[it.startingText] = it.provisionalText
+//                    }
+//                }
+//        }
+//        storageChangeListener()
+//        KeyValueStorageManager.registerChangeListener(
+//            HostSwitcherFragmentViewModel.KEY_NAME,
+//            storageChangeListener
+//        )
+//    }
+
+    private fun initStorageListener() {
         val typeToken = object : TypeToken<List<SwitchingRule>>() {}
         val storageChangeListener: () -> Unit = {
             switchingRulesMap.clear()
@@ -48,9 +68,14 @@ internal class RequestProcessor(
             HostSwitcherFragmentViewModel.KEY_NAME,
             storageChangeListener
         )
+        isStorageListenerInitDone = true
     }
 
     fun process(req: Request, transaction: HttpTransaction): Request {
+        if(!isStorageListenerInitDone) {
+            initStorageListener()
+        }
+
         var urlString = req.url.toString()
         switchingRulesMap.forEach {
             urlString = urlString.replace(it.key, it.value, ignoreCase = true)
