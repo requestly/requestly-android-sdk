@@ -23,6 +23,7 @@ Requestly Android SDK lets you debug your android apps without needing you to se
   - [Analytics Event Debugger](#analytics-event-debugger)
   - [Logs Debugger](#logs-debugger)
   - [Host Switcher](#host-switcher)
+- [Try Now](#try-now)
 - [Acknowledgments](#acknowledgments)
   
 ## Installation
@@ -107,6 +108,10 @@ Debug your Logs directly from your App. No need to connect your device to your c
 Switch between production and staging APIs easily in your Android debug builds. Eg. api.requestly.io → staging.requestly.io
 
 <img width="400" alt="Logs Debugger" src="./assets/host-switcher.jpeg">
+
+## Try Now
+
+<a href="https://appetize.io/embed/ctumozxsaz6cj4wox36vjc7jwy?device=pixel6pro&osVersion=12.0&scale=75&deviceColor=black"><img width="300" alt="Try Now" src="https://user-images.githubusercontent.com/16779465/202178671-41f03b5d-a4c8-44c8-a7ff-0acbc0fd9451.png"></a>
 
 ## Acknowledgments
 Special Thanks to chuckerteam for maintaining such an awesome project because of which rq-interceptor was possible
