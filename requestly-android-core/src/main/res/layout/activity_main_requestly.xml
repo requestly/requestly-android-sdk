@@ -14,7 +14,7 @@
         app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@id/updateNotifyStripView"
         app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/main_nav_graph" />
+        app:navGraph="@navigation/rq_main_nav_graph" />
 
     <LinearLayout
         android:id="@+id/updateNotifyStripView"

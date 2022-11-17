@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_nav_graph"
+    android:id="@+id/rq_main_nav_graph"
     app:startDestination="@id/network_flow">
 
     <include app:graph="@navigation/network_graph" />
@@ -13,16 +13,16 @@
     <action
         android:id="@+id/action_global_network_flow"
         app:destination="@id/network_flow"
-        app:popUpTo="@id/main_nav_graph" />
+        app:popUpTo="@id/rq_main_nav_graph" />
 
     <action
         android:id="@+id/action_global_analytics_flow"
         app:destination="@id/analytics_flow"
-        app:popUpTo="@id/main_nav_graph" />
+        app:popUpTo="@id/rq_main_nav_graph" />
 
     <action
         android:id="@+id/action_global_host_switcher"
         app:destination="@id/host_switcher_flow"
-        app:popUpTo="@id/main_nav_graph" />
+        app:popUpTo="@id/rq_main_nav_graph" />
 
 </navigation>
