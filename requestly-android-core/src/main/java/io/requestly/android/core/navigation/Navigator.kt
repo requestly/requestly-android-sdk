@@ -1,7 +1,7 @@
 package io.requestly.android.core.navigation
 
 import androidx.navigation.NavController
-import io.requestly.android.core.MainNavGraphDirections
+import io.requestly.android.core.RqMainNavGraphDirections
 
 class Navigator {
     lateinit var navController: NavController
@@ -9,16 +9,16 @@ class Navigator {
 //     navigate on main thread or nav component crashes sometimes
     fun navigateToFlow(navigationFlow: NavigationFlow) = when (navigationFlow) {
         is NavigationFlow.NetworkFlow -> navController.navigate(
-            MainNavGraphDirections.actionGlobalNetworkFlow()
+            RqMainNavGraphDirections.actionGlobalNetworkFlow()
         )
         is NavigationFlow.AnalyticsFlow -> navController.navigate(
-            MainNavGraphDirections.actionGlobalAnalyticsFlow()
+            RqMainNavGraphDirections.actionGlobalAnalyticsFlow()
         )
         is NavigationFlow.HostSwitcherFlow -> navController.navigate(
-            MainNavGraphDirections.actionGlobalHostSwitcher()
+            RqMainNavGraphDirections.actionGlobalHostSwitcher()
         )
 //        is NavigationFlow.DashboardFlow -> navController.navigate(
-//            MainNavGraphDirections.actionGlobalDashboardFlow(navigationFlow.msg)
+//            RqMainNavGraphDirections.actionGlobalDashboardFlow(navigationFlow.msg)
 //        )
     }
 }
