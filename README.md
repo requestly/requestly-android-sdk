@@ -128,5 +128,4 @@ Switch between production and staging APIs easily in your Android debug builds. 
 <img width="400" alt="Logs Debugger" src="./assets/host-switcher.jpeg">
 
 ## Acknowledgments
-Special Thanks to chuckerteam for maintaining such an awesome project because of which rq-interceptor was possible
-https://github.com/chuckerteam/chucker
+Special Thanks to [chuckerteam](https://github.com/chuckerteam/chucker) for maintaining such an awesome project [Chucker](https://github.com/chuckerteam/chucker) because of which requestly-android-sdk was possible.
