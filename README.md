@@ -13,6 +13,7 @@
 
 Requestly Android SDK lets you debug your android apps without needing you to setup any proxies or install any certificates everytime. It makes easy to identify & debug your Android Apps faster and save your time.
 
+- [Try Now](#try-now)
 - [Installation](#installation)
 - [SDK Initialization](#sdk-initialization)
 - [API Debugger Initialization](#api-debugger-initialization)
@@ -23,8 +24,24 @@ Requestly Android SDK lets you debug your android apps without needing you to se
   - [Analytics Event Debugger](#analytics-event-debugger)
   - [Logs Debugger](#logs-debugger)
   - [Host Switcher](#host-switcher)
-- [Try Now](#try-now)
 - [Acknowledgments](#acknowledgments)
+
+## Try Now
+### ↓ Click on Screenshots to try Apps ↓
+<a href="https://appetize.io/embed/ctumozxsaz6cj4wox36vjc7jwy?device=pixel6pro&osVersion=12.0&scale=75&deviceColor=black" target="_blank">
+    <img width="300" alt="Try Now" src="https://user-images.githubusercontent.com/16779465/202981047-81ae477c-9ff8-49ed-9c03-0140bd9bb537.png">
+</a>
+<a href="https://appetize.io/embed/s3w5vwumwjtvj4kn2xsez5b4cy?device=pixel6pro&osVersion=12.0&scale=75&deviceColor=black" target="_blank">
+    <img width="300" alt="Try Now" src="https://user-images.githubusercontent.com/16779465/202981055-63253e28-0a7e-4ebc-889e-672f12a38dbc.png">
+</a>
+<a href="https://appetize.io/embed/hngjeexnhwrcm3acdclsqkye6e?device=pixel6pro&osVersion=12.0&scale=75&deviceColor=black" target="_blank">
+    <img width="300" alt="Try Now" src="https://user-images.githubusercontent.com/16779465/202981457-7c5f57fe-3216-4f9e-b55e-89c9f71c514a.png">
+</a>
+
+### OR 
+- [Dowload CryptoDemo Apk](https://github.com/requestly/android-debugger-examples/releases/latest/download/cryptodemo-debug.apk)
+- [Download Infinity Reddit Apk](https://github.com/requestly/android-debugger-examples/releases/latest/download/infinity-reddit-debug.apk)
+- [Download Pokedex Apk](https://github.com/requestly/android-debugger-examples/releases/latest/download/pokedex-debug.apk)
   
 ## Installation
 The best way to install the Requestly Android SDK is with a build system like Gradle. This ensures you can easily upgrade to the latest versions.
@@ -108,10 +125,6 @@ Debug your Logs directly from your App. No need to connect your device to your c
 Switch between production and staging APIs easily in your Android debug builds. Eg. api.requestly.io → staging.requestly.io
 
 <img width="400" alt="Logs Debugger" src="./assets/host-switcher.jpeg">
-
-## Try Now
-
-<a href="https://appetize.io/embed/ctumozxsaz6cj4wox36vjc7jwy?device=pixel6pro&osVersion=12.0&scale=75&deviceColor=black" target="_blank"><img width="300" alt="Try Now" src="https://user-images.githubusercontent.com/16779465/202178671-41f03b5d-a4c8-44c8-a7ff-0acbc0fd9451.png"></a>
 
 ## Acknowledgments
 Special Thanks to chuckerteam for maintaining such an awesome project because of which rq-interceptor was possible
