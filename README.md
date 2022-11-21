@@ -4,7 +4,7 @@
 
 <p align="center">
     <a href="https://github.com/requestly/requestly-android-sdk/releases"><img alt="GitHub release" src="https://img.shields.io/github/release/requestly/requestly-android-sdk.svg"></a>
-    <a href="https://search.maven.org/search?q=io.requestly%20-library"><img alt="Maven" src="https://img.shields.io/badge/-Maven-green?logo=apachemaven"></a>
+    <a href="https://search.maven.org/search?q=io.requestly%20-library"><img alt="Maven" src="https://img.shields.io/maven-metadata/v.svg?label=maven-central&color=green&logo=apachemaven&metadataUrl=https%3A%2F%2Frepo1.maven.org%2Fmaven2%2Fio%2Frequestly%2Frequestly-android%2Fmaven-metadata.xml"></a>
     <a href="https://bit.ly/requestly-slack"><img alt="Maven" src="https://img.shields.io/badge/slack-@requestly--community-purple.svg?logo=slack"></a>
 </p>
 
