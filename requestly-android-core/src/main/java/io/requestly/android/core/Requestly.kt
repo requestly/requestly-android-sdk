@@ -51,17 +51,17 @@ class Requestly {
         // End Configuration
 
         fun build() {
+            Log.d(Constants.LOG_TAG, "Start: Building Core")
+
+            // Create Requestly Instance
+            INSTANCE = Requestly()
+            getInstance().applicationContext = applicationContext
+            getInstance().listNotificationHelper = ListNotificationHelper(applicationContext)
+
+            // Init KeyValueStorageManager
+            KeyValueStorageManager.initialize(applicationContext)
+
             applicationScope.launch {
-                Log.d(Constants.LOG_TAG, "Start: Building Core")
-
-                // Create Requestly Instance
-                INSTANCE = Requestly()
-                getInstance().applicationContext = applicationContext
-                getInstance().listNotificationHelper = ListNotificationHelper(applicationContext)
-
-                // Init KeyValueStorageManager
-                KeyValueStorageManager.initialize(applicationContext)
-
                 // Init SettingsManager Singleton
                 // Overrides the token set previously
                 appToken?.let {
