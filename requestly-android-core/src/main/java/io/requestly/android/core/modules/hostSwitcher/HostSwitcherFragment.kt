@@ -7,6 +7,7 @@ import android.view.*
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
@@ -41,10 +42,14 @@ class HostSwitcherFragment : Fragment() {
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
-                    R.id.addNew -> {
+                    R.id.createHostSwitchRule -> {
                         loadAddNewHostSwitchItemDialog(null) { t1, t2 ->
                             viewModel.createItem(startingText = t1, provisionalText = t2)
                         }
+                        true
+                    }
+                    R.id.createMockRule -> {
+                        Toast.makeText(context, "New Mock Rule TBA", Toast.LENGTH_SHORT).show()
                         true
                     }
                     else -> {
