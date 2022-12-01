@@ -23,7 +23,6 @@ class SharedPrefViewerFragment : Fragment() {
 
 
     private lateinit var mainBinding: FragmentSharedPrefViewerBinding
-
     private val viewModel: SharedPrefViewerViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
