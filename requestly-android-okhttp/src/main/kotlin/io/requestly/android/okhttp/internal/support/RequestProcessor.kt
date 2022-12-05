@@ -7,6 +7,7 @@ import io.requestly.android.core.KeyValueStorageManager
 import io.requestly.android.core.SettingsManager
 import io.requestly.android.core.modules.hostSwitcher.HostSwitcherFragmentViewModel
 import io.requestly.android.core.modules.hostSwitcher.SwitchingRule
+import io.requestly.android.core.modules.hostSwitcher.models.Replace
 import io.requestly.android.okhttp.R
 import io.requestly.android.okhttp.api.BodyDecoder
 import io.requestly.android.okhttp.api.RQCollector
@@ -59,7 +60,8 @@ internal class RequestProcessor(
             KeyValueStorageManager.getList(HostSwitcherFragmentViewModel.KEY_NAME, typeToken)
                 ?.forEach {
                     if (it.isActive) {
-                        switchingRulesMap[it.startingText] = it.provisionalText
+                        val rule = it.pairs[0] as? Replace
+                        switchingRulesMap[rule!!.from] = rule.from
                     }
                 }
         }

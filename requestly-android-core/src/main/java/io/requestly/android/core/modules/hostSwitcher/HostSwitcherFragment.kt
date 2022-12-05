@@ -5,13 +5,15 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.*
 import android.widget.*
-import androidx.fragment.app.Fragment
 import androidx.core.view.MenuProvider
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.requestly.android.core.R
 import io.requestly.android.core.databinding.FragmentHostSwitcherBinding
+import io.requestly.android.core.modules.hostSwitcher.models.Replace
+
 typealias OnSaveClickFnType = (startingText: String, provisionalText: String) -> Unit
 class HostSwitcherFragment : Fragment() {
 
@@ -62,9 +64,12 @@ class HostSwitcherFragment : Fragment() {
         mainBinding.hostSwitcherRulesRecyclerView.layoutManager =
             LinearLayoutManager(requireContext())
         val mapper: (SwitchingRule) -> HostSwitchItemModel = {
+
+            val replaceRule = it.pairs[0] as? Replace
+
             HostSwitchItemModel(
-                startingText = it.startingText,
-                provisionalText = it.provisionalText,
+                startingText = replaceRule?.from ?: "",
+                provisionalText = replaceRule?.to ?: "",
                 isActive = it.isActive,
                 onSwitchStateChangeListener = { boolValue ->
                     viewModel.editSwitchState(
@@ -114,8 +119,10 @@ class HostSwitcherFragment : Fragment() {
         val startingEditText = dialog.findViewById<EditText>(R.id.startingEditText)
         val provisionalEditText = dialog.findViewById<EditText>(R.id.provisionalEditText)
 
-        startingEditText.setText(itemRule?.startingText ?: "", TextView.BufferType.EDITABLE)
-        provisionalEditText.setText(itemRule?.provisionalText ?: "", TextView.BufferType.EDITABLE)
+        val rule = itemRule?.pairs?.get(0) as? Replace
+
+        startingEditText.setText(rule?.from ?: "", TextView.BufferType.EDITABLE)
+        provisionalEditText.setText(rule?.to ?: "", TextView.BufferType.EDITABLE)
         saveButton.setOnClickListener {
             onSaveClick(startingEditText.text.toString(), provisionalEditText.text.toString())
             dialog.hide()

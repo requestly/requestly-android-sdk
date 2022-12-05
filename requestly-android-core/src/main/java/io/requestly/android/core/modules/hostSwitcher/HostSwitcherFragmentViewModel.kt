@@ -3,22 +3,17 @@ package io.requestly.android.core.modules.hostSwitcher
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
 import io.requestly.android.core.KeyValueStorageManager
-import java.util.*
+import io.requestly.android.core.modules.hostSwitcher.models.Rule
 
 
-data class SwitchingRule(
-    @SerializedName("startingText") var startingText: String,
-    @SerializedName("provisionalText") var provisionalText: String,
-    @SerializedName("isActive") var isActive: Boolean,
-    @SerializedName("id") val id: String)
+typealias SwitchingRule = Rule
 
 class HostSwitcherFragmentViewModel: ViewModel() {
 
     companion object {
-        const val KEY_NAME = "io.requestly.host_switch_rules_key"
+        const val KEY_NAME = "io.requestly.api_modifier_rules_key"
     }
 
     private var _rulesListLive = MutableLiveData<List<SwitchingRule>>()
@@ -28,11 +23,15 @@ class HostSwitcherFragmentViewModel: ViewModel() {
         // T should be known at compile time.
         // https://stackoverflow.com/a/14506181
         val typeToken = object : TypeToken<List<SwitchingRule>>() {}
+
         _rulesListLive.value = KeyValueStorageManager.getList(KEY_NAME, typeToken) ?: emptyList()
     }
 
     fun createItem(startingText: String, provisionalText: String) {
-        val newRule = SwitchingRule(startingText, provisionalText, true, UUID.randomUUID().toString())
+        val newRule = SwitchingRule.newReplaceRule(
+            from = startingText,
+            to = provisionalText
+        )
         val list = _rulesListLive.value!! + newRule
         _rulesListLive.value = list
 
@@ -45,11 +44,19 @@ class HostSwitcherFragmentViewModel: ViewModel() {
     }
 
     fun editItem(startingText: String, provisionalText: String, ruleId: String) {
-        val rule =  _rulesListLive.value?.find { it.id === ruleId }
-        rule?.startingText = startingText
-        rule?.provisionalText = provisionalText
-        _rulesListLive.postValue(_rulesListLive.value)
-        KeyValueStorageManager.putList(KEY_NAME, _rulesListLive.value!!)
+        val mutableList =  _rulesListLive.value!!.toMutableList()
+        val index =  mutableList.indexOfFirst { it.id == ruleId }
+
+        if (index != -1) {
+            val rule = mutableList[index]
+            mutableList[index] = SwitchingRule.newReplaceRule(
+                id = rule.id,
+                from = startingText,
+                to = provisionalText
+            )
+        }
+        _rulesListLive.postValue(mutableList)
+        KeyValueStorageManager.putList(KEY_NAME, mutableList)
     }
 
     fun deleteItem(ruleId: String) {

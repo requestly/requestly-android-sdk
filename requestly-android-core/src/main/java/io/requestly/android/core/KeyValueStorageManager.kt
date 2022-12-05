@@ -3,7 +3,10 @@ package io.requestly.android.core
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
+import io.requestly.android.core.modules.hostSwitcher.models.Rule
+import io.requestly.android.core.modules.hostSwitcher.models.RuleJsonDeserializer
 import java.io.File
 import java.lang.ref.WeakReference
 
@@ -55,7 +58,9 @@ object KeyValueStorageManager {
     fun initialize(context: Context) {
         mContext = WeakReference(context)
         mSharedPref = context.getSharedPreferences(FILE_NAME, 0)
-        gson = Gson()
+        val builder = GsonBuilder()
+        builder.registerTypeAdapter(Rule::class.java, RuleJsonDeserializer())
+        gson = builder.create()
     }
 
     fun getString(key: String, defaultValue: String? = null): String? {
@@ -196,4 +201,5 @@ object KeyValueStorageManager {
         }
     }
 }
+
 
