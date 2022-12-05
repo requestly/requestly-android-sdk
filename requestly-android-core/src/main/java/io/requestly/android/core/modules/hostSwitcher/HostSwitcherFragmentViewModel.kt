@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.reflect.TypeToken
 import io.requestly.android.core.KeyValueStorageManager
+import io.requestly.android.core.modules.hostSwitcher.models.HttpVerb
 import io.requestly.android.core.modules.hostSwitcher.models.Rule
 
 
@@ -27,10 +28,22 @@ class HostSwitcherFragmentViewModel: ViewModel() {
         _rulesListLive.value = KeyValueStorageManager.getList(KEY_NAME, typeToken) ?: emptyList()
     }
 
-    fun createItem(startingText: String, provisionalText: String) {
+    fun createReplaceRule(startingText: String, provisionalText: String) {
         val newRule = SwitchingRule.newReplaceRule(
             from = startingText,
             to = provisionalText
+        )
+        val list = _rulesListLive.value!! + newRule
+        _rulesListLive.value = list
+
+        KeyValueStorageManager.putList(KEY_NAME, list)
+    }
+
+    fun createRedirectRule(httpMethod: HttpVerb, sourceUrlText: String, destinationUrl: String) {
+        val newRule = SwitchingRule.newRedirectRule(
+            destination = destinationUrl,
+            requestMethod = listOf(httpMethod),
+            sourceUrlText = sourceUrlText
         )
         val list = _rulesListLive.value!! + newRule
         _rulesListLive.value = list

@@ -1,11 +1,14 @@
 package io.requestly.android.core.modules.hostSwitcher
 
+import android.content.ClipData.Item
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import androidx.recyclerview.widget.RecyclerView
+import io.requestly.android.core.R
 import io.requestly.android.core.databinding.HostSwitcherItemBinding
 
+sealed class ApiModiferRuleItemModel
 data class HostSwitchItemModel(
     val startingText: String,
     val provisionalText: String,
@@ -13,23 +16,42 @@ data class HostSwitchItemModel(
     val onSwitchStateChangeListener: ((Boolean) -> Unit)?,
     val onEditClickListener: (() -> Unit)?,
     val onDeleteClickListener: (() -> Unit)?
-)
+): ApiModiferRuleItemModel()
 
-class HostSwitchItemAdaptor(var items: List<HostSwitchItemModel>) :
-    RecyclerView.Adapter<HostSwitchItemAdaptor.ItemViewHolder>() {
+data class RedirectRuleItemModel(
+    val httpVerbText: String,
+    val sourceUrlText: String,
+    val destinationUrlText: String,
+    val isActive: Boolean,
+    val onSwitchStateChangeListener: ((Boolean) -> Unit)?,
+    val onEditClickListener: (() -> Unit)?,
+    val onDeleteClickListener: (() -> Unit)?
+): ApiModiferRuleItemModel()
+
+class HostSwitchItemAdaptor(var items: List<ApiModiferRuleItemModel>) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val viewBinding =
-            HostSwitcherItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ItemViewHolder(viewBinding)
-    }
-
-    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.bindTo(items[position])
+        when (viewType) {
+            R.layout.host_switcher_item -> {
+                val binding = HostSwitcherItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                return ItemViewHolder(binding)
+            }
+            else -> {
+                TODO()
+            }
+        }
     }
 
     override fun getItemCount(): Int {
         return items.size
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return when(items[position]) {
+            is HostSwitchItemModel -> R.layout.host_switcher_item
+            is RedirectRuleItemModel -> TODO()
+        }
     }
 
     class ItemViewHolder(itemView: HostSwitcherItemBinding) :
@@ -53,6 +75,14 @@ class HostSwitchItemAdaptor(var items: List<HostSwitchItemModel>) :
             }
             deleteButton.setOnClickListener {
                 model.onDeleteClickListener?.let { it1 -> it1() }
+            }
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder is ItemViewHolder) {
+            (items[position] as? HostSwitchItemModel)?.let {
+                holder.bindTo(it)
             }
         }
     }
