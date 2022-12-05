@@ -4,10 +4,7 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.view.*
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
@@ -49,7 +46,7 @@ class HostSwitcherFragment : Fragment() {
                         true
                     }
                     R.id.createMockRule -> {
-                        Toast.makeText(context, "New Mock Rule TBA", Toast.LENGTH_SHORT).show()
+                        loadAddNewMockRuleItemDialog()
                         true
                     }
                     else -> {
@@ -141,5 +138,39 @@ class HostSwitcherFragment : Fragment() {
             }
             .create()
             .show()
+    }
+
+    private fun loadAddNewMockRuleItemDialog() {
+        val dialog = Dialog(requireContext())
+        with(dialog) {
+            this.setContentView(R.layout.api_modifier_new_mock_rule_dialog)
+            this.window?.setLayout(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+            this.setCancelable(false)
+
+            val saveButton = dialog.findViewById<TextView>(R.id.saveTextButton)
+            val cancelButton = dialog.findViewById<TextView>(R.id.cancelTextButton)
+            val httpMethodSpinner = dialog.findViewById<Spinner>(R.id.httpMethodSpinner)
+            val urlOperatorSpinner = dialog.findViewById<Spinner>(R.id.urlOperatorSpinner)
+
+            val httpMethods = listOf("GET", "POST", "PUT", "PATCH", "DELETE")
+            val httpSpinneradaptor = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, httpMethods)
+            httpSpinneradaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            httpMethodSpinner.adapter = httpSpinneradaptor
+            httpMethodSpinner.setSelection(0)
+
+            val operators = listOf("CONTAINS")
+            val urlOperatorSpinnerAdaptor = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, operators)
+            urlOperatorSpinnerAdaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            urlOperatorSpinner.adapter = urlOperatorSpinnerAdaptor
+            urlOperatorSpinner.setSelection(0)
+
+            cancelButton.setOnClickListener {
+                dialog.hide()
+            }
+        }
+        dialog.show()
     }
 }
