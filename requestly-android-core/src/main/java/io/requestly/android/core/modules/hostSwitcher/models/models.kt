@@ -14,15 +14,28 @@ data class Rule constructor(
     val pairs: List<Pair>
 ) {
     companion object {
-        fun newRedirectRule(destination: String, source: Source): Rule {
+        fun newRedirectRule(
+            destination: String,
+            requestMethod: List<HttpVerb>,
+            sourceUrlText: String
+        ): Rule {
             return Rule(
-                UUID.randomUUID().toString(),
-                RuleType.REDIRECT,
-                RuleStatus.ACTIVE,
+                id = UUID.randomUUID().toString(),
+                ruleType = RuleType.REDIRECT,
+                status = RuleStatus.ACTIVE,
                 pairs = listOf(
                     Redirect(
-                        destination,
-                        source
+                        destination = destination,
+                        source = Source(
+                            key = SourceKey.URL,
+                            operator = SourceOperator.CONTAINS,
+                            value = sourceUrlText,
+                            filters = listOf(
+                                Filter(
+                                    requestMethod
+                                )
+                            )
+                        )
                     )
                 )
             )
@@ -34,9 +47,9 @@ data class Rule constructor(
             to: String
         ): Rule {
             return Rule(
-                id,
-                RuleType.REPLACE,
-                RuleStatus.ACTIVE,
+                id = id,
+                ruleType = RuleType.REPLACE,
+                status = RuleStatus.ACTIVE,
                 pairs = listOf(
                     Replace(
                         from,
@@ -44,7 +57,8 @@ data class Rule constructor(
                         Source(
                             key = SourceKey.URL,
                             operator = SourceOperator.CONTAINS,
-                            from
+                            value = from,
+                            filters = listOf(Filter(listOf(HttpVerb.GET, HttpVerb.POST)))
                         )
                     )
                 )
@@ -74,23 +88,39 @@ enum class SourceOperator {
     CONTAINS
 }
 
-data class Source(
-    @SerializedName("key") var key: SourceKey,
-    @SerializedName("operator") var operator: SourceOperator,
-    @SerializedName("value") var value: String
+enum class HttpVerb {
+    GET,
+    POST,
+    PUT,
+    PATCH,
+    DELETE,
+    OPTIONS,
+    CONNECT,
+    TRACE
+}
+
+data class Filter(
+    @SerializedName("requestMethod") val requestMethod: List<HttpVerb>
 )
 
-interface Pair
+data class Source(
+    @SerializedName("key") val key: SourceKey,
+    @SerializedName("operator") val operator: SourceOperator,
+    @SerializedName("value") val value: String,
+    @SerializedName("filters") val filters: List<Filter> = emptyList()
+)
+
+sealed class Pair
 class Redirect(
-    @SerializedName("destination") var destination: String,
-    @SerializedName("source") var source: Source
-) : Pair
+    @SerializedName("destination") val destination: String,
+    @SerializedName("source") val source: Source
+) : Pair()
 
 class Replace(
-    @SerializedName("from") var from: String,
-    @SerializedName("to") var to: String,
-    @SerializedName("source") var source: Source
-) : Pair
+    @SerializedName("from") val from: String,
+    @SerializedName("to") val to: String,
+    @SerializedName("source") val source: Source
+) : Pair()
 
 enum class RuleType {
     @SerializedName("Replace")
@@ -124,15 +154,18 @@ class RuleJsonDeserializer : JsonDeserializer<Rule?> {
     ): Rule? {
         val jsonObject = json?.asJsonObject
 
-        val id = context?.deserialize<String>(jsonObject?.get("id"), String::class.java) ?: return null
-        val ruleType = context.deserialize<RuleType>(jsonObject?.get("ruleType"), RuleType::class.java)
-            ?: return null
-        val status = context.deserialize<RuleStatus>(jsonObject?.get("status"), RuleStatus::class.java)
-            ?: RuleStatus.INACTIVE
+        val id =
+            context?.deserialize<String>(jsonObject?.get("id"), String::class.java) ?: return null
+        val ruleType =
+            context.deserialize<RuleType>(jsonObject?.get("ruleType"), RuleType::class.java)
+                ?: return null
+        val status =
+            context.deserialize<RuleStatus>(jsonObject?.get("status"), RuleStatus::class.java)
+                ?: RuleStatus.INACTIVE
 
         val pairsJsonArray = jsonObject?.get("pairs")?.asJsonArray ?: return null
 
-        val pairs = when(ruleType) {
+        val pairs = when (ruleType) {
             RuleType.REPLACE -> {
                 pairsJsonArray.map { context.deserialize<Replace>(it, Replace::class.java) }
             }
@@ -144,7 +177,7 @@ class RuleJsonDeserializer : JsonDeserializer<Rule?> {
             id = id,
             ruleType = ruleType,
             status = status,
-            pairs = pairs.filterNotNull()
+            pairs = pairs
         )
     }
 }
