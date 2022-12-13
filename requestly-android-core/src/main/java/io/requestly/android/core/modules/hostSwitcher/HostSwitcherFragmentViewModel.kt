@@ -55,7 +55,7 @@ class HostSwitcherFragmentViewModel: ViewModel() {
         KeyValueStorageManager.putList(KEY_NAME, _rulesListLive.value!!)
     }
 
-    fun editItem(startingText: String, provisionalText: String, ruleId: String) {
+    fun editReplaceRule(sourceText: String, targetText: String, ruleId: String) {
         val mutableList =  _rulesListLive.value!!.toMutableList()
         val index =  mutableList.indexOfFirst { it.id == ruleId }
 
@@ -63,8 +63,25 @@ class HostSwitcherFragmentViewModel: ViewModel() {
             val rule = mutableList[index]
             mutableList[index] = SwitchingRule.newReplaceRule(
                 id = rule.id,
-                from = startingText,
-                to = provisionalText
+                from = sourceText,
+                to = targetText
+            )
+        }
+        _rulesListLive.postValue(mutableList)
+        KeyValueStorageManager.putList(KEY_NAME, mutableList)
+    }
+
+    fun editRedirectRule(httpVerb: HttpVerb, sourceText: String, targetText: String, ruleId: String) {
+        val mutableList =  _rulesListLive.value!!.toMutableList()
+        val index =  mutableList.indexOfFirst { it.id == ruleId }
+
+        if (index != -1) {
+            val rule = mutableList[index]
+            mutableList[index] = SwitchingRule.newRedirectRule(
+                id = rule.id,
+                destination = targetText,
+                requestMethod = listOf(httpVerb),
+                sourceUrlText = sourceText
             )
         }
         _rulesListLive.postValue(mutableList)

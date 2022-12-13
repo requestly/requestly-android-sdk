@@ -1,7 +1,6 @@
 package io.requestly.android.core.modules.hostSwitcher
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.view.*
@@ -74,33 +73,76 @@ class HostSwitcherFragment : Fragment() {
     private fun initRecyclerView() {
         mainBinding.hostSwitcherRulesRecyclerView.layoutManager =
             LinearLayoutManager(requireContext())
-        val mapper: (SwitchingRule) -> ApiModiferRuleItemModel? = mapperFunc@ {
+        val mapper: (SwitchingRule) -> ApiModiferRuleItemModel? = mapperFunc@{
 
-            val replaceRule = it.pairs[0] as? Replace ?: return@mapperFunc null
+            val rule = it.pairs.firstOrNull() ?: return@mapperFunc null
 
-            HostSwitchItemModel(
-                startingText = replaceRule.from,
-                provisionalText = replaceRule.to,
-                isActive = it.isActive,
-                onSwitchStateChangeListener = { boolValue ->
-                    viewModel.editSwitchState(
-                        it.id,
-                        boolValue
-                    )
-                },
-                onEditClickListener = {
-                    loadAddNewHostSwitchItemDialog(replaceRule) { (t1, t2) ->
-                        viewModel.editItem(t1, t2, it.id)
-                    }
-                },
-                onDeleteClickListener = {
-                    loadSimpleYesNoAlertDialog(
-                        context = requireContext(),
-                        message = "Are you sure you want to delete this?",
-                        onPositiveButtonClick = { viewModel.deleteItem(it.id) }
+            when (rule) {
+                is Redirect -> {
+                    return@mapperFunc ApiModiferRuleItemModel(
+                        ruleTypeText = "Mock Rule",
+                        httpVerbText = rule.source
+                            .filters.firstOrNull()
+                            ?.requestMethod?.firstOrNull()
+                            ?.toString(),
+                        operatorText = rule.source.operator.toString(),
+                        sourceUrlText = rule.source.value,
+                        targetUrlText = rule.destination,
+                        targetUrlGuideText = "Load Response from",
+                        isActive = it.isActive,
+                        onSwitchStateChangeListener = { boolValue ->
+                            viewModel.editSwitchState(it.id, boolValue)
+                        },
+                        onEditClickListener = {
+                            loadAddNewMockRuleItemDialog(
+                                rule = rule,
+                                httpVerbs = HttpVerb.values().asList(),
+                                operators = SourceOperator.values().asList()
+                            ) { (verb, urlContainingText, destinationUrl) ->
+                                viewModel.editRedirectRule(
+                                    verb,
+                                    urlContainingText,
+                                    destinationUrl,
+                                    it.id
+                                )
+                            }
+                        },
+                        onDeleteClickListener = {
+                            loadSimpleYesNoAlertDialog(
+                                context = requireContext(),
+                                message = "Are you sure you want to delete this?",
+                                onPositiveButtonClick = { viewModel.deleteItem(it.id) }
+                            )
+                        }
                     )
                 }
-            )
+                is Replace -> {
+                    return@mapperFunc ApiModiferRuleItemModel(
+                        ruleTypeText = "Switch Rule",
+                        httpVerbText = null,
+                        operatorText = rule.source.operator.toString(),
+                        sourceUrlText = rule.from,
+                        targetUrlText = rule.to,
+                        targetUrlGuideText = "Replace with",
+                        isActive = it.isActive,
+                        onSwitchStateChangeListener = { boolValue ->
+                            viewModel.editSwitchState(it.id, boolValue)
+                        },
+                        onEditClickListener = {
+                            loadAddNewHostSwitchItemDialog(rule) { (t1, t2) ->
+                                viewModel.editReplaceRule(t1, t2, it.id)
+                            }
+                        },
+                        onDeleteClickListener = {
+                            loadSimpleYesNoAlertDialog(
+                                context = requireContext(),
+                                message = "Are you sure you want to delete this?",
+                                onPositiveButtonClick = { viewModel.deleteItem(it.id) }
+                            )
+                        }
+                    )
+                }
+            }
         }
         val items: List<ApiModiferRuleItemModel> =
             viewModel.rulesListLive.value?.map(mapper)?.filterNotNull() ?: emptyList()
@@ -143,15 +185,15 @@ class HostSwitcherFragment : Fragment() {
         }
     }
 
-
-
     private fun loadAddNewMockRuleItemDialog(
         rule: Redirect?,
         httpVerbs: List<HttpVerb>,
         operators: List<SourceOperator>,
         onSaveClick: OnSaveClickFnType<Triple<HttpVerb, String, String>>,
     ) {
-        var selectedMethod = httpVerbs[0]
+        var selectedMethod: HttpVerb =
+            rule?.source?.filters?.firstOrNull()?.requestMethod?.firstOrNull() ?: httpVerbs[0]
+        val selectionPosition = httpVerbs.indexOf(selectedMethod)
 
         val dialog = Dialog(requireContext())
         with(dialog) {
@@ -169,7 +211,7 @@ class HostSwitcherFragment : Fragment() {
                 ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, httpVerbs)
             httpSpinneradaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             httpMethodSpinner.adapter = httpSpinneradaptor
-            httpMethodSpinner.setSelection(0)
+            httpMethodSpinner.setSelection(selectionPosition)
             httpMethodSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
 

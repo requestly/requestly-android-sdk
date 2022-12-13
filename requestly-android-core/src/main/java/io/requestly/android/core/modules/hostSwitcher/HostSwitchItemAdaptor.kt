@@ -1,79 +1,77 @@
 package io.requestly.android.core.modules.hostSwitcher
 
-import android.content.ClipData.Item
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import io.requestly.android.core.R
-import io.requestly.android.core.databinding.HostSwitcherItemBinding
+import io.requestly.android.core.databinding.ApiModifierMockRuleItemBinding
 
-sealed class ApiModiferRuleItemModel
-data class HostSwitchItemModel(
-    val startingText: String,
-    val provisionalText: String,
-    val isActive: Boolean,
-    val onSwitchStateChangeListener: ((Boolean) -> Unit)?,
-    val onEditClickListener: (() -> Unit)?,
-    val onDeleteClickListener: (() -> Unit)?
-): ApiModiferRuleItemModel()
-
-data class RedirectRuleItemModel(
-    val httpVerbText: String,
+data class ApiModiferRuleItemModel(
+    val ruleTypeText: String,
+    val httpVerbText: String?,
+    val operatorText: String,
     val sourceUrlText: String,
-    val destinationUrlText: String,
+    val targetUrlText: String,
+    val targetUrlGuideText: String,
     val isActive: Boolean,
     val onSwitchStateChangeListener: ((Boolean) -> Unit)?,
     val onEditClickListener: (() -> Unit)?,
     val onDeleteClickListener: (() -> Unit)?
-): ApiModiferRuleItemModel()
+)
 
 class HostSwitchItemAdaptor(var items: List<ApiModiferRuleItemModel>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        when (viewType) {
-            R.layout.host_switcher_item -> {
-                val binding = HostSwitcherItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                return ItemViewHolder(binding)
-            }
-            else -> {
-                TODO()
-            }
-        }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val binding = ApiModifierMockRuleItemBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return ItemViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
         return items.size
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return when(items[position]) {
-            is HostSwitchItemModel -> R.layout.host_switcher_item
-            is RedirectRuleItemModel -> TODO()
-        }
-    }
-
-    class ItemViewHolder(itemView: HostSwitcherItemBinding) :
+    class ItemViewHolder(itemView: ApiModifierMockRuleItemBinding) :
         RecyclerView.ViewHolder(itemView.root) {
 
-        private val startingTextView = itemView.startingTextView
-        private val provisionalTextView = itemView.provisionalTextView
-        private val editButton = itemView.editButton
-        private val deleteButton = itemView.deleteButton
+        private val ruleTypeTextView = itemView.ruleTypeTextView
+        private val httpMethodTextView = itemView.httpMethodTextView
+        private val operatorTextView = itemView.operatorTextView
+        private val sourceUrlTextView = itemView.sourceUrlTextView
+        private val targetUrlTextView = itemView.targetUrlTextView
+        private val targetUrlGuideTextView = itemView.targetUrlGuideText
         private val activeSwitch = itemView.activeSwitch
+        private val editTextButton = itemView.editTextButton
+        private val deleteTextButton = itemView.deleteTextButton
 
-        fun bindTo(model: HostSwitchItemModel) {
-            startingTextView.text = model.startingText
-            provisionalTextView.text = model.provisionalText
+        fun bindTo(model: ApiModiferRuleItemModel) {
+            if (model.httpVerbText != null) {
+                httpMethodTextView.text = model.httpVerbText
+                httpMethodTextView.visibility = View.VISIBLE
+            } else {
+                httpMethodTextView.text = null
+                httpMethodTextView.visibility = View.GONE
+            }
+
+            ruleTypeTextView.text = model.ruleTypeText
+            operatorTextView.text = model.operatorText
+            sourceUrlTextView.setText(model.sourceUrlText, TextView.BufferType.NORMAL)
+            targetUrlTextView.setText(model.targetUrlText, TextView.BufferType.NORMAL)
+            targetUrlGuideTextView.text = model.targetUrlGuideText
             activeSwitch.isChecked = model.isActive
             activeSwitch.setOnCheckedChangeListener { _: CompoundButton, b: Boolean ->
                 model.onSwitchStateChangeListener?.let { it(b) }
             }
-            editButton.setOnClickListener {
+            editTextButton.setOnClickListener {
                 model.onEditClickListener?.let { it1 -> it1() }
             }
-            deleteButton.setOnClickListener {
+            deleteTextButton.setOnClickListener {
                 model.onDeleteClickListener?.let { it1 -> it1() }
             }
         }
@@ -81,9 +79,7 @@ class HostSwitchItemAdaptor(var items: List<ApiModiferRuleItemModel>) :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is ItemViewHolder) {
-            (items[position] as? HostSwitchItemModel)?.let {
-                holder.bindTo(it)
-            }
+            holder.bindTo(items[position])
         }
     }
 }

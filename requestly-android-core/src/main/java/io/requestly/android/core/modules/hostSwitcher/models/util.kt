@@ -43,12 +43,13 @@ class RuleJsonDeserializer : JsonDeserializer<Rule?> {
 }
 
 fun Rule.Companion.newRedirectRule(
+    id: String = UUID.randomUUID().toString(),
     destination: String,
     requestMethod: List<HttpVerb>,
     sourceUrlText: String
 ): Rule {
     return Rule(
-        id = UUID.randomUUID().toString(),
+        id = id,
         ruleType = RuleType.REDIRECT,
         status = RuleStatus.ACTIVE,
         pairs = listOf(
@@ -96,10 +97,10 @@ fun Rule.Companion.newReplaceRule(
 var Rule.isActive: Boolean
     get() = status == RuleStatus.ACTIVE
     set(value) {
-    if (value) {
-        status = RuleStatus.ACTIVE
-        return
-    }
+        if (value) {
+            status = RuleStatus.ACTIVE
+            return
+        }
 
-    status = RuleStatus.INACTIVE
-}
+        status = RuleStatus.INACTIVE
+    }
