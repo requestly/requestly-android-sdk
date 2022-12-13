@@ -57,18 +57,10 @@ class Replace(
 
 enum class RuleType {
     @SerializedName("Replace")
-    REPLACE {
-        override fun toString(): String {
-            return "Replace"
-        }
-    },
+    REPLACE,
 
     @SerializedName("Redirect")
-    REDIRECT {
-        override fun toString(): String {
-            return "Redirect"
-        }
-    }
+    REDIRECT
 }
 
 enum class RuleStatus {
