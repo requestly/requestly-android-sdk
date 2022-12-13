@@ -10,6 +10,6 @@
     <fragment
         android:id="@id/host_switcher_fragment"
         android:name="io.requestly.android.core.modules.hostSwitcher.HostSwitcherFragment"
-        android:label="Host Switcher">
+        android:label="Req/Resp Modifier">
     </fragment>
 </navigation>

@@ -14,7 +14,7 @@
     <item
         android:id="@id/host_switcher_flow"
         android:icon="@drawable/ic_switch_24"
-        android:title="Host Switcher" />
+        android:title="Req/Resp Modifier" />
 
     <item
         android:id="@id/logs_flow"
