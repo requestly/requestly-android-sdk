@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import io.requestly.android.core.R
 import io.requestly.android.core.SharedPrefFileData
 import io.requestly.android.core.databinding.FragmentSharedPrefViewerBinding
+import io.requestly.android.core.modules.loadSimpleYesNoAlertDialog
 
 class SharedPrefViewerFragment : Fragment() {
 
@@ -100,9 +101,11 @@ class SharedPrefViewerFragment : Fragment() {
                     }
                 },
                 onDeleteClickListener = {
-                    loadDeleteConfirmationDialog {
-                        viewModel.deleteEntry(fileName = it.fileName, keyName = it.key)
-                    }
+                    loadSimpleYesNoAlertDialog(
+                        context = requireContext(),
+                        message = "Are you sure you want to delete this?",
+                        onPositiveButtonClick = { viewModel.deleteEntry(fileName = it.fileName, keyName = it.key) }
+                    )
                 }
             )
         }
@@ -164,20 +167,5 @@ class SharedPrefViewerFragment : Fragment() {
 
         // Show Dialog
         dialog.show()
-    }
-
-    private fun loadDeleteConfirmationDialog(onPositiveButtonClick: () -> Unit) {
-        AlertDialog.Builder(requireActivity())
-            .setCancelable(false)
-            .setTitle("Are you sure you want to delete this?")
-            .setPositiveButton("Yes") { dialog, _ ->
-                onPositiveButtonClick()
-                dialog.cancel()
-            }
-            .setNegativeButton("No") { dialog, _ ->
-                dialog.cancel()
-            }
-            .create()
-            .show()
     }
 }

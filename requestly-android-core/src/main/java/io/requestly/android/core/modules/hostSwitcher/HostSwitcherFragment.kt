@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import io.requestly.android.core.R
 import io.requestly.android.core.databinding.FragmentHostSwitcherBinding
 import io.requestly.android.core.modules.hostSwitcher.models.*
+import io.requestly.android.core.modules.loadSimpleYesNoAlertDialog
 import kotlin.Pair
 
 typealias OnSaveClickFnType<T> = (T) -> Unit
@@ -93,9 +94,11 @@ class HostSwitcherFragment : Fragment() {
                     }
                 },
                 onDeleteClickListener = {
-                    loadDeleteConfirmationDialog {
-                        viewModel.deleteItem(it.id)
-                    }
+                    loadSimpleYesNoAlertDialog(
+                        context = requireContext(),
+                        message = "Are you sure you want to delete this?",
+                        onPositiveButtonClick = { viewModel.deleteItem(it.id) }
+                    )
                 }
             )
         }
@@ -116,7 +119,7 @@ class HostSwitcherFragment : Fragment() {
         onSaveClick: OnSaveClickFnType<Pair<String, String>>
     ) {
         val dialog = Dialog(requireContext())
-        dialog.setContentView(R.layout.host_switcher_new_item_dialog)
+        dialog.setContentView(R.layout.api_modifier_new_replace_rule_dialog)
         dialog.window?.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
@@ -124,8 +127,8 @@ class HostSwitcherFragment : Fragment() {
         dialog.setCancelable(false)
         dialog.show()
 
-        val saveButton = dialog.findViewById<Button>(R.id.saveButton)
-        val cancelButton = dialog.findViewById<Button>(R.id.cancelButton)
+        val saveButton = dialog.findViewById<TextView>(R.id.saveButton)
+        val cancelButton = dialog.findViewById<TextView>(R.id.cancelButton)
         val startingEditText = dialog.findViewById<EditText>(R.id.startingEditText)
         val provisionalEditText = dialog.findViewById<EditText>(R.id.provisionalEditText)
 
@@ -140,20 +143,7 @@ class HostSwitcherFragment : Fragment() {
         }
     }
 
-    private fun loadDeleteConfirmationDialog(onPositiveButtonClick: () -> Unit) {
-        AlertDialog.Builder(requireActivity())
-            .setCancelable(false)
-            .setTitle("Are you sure you want to delete this?")
-            .setPositiveButton("Yes") { dialog, _ ->
-                onPositiveButtonClick()
-                dialog.cancel()
-            }
-            .setNegativeButton("No") { dialog, _ ->
-                dialog.cancel()
-            }
-            .create()
-            .show()
-    }
+
 
     private fun loadAddNewMockRuleItemDialog(
         rule: Redirect?,
