@@ -13,10 +13,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.requestly.android.core.R
 import io.requestly.android.core.databinding.FragmentHostSwitcherBinding
-import io.requestly.android.core.modules.hostSwitcher.models.HttpVerb
-import io.requestly.android.core.modules.hostSwitcher.models.Redirect
-import io.requestly.android.core.modules.hostSwitcher.models.Replace
-import io.requestly.android.core.modules.hostSwitcher.models.SourceOperator
+import io.requestly.android.core.modules.hostSwitcher.models.*
+import kotlin.Pair
 
 typealias OnSaveClickFnType<T> = (T) -> Unit
 

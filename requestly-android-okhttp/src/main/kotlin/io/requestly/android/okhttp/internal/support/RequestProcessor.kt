@@ -8,6 +8,7 @@ import io.requestly.android.core.SettingsManager
 import io.requestly.android.core.modules.hostSwitcher.HostSwitcherFragmentViewModel
 import io.requestly.android.core.modules.hostSwitcher.SwitchingRule
 import io.requestly.android.core.modules.hostSwitcher.models.Replace
+import io.requestly.android.core.modules.hostSwitcher.models.isActive
 import io.requestly.android.okhttp.R
 import io.requestly.android.okhttp.api.BodyDecoder
 import io.requestly.android.okhttp.api.RQCollector
