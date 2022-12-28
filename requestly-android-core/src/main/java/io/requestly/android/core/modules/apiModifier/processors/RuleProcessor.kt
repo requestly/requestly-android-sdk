@@ -1,15 +1,18 @@
-package io.requestly.android.core.modules.apiModifier.models
+package io.requestly.android.core.modules.apiModifier.processors
 
 import android.util.Patterns
 import com.google.gson.reflect.TypeToken
 import io.requestly.android.core.KeyValueStorageManager
 import io.requestly.android.core.modules.apiModifier.ApiModifierFragmentViewModel
+import io.requestly.android.core.modules.apiModifier.dao.*
+import io.requestly.android.core.modules.apiModifier.processors.models.Action
+import io.requestly.android.core.modules.apiModifier.processors.models.ActionName
 import okhttp3.Request
 import java.net.URL
 
 object RuleProcessor {
 
-    var activeRules: MutableList<Rule> = mutableListOf()
+    private var activeRules: MutableList<Rule> = mutableListOf()
 
     init {
         val typeToken = object : TypeToken<List<Rule>>() {}
@@ -31,15 +34,15 @@ object RuleProcessor {
         val actions = activeRules.map mapperFunc@{
             val rule = it.pairs.firstOrNull() ?: return@mapperFunc null
             when (rule) {
-                is Redirect -> RedirectRuleProcessor(rule, request)
-                is Replace -> ReplaceRuleProcessor(rule, request)
+                is Redirect -> redirectRuleProcessor(rule, request)
+                is Replace -> replaceRuleProcessor(rule, request)
             }
         }
         return actions.filterNotNull()
     }
 }
 
-fun ReplaceRuleProcessor(rule: Replace, request: Request): Action? {
+private fun replaceRuleProcessor(rule: Replace, request: Request): Action? {
     val url = request.url().toString()
     if (!url.contains(rule.from)) {
         return null
@@ -53,7 +56,7 @@ fun ReplaceRuleProcessor(rule: Replace, request: Request): Action? {
     )
 }
 
-fun RedirectRuleProcessor(rule: Redirect, request: Request): Action? {
+private fun redirectRuleProcessor(rule: Redirect, request: Request): Action? {
     val url = request.url().toString()
     if (!url.contains(rule.source.value)) {
         return null

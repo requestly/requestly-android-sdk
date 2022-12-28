@@ -5,8 +5,8 @@ import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
-import io.requestly.android.core.modules.apiModifier.models.Rule
-import io.requestly.android.core.modules.apiModifier.models.RuleJsonDeserializer
+import io.requestly.android.core.modules.apiModifier.dao.Rule
+import io.requestly.android.core.modules.apiModifier.dao.RuleJsonDeserializer
 import java.io.File
 import java.lang.ref.WeakReference
 

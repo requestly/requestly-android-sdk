@@ -1,5 +1,7 @@
-package io.requestly.android.core.modules.apiModifier.models
+package io.requestly.android.core.modules.apiModifier.processors
 
+import io.requestly.android.core.modules.apiModifier.processors.models.Action
+import io.requestly.android.core.modules.apiModifier.processors.models.ActionName
 import okhttp3.Request
 
 object ActionProcessor {

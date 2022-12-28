@@ -12,7 +12,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.requestly.android.core.R
 import io.requestly.android.core.databinding.FragmentApiModifierBinding
-import io.requestly.android.core.modules.apiModifier.models.*
+import io.requestly.android.core.modules.apiModifier.dao.*
 import io.requestly.android.core.modules.loadSimpleYesNoAlertDialog
 import kotlin.Pair
 

@@ -1,4 +1,4 @@
-package io.requestly.android.core.modules.apiModifier.models
+package io.requestly.android.core.modules.apiModifier.dao
 
 import com.google.gson.annotations.SerializedName
 

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.reflect.TypeToken
 import io.requestly.android.core.KeyValueStorageManager
-import io.requestly.android.core.modules.apiModifier.models.*
+import io.requestly.android.core.modules.apiModifier.dao.*
 
 
 typealias SwitchingRule = Rule
