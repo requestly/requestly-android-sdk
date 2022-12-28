@@ -1,16 +1,16 @@
-package io.requestly.android.core.modules.hostSwitcher
+package io.requestly.android.core.modules.apiModifier
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.reflect.TypeToken
 import io.requestly.android.core.KeyValueStorageManager
-import io.requestly.android.core.modules.hostSwitcher.models.*
+import io.requestly.android.core.modules.apiModifier.models.*
 
 
 typealias SwitchingRule = Rule
 
-class HostSwitcherFragmentViewModel: ViewModel() {
+class ApiModifierFragmentViewModel: ViewModel() {
 
     companion object {
         const val KEY_NAME = "io.requestly.api_modifier_rules_key"

@@ -1,4 +1,4 @@
-package io.requestly.android.core.modules.hostSwitcher
+package io.requestly.android.core.modules.apiModifier
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -11,23 +11,23 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.requestly.android.core.R
-import io.requestly.android.core.databinding.FragmentHostSwitcherBinding
-import io.requestly.android.core.modules.hostSwitcher.models.*
+import io.requestly.android.core.databinding.FragmentApiModifierBinding
+import io.requestly.android.core.modules.apiModifier.models.*
 import io.requestly.android.core.modules.loadSimpleYesNoAlertDialog
 import kotlin.Pair
 
 typealias OnSaveClickFnType<T> = (T) -> Unit
 
-class HostSwitcherFragment : Fragment() {
+class ApiModifierFragment : Fragment() {
 
-    private lateinit var mainBinding: FragmentHostSwitcherBinding
-    private val viewModel: HostSwitcherFragmentViewModel by viewModels()
+    private lateinit var mainBinding: FragmentApiModifierBinding
+    private val viewModel: ApiModifierFragmentViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        mainBinding = FragmentHostSwitcherBinding.inflate(layoutInflater)
+        mainBinding = FragmentApiModifierBinding.inflate(layoutInflater)
 
         // Inflate the layout for this fragment
         initRecyclerView()
@@ -146,7 +146,7 @@ class HostSwitcherFragment : Fragment() {
         }
         val items: List<ApiModifierRuleItemModel> =
             viewModel.rulesListLive.value?.map(mapper)?.filterNotNull() ?: emptyList()
-        val adaptor = HostSwitchItemAdaptor(items)
+        val adaptor = ApiModifierRuleItemAdaptor(items)
         viewModel.rulesListLive.observe(viewLifecycleOwner) {
             adaptor.items = it.map(mapper).filterNotNull()
             // Its fine to use notifyDataSetChanged here.

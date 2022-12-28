@@ -1,9 +1,9 @@
-package io.requestly.android.core.modules.hostSwitcher.models
+package io.requestly.android.core.modules.apiModifier.models
 
 import android.util.Patterns
 import com.google.gson.reflect.TypeToken
 import io.requestly.android.core.KeyValueStorageManager
-import io.requestly.android.core.modules.hostSwitcher.HostSwitcherFragmentViewModel
+import io.requestly.android.core.modules.apiModifier.ApiModifierFragmentViewModel
 import okhttp3.Request
 import java.net.URL
 
@@ -15,14 +15,14 @@ object RuleProcessor {
         val typeToken = object : TypeToken<List<Rule>>() {}
         val storageChangeListener: () -> Unit = {
             activeRules =
-                KeyValueStorageManager.getList(HostSwitcherFragmentViewModel.KEY_NAME, typeToken)
+                KeyValueStorageManager.getList(ApiModifierFragmentViewModel.KEY_NAME, typeToken)
                     ?.filter {
                         it.isActive
                     }?.toMutableList() ?: mutableListOf()
         }
         storageChangeListener()
         KeyValueStorageManager.registerChangeListener(
-            HostSwitcherFragmentViewModel.KEY_NAME,
+            ApiModifierFragmentViewModel.KEY_NAME,
             storageChangeListener
         )
     }

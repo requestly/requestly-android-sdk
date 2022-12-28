@@ -3,8 +3,8 @@ package io.requestly.android.okhttp.internal.support
 import android.content.Context
 import android.util.Log
 import io.requestly.android.core.SettingsManager
-import io.requestly.android.core.modules.hostSwitcher.models.ActionProcessor
-import io.requestly.android.core.modules.hostSwitcher.models.RuleProcessor
+import io.requestly.android.core.modules.apiModifier.models.ActionProcessor
+import io.requestly.android.core.modules.apiModifier.models.RuleProcessor
 import io.requestly.android.okhttp.R
 import io.requestly.android.okhttp.api.BodyDecoder
 import io.requestly.android.okhttp.api.RQCollector

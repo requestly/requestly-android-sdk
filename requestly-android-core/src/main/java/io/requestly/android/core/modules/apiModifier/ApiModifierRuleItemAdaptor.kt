@@ -1,4 +1,4 @@
-package io.requestly.android.core.modules.hostSwitcher
+package io.requestly.android.core.modules.apiModifier
 
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +21,7 @@ data class ApiModifierRuleItemModel(
     val onDeleteClickListener: (() -> Unit)?
 )
 
-class HostSwitchItemAdaptor(var items: List<ApiModifierRuleItemModel>) :
+class ApiModifierRuleItemAdaptor(var items: List<ApiModifierRuleItemModel>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

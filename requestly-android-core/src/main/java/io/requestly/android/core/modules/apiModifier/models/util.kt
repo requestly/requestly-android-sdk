@@ -1,4 +1,4 @@
-package io.requestly.android.core.modules.hostSwitcher.models
+package io.requestly.android.core.modules.apiModifier.models
 
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
