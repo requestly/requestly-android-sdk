@@ -7,9 +7,9 @@ import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import io.requestly.android.event.api.RequestlyEvent
+import io.requestly.android.okhttp.api.RQ
 import io.requestly.android.okhttp.api.RQ.getLaunchIntent
 import io.requestly.android.sample.databinding.ActivityMainSampleBinding
-import io.requestly.android.okhttp.api.RQ
 
 private val interceptorTypeSelector = InterceptorTypeSelector()
 
@@ -100,6 +100,22 @@ class MainActivity : AppCompatActivity() {
                 .penaltyDeath()
                 .build()
         )
+
+        val spFile1 = getSharedPreferences("com.sample.shared_pref_file_1", 0)
+        with(spFile1.edit()) {
+            this.putBoolean("bool_value", true)
+            this.putString("string_value", "Hello World")
+            this.putFloat("float_value", 3.14F)
+            this.putInt("integer_value", 100)
+            this.putLong("long_value", 1000000000000L)
+            this.commit()
+        }
+
+        val spFile2 = getSharedPreferences("com.sample.shared_pref_file_2", 0)
+        with(spFile2.edit()) {
+            this.putStringSet("string_set_value", setOf("One", "Two", "Three", "Four"))
+            this.commit()
+        }
     }
 
 

@@ -2,14 +2,14 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@id/host_switcher_flow"
+    android:id="@id/shared_pref_viewer_flow"
     tools:ignore="ResourceName"
-    app:startDestination="@id/host_switcher_fragment">
+    app:startDestination="@id/shared_pref_viewer_fragment">
 
     <!-- Setting this id from core as they are required to setup appBarConfiguration -->
     <fragment
-        android:id="@id/host_switcher_fragment"
-        android:name="io.requestly.android.core.modules.apiModifier.ApiModifierFragment"
-        android:label="Req/Resp Modifier">
+        android:id="@id/shared_pref_viewer_fragment"
+        android:name="io.requestly.android.core.modules.sharedPrefViewer.SharedPrefViewerFragment"
+        android:label="SharedPref Viewer">
     </fragment>
 </navigation>
