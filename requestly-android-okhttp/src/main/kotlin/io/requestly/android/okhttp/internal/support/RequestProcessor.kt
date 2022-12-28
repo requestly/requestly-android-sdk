@@ -2,13 +2,9 @@ package io.requestly.android.okhttp.internal.support
 
 import android.content.Context
 import android.util.Log
-import com.google.gson.reflect.TypeToken
-import io.requestly.android.core.KeyValueStorageManager
 import io.requestly.android.core.SettingsManager
-import io.requestly.android.core.modules.hostSwitcher.HostSwitcherFragmentViewModel
-import io.requestly.android.core.modules.hostSwitcher.SwitchingRule
-import io.requestly.android.core.modules.hostSwitcher.models.Replace
-import io.requestly.android.core.modules.hostSwitcher.models.isActive
+import io.requestly.android.core.modules.hostSwitcher.models.ActionProcessor
+import io.requestly.android.core.modules.hostSwitcher.models.RuleProcessor
 import io.requestly.android.okhttp.R
 import io.requestly.android.okhttp.api.BodyDecoder
 import io.requestly.android.okhttp.api.RQCollector
@@ -32,62 +28,10 @@ internal class RequestProcessor(
     private val bodyDecoders: List<BodyDecoder>,
 ) {
 
-    private val switchingRulesMap = HashMap<String, String>()
-    private var isStorageListenerInitDone = false
-
-    // NOT WORKING with Hilt
-//    init {
-//        val typeToken = object : TypeToken<List<SwitchingRule>>() {}
-//        val storageChangeListener: () -> Unit = {
-//            switchingRulesMap.clear()
-//            KeyValueStorageManager.getList(HostSwitcherFragmentViewModel.KEY_NAME, typeToken)
-//                ?.forEach {
-//                    if (it.isActive) {
-//                        switchingRulesMap[it.startingText] = it.provisionalText
-//                    }
-//                }
-//        }
-//        storageChangeListener()
-//        KeyValueStorageManager.registerChangeListener(
-//            HostSwitcherFragmentViewModel.KEY_NAME,
-//            storageChangeListener
-//        )
-//    }
-
-    private fun initStorageListener() {
-        val typeToken = object : TypeToken<List<SwitchingRule>>() {}
-        val storageChangeListener: () -> Unit = {
-            switchingRulesMap.clear()
-            KeyValueStorageManager.getList(HostSwitcherFragmentViewModel.KEY_NAME, typeToken)
-                ?.forEach {
-                    if (it.isActive) {
-                        val rule = it.pairs[0] as? Replace
-                        switchingRulesMap[rule!!.from] = rule.from
-                    }
-                }
-        }
-        storageChangeListener()
-        KeyValueStorageManager.registerChangeListener(
-            HostSwitcherFragmentViewModel.KEY_NAME,
-            storageChangeListener
-        )
-        isStorageListenerInitDone = true
-    }
-
     fun process(req: Request, transaction: HttpTransaction): Request {
-        if(!isStorageListenerInitDone) {
-            initStorageListener()
-        }
 
-        var urlString = req.url.toString()
-        switchingRulesMap.forEach {
-            urlString = urlString.replace(it.key, it.value, ignoreCase = true)
-        }
-
-        val request = req
-            .newBuilder()
-            .url(urlString)
-            .build()
+        val actions = RuleProcessor.process(req)
+        val request = ActionProcessor.process(actions, req)
 
         processMetadata(request, transaction)
         processPayload(request, transaction)

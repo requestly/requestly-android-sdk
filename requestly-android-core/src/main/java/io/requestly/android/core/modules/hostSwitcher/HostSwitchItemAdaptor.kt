@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.requestly.android.core.databinding.ApiModifierMockRuleItemBinding
 
-data class ApiModiferRuleItemModel(
+data class ApiModifierRuleItemModel(
     val ruleTypeText: String,
     val httpVerbText: String?,
     val operatorText: String,
@@ -21,7 +21,7 @@ data class ApiModiferRuleItemModel(
     val onDeleteClickListener: (() -> Unit)?
 )
 
-class HostSwitchItemAdaptor(var items: List<ApiModiferRuleItemModel>) :
+class HostSwitchItemAdaptor(var items: List<ApiModifierRuleItemModel>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -50,7 +50,7 @@ class HostSwitchItemAdaptor(var items: List<ApiModiferRuleItemModel>) :
         private val editTextButton = itemView.editTextButton
         private val deleteTextButton = itemView.deleteTextButton
 
-        fun bindTo(model: ApiModiferRuleItemModel) {
+        fun bindTo(model: ApiModifierRuleItemModel) {
             if (model.httpVerbText != null) {
                 httpMethodTextView.text = model.httpVerbText
                 httpMethodTextView.visibility = View.VISIBLE

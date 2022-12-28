@@ -73,13 +73,13 @@ class HostSwitcherFragment : Fragment() {
     private fun initRecyclerView() {
         mainBinding.hostSwitcherRulesRecyclerView.layoutManager =
             LinearLayoutManager(requireContext())
-        val mapper: (SwitchingRule) -> ApiModiferRuleItemModel? = mapperFunc@{
+        val mapper: (SwitchingRule) -> ApiModifierRuleItemModel? = mapperFunc@{
 
             val rule = it.pairs.firstOrNull() ?: return@mapperFunc null
 
             when (rule) {
                 is Redirect -> {
-                    return@mapperFunc ApiModiferRuleItemModel(
+                    return@mapperFunc ApiModifierRuleItemModel(
                         ruleTypeText = "Mock Rule",
                         httpVerbText = rule.source
                             .filters.firstOrNull()
@@ -117,7 +117,7 @@ class HostSwitcherFragment : Fragment() {
                     )
                 }
                 is Replace -> {
-                    return@mapperFunc ApiModiferRuleItemModel(
+                    return@mapperFunc ApiModifierRuleItemModel(
                         ruleTypeText = "Switch Rule",
                         httpVerbText = null,
                         operatorText = rule.source.operator.toString(),
@@ -144,7 +144,7 @@ class HostSwitcherFragment : Fragment() {
                 }
             }
         }
-        val items: List<ApiModiferRuleItemModel> =
+        val items: List<ApiModifierRuleItemModel> =
             viewModel.rulesListLive.value?.map(mapper)?.filterNotNull() ?: emptyList()
         val adaptor = HostSwitchItemAdaptor(items)
         viewModel.rulesListLive.observe(viewLifecycleOwner) {
