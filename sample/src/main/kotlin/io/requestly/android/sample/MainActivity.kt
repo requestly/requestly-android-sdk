@@ -1,13 +1,13 @@
 package io.requestly.android.sample
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.StrictMode
 import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import io.requestly.android.core.Requestly
+import io.requestly.android.core.RequestlyLaunchFlow
 import io.requestly.android.event.api.RequestlyEvent
-import io.requestly.android.okhttp.api.RQ.getLaunchIntent
 import io.requestly.android.sample.databinding.ActivityMainSampleBinding
 import io.requestly.android.okhttp.api.RQ
 
@@ -46,10 +46,7 @@ class MainActivity : AppCompatActivity() {
                     "Events CTA clicked",
                     mapOf("foo" to "bar")
                 )
-                startActivity(Intent(applicationContext, Class.forName(
-                    "io.requestly.android.core.ui.MainRequestlyActivity"))
-                )
-//                startActivity(Utils.getLaunchIntent(applicationContext))
+                startActivity(Requestly.getLaunchIntent(applicationContext, RequestlyLaunchFlow.ANALYTICS))
             }
 
             launchRqinterceptorDirectly.visibility = if (RQ.isOp) View.VISIBLE else View.GONE
@@ -138,6 +135,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun launchRqInterceptorDirectly() {
         // Optionally launch Chucker directly from your own app UI
-        startActivity(getLaunchIntent(this))
+        startActivity(Requestly.getLaunchIntent(this, RequestlyLaunchFlow.MAIN))
     }
 }

@@ -9,10 +9,11 @@ import android.os.Build
 import android.util.LongSparseArray
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
+import io.requestly.android.core.Requestly
+import io.requestly.android.core.RequestlyLaunchFlow
 import io.requestly.android.okhttp.R
 import io.requestly.android.okhttp.internal.data.entity.HttpTransaction
 import io.requestly.android.okhttp.internal.ui.BaseRequestlyNetworkFragment
-import java.util.HashSet
 
 internal class NotificationHelper(val context: Context) {
 
@@ -41,7 +42,7 @@ internal class NotificationHelper(val context: Context) {
         PendingIntent.getActivity(
             context,
             TRANSACTION_NOTIFICATION_ID,
-            io.requestly.android.okhttp.api.RQ.getLaunchIntent(context),
+            Requestly.getLaunchIntent(context, RequestlyLaunchFlow.MAIN),
             PendingIntent.FLAG_UPDATE_CURRENT or immutableFlag()
         )
     }
