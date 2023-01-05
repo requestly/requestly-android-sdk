@@ -8,6 +8,8 @@ import android.graphics.drawable.Icon
 import android.os.Build
 import android.util.Log
 import androidx.core.content.getSystemService
+import io.requestly.android.core.Requestly.Companion.getLaunchIntent
+import io.requestly.android.core.RequestlyLaunchFlow
 import io.requestly.android.okhttp.R
 import io.requestly.android.okhttp.internal.support.Logger
 import io.requestly.android.okhttp.internal.support.NotificationHelper
@@ -27,17 +29,6 @@ public object RQ {
     public val isOp: Boolean = true
 
     /**
-     * Get an Intent to launch the RQ Interceptor UI directly.
-     * @param context An Android [Context].
-     * @return An Intent for the main RQ Interceptor Activity that can be started with [Context.startActivity].
-     */
-    @JvmStatic
-    public fun getLaunchIntent(context: Context): Intent {
-        return Intent(context, io.requestly.android.core.ui.MainRequestlyActivity::class.java)
-            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-    }
-
-    /**
      * Create a shortcut to launch RQ Interceptor UI.
      * @param context An Android [Context].
      */
@@ -55,7 +46,7 @@ public object RQ {
             .setShortLabel(context.getString(R.string.rq_interceptor_shortcut_label))
             .setLongLabel(context.getString(R.string.rq_interceptor_shortcut_label))
             .setIcon(Icon.createWithResource(context, R.mipmap.rq_interceptor_ic_launcher))
-            .setIntent(getLaunchIntent(context).setAction(Intent.ACTION_VIEW))
+            .setIntent(getLaunchIntent(context, RequestlyLaunchFlow.MAIN).setAction(Intent.ACTION_VIEW))
             .build()
         try {
             shortcutManager.addDynamicShortcuts(listOf(shortcut))

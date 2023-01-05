@@ -2,6 +2,7 @@ package io.requestly.android.core
 
 import android.app.Application
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import io.requestly.android.core.internal.support.ListNotificationHelper
 import io.requestly.android.core.internal.support.MetadataNotificationHelper
@@ -10,6 +11,7 @@ import io.requestly.android.core.modules.logs.lib.lynx.main.model.*
 import io.requestly.android.core.modules.logs.lib.lynx.main.presenter.LynxRequestlyPresenter
 import io.requestly.android.core.network.NetworkManager
 import io.requestly.android.core.network.models.InitDeviceResponseModel
+import io.requestly.android.core.ui.MainRequestlyActivity
 import kotlinx.coroutines.*
 import java.lang.Exception
 import java.util.UUID
@@ -21,6 +23,16 @@ class Requestly {
         @JvmStatic
         fun getInstance(): Requestly {
             return INSTANCE
+        }
+
+        fun getLaunchIntent(context: Context, startingFlow: RequestlyLaunchFlow): Intent {
+            return MainRequestlyActivity.getLaunchIntent(
+                context,
+                Intent.FLAG_ACTIVITY_RETAIN_IN_RECENTS
+                    or Intent.FLAG_ACTIVITY_NEW_DOCUMENT
+                    or Intent.FLAG_ACTIVITY_SINGLE_TOP,
+                startingFlow
+            )
         }
     }
 

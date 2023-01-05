@@ -8,9 +8,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
-import io.requestly.android.core.Constants
-import io.requestly.android.core.R
-import io.requestly.android.core.SettingsManager
+import io.requestly.android.core.*
 
 class MetadataNotificationHelper(val context: Context) {
 
@@ -27,7 +25,7 @@ class MetadataNotificationHelper(val context: Context) {
         PendingIntent.getActivity(
             context,
             NOTIFICATION_ID,
-            Utils.getMainActivityLaunchIntent(context),
+            Requestly.getLaunchIntent(context, RequestlyLaunchFlow.MAIN),
             PendingIntent.FLAG_UPDATE_CURRENT or immutableFlag()
         )
     }

@@ -1,5 +1,6 @@
 package io.requestly.android.core.ui
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -16,6 +17,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.requestly.android.core.R
+import io.requestly.android.core.RequestlyLaunchFlow
 import io.requestly.android.core.databinding.ActivityMainRequestlyBinding
 import io.requestly.android.core.navigation.NavigationFlow
 import io.requestly.android.core.navigation.Navigator
@@ -23,6 +25,17 @@ import io.requestly.android.core.navigation.ToFlowNavigatable
 
 
 class MainRequestlyActivity : AppCompatActivity(), ToFlowNavigatable {
+
+    companion object {
+        private const val INTENT_NAME_STARTING_FLOW = "MainRequestlyActivity.STARTING_FLOW"
+
+        fun getLaunchIntent(content: Context, flags: Int, flow: RequestlyLaunchFlow): Intent {
+            return Intent(content, MainRequestlyActivity::class.java).apply {
+                addFlags(flags)
+                putExtra(INTENT_NAME_STARTING_FLOW, flow.toString())
+            }
+        }
+    }
 
     private lateinit var binding: ActivityMainRequestlyBinding
     private var navigator = Navigator()
@@ -51,7 +64,6 @@ class MainRequestlyActivity : AppCompatActivity(), ToFlowNavigatable {
 
         navigator.navController = navController
         setupMenu()
-        handleOnStartNavigation()
 
         binding.updateNotifyStripView.visibility = View.GONE
         viewModel.versionUpdateLiveData.observe(this) { data ->
@@ -70,17 +82,30 @@ class MainRequestlyActivity : AppCompatActivity(), ToFlowNavigatable {
         }
     }
 
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        handleIntent()
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         return (findNavController(R.id.nav_host_fragment).navigateUp() || super.onSupportNavigateUp())
     }
 
-    private fun handleOnStartNavigation() {
-        var startFlow = intent.getStringExtra("STARTING_FLOW")
+    private fun handleIntent() {
+        val startFlow = intent.getStringExtra(INTENT_NAME_STARTING_FLOW) ?: return
 
-        if (startFlow == "ANALYTICS") {
-            navigator.navigateToFlow(NavigationFlow.AnalyticsFlow)
-        } else {
-            // Go To Default Destination i.e: Network
+        when(RequestlyLaunchFlow.valueOf(startFlow)) {
+            RequestlyLaunchFlow.ANALYTICS -> {
+                navigator.navigateToFlow(NavigationFlow.AnalyticsFlow)
+            }
+            RequestlyLaunchFlow.MAIN -> {
+                navigator.navigateToFlow(NavigationFlow.NetworkFlow)
+            }
         }
     }
 

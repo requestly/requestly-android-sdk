@@ -15,3 +15,8 @@ object Constants {
     const val NOTIFICATION_CONNECT_UNAVAILABLE_TEXT = "Connect Unavailable"
     const val NOTIFICATION_CHANNEL_NAME = "Requestly Android Sdk"
 }
+
+enum class RequestlyLaunchFlow {
+    ANALYTICS,
+    MAIN
+}
