@@ -39,11 +39,11 @@ Requestly Android SDK lets you debug your android apps without needing you to se
     <img width="250" alt="Try Now" src="https://user-images.githubusercontent.com/16779465/202981457-7c5f57fe-3216-4f9e-b55e-89c9f71c514a.png">
 </a>
 
-### OR 
+### OR
 - [Dowload CryptoDemo Apk](https://github.com/requestly/android-debugger-examples/releases/latest/download/cryptodemo-debug.apk)
 - [Download Infinity Reddit Apk](https://github.com/requestly/android-debugger-examples/releases/latest/download/infinity-reddit-debug.apk)
 - [Download Pokedex Apk](https://github.com/requestly/android-debugger-examples/releases/latest/download/pokedex-debug.apk)
-  
+
 ## Installation
 The best way to install the Requestly Android SDK is with a build system like Gradle. This ensures you can easily upgrade to the latest versions.
 
@@ -51,10 +51,10 @@ RQInterceptor is distributed through [Maven Central](https://search.maven.org/se
 
 ```
 dependencies {
-    debugImplementation "io.requestly:requestly-android:2.4.3"
-    releaseImplementation "io.requestly:requestly-android-noop:2.4.3"
-    debugImplementation "io.requestly:requestly-android-okhttp:2.4.3"
-    releaseImplementation "io.requestly:requestly-android-okhttp-noop:2.4.3"
+    debugImplementation "io.requestly:requestly-android:2.4.7"
+    releaseImplementation "io.requestly:requestly-android-noop:2.4.7"
+    debugImplementation "io.requestly:requestly-android-okhttp:2.4.7"
+    releaseImplementation "io.requestly:requestly-android-okhttp-noop:2.4.7"
 }
 ```
 
@@ -65,7 +65,7 @@ Initialize the Requestly SDK in your Application class onCreate method.
 class App : Application(){
     override fun onCreate() {
         super.onCreate()
-        
+
         // Initialize Requestly SDK like this
         Requestly.Builder(this, [optional "<your-sdk-key>"])
             .build()
@@ -85,7 +85,7 @@ val collector = RQCollector(context=appContext)
 val rqInterceptor = RQInterceptor.Builder(appContext)
     .collector(collector)
     .build()
-    
+
 val client = OkHttpClient.Builder()
     .addInterceptor(rqInterceptor)
     .build()
