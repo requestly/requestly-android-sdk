@@ -166,6 +166,7 @@ class Requestly {
                         deviceModel,
                         deviceName,
                         false, // Sending this false only
+                        BuildConfig.VERSION_CODE.toString(),
                     )
                     if(response.isSuccessful) {
                         val responseBody: InitDeviceResponseModel? = response.body()

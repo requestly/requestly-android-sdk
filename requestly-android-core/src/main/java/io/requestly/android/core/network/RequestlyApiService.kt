@@ -15,5 +15,6 @@ interface RequestlyApiService {
         @Header("device_model") deviceModel: String,
         @Header("device_name") deviceName: String,
         @Header("capture_enabled") captureEnabled: Boolean,
+        @Header("sdk_version") sdkVersion: String,
     ): Response<InitDeviceResponseModel>
 }
