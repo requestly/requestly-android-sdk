@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/clear"
-        android:icon="@drawable/trash_white"
+        android:icon="@drawable/trash"
         android:title="@string/clear"
         app:showAsAction="ifRoom" />
 </menu>

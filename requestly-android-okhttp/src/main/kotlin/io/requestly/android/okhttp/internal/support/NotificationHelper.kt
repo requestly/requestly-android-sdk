@@ -122,7 +122,7 @@ internal class NotificationHelper(val context: Context) {
             PendingIntent.FLAG_ONE_SHOT or immutableFlag()
         )
         return NotificationCompat.Action(
-            R.drawable.rq_interceptor_ic_delete_white,
+            R.drawable.rq_interceptor_ic_delete,
             clearTitle,
             pendingBroadcastIntent
         )

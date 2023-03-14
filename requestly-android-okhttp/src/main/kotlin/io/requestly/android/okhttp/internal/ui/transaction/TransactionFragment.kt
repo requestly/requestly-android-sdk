@@ -134,9 +134,9 @@ internal class TransactionFragment : BaseRequestlyNetworkFragment() {
             viewLifecycleOwner
         ) { encode ->
             val icon = if (encode) {
-                R.drawable.rq_interceptor_ic_encoded_url_white
+                R.drawable.rq_interceptor_ic_encoded_url
             } else {
-                R.drawable.rq_interceptor_ic_decoded_url_white
+                R.drawable.rq_interceptor_ic_decoded_url
             }
             encodeUrlMenuItem.setIcon(icon)
         }
