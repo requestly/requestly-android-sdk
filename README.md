@@ -1,3 +1,5 @@
+<p>Update: Requestly's Android Debugger has been sunset. This repository has been archived.</p>
+
 <p align="center"><img src="https://user-images.githubusercontent.com/16779465/194505910-b6a7be70-df20-4b1a-9730-06a48cdd75ac.png" alt="Requestly Logo" width="50%"/></p>
 
 <h2 align="center">Chrome like developer tool for Android debug builds</h2>
